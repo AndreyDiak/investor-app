@@ -1,22 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
-  generateCharacters,
-  selectCharacters,
+  selectCharacters, setCharacters,
 } from "./features/slices/characters/characterSlice";
 import { useAppDispatch, useAppSelector } from "./features/hooks";
 import { selectTimeSpeed } from "./features/slices/settings/settingsSlice";
 
 function App() {
   const timeSpeed = useAppSelector(selectTimeSpeed);
-  const characters = useAppSelector(selectCharacters);
-
-  console.log(characters);
+  const [characters] = useState(useAppSelector(selectCharacters));
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const generate = () => {
-      console.log("hi");
-      generateCharacters();
-    };
+      dispatch(setCharacters());
+    }; 
     generate();
   }, []);
   return <div>{timeSpeed}</div>;

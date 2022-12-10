@@ -7,10 +7,12 @@ import {
   InitialPerson,
 } from "./typings";
 
+
 export enum Expenses {
   HOME = "home",
   CAR = "car",
   CREDIT_CARD = "credit-card",
+  expense = "expense"
 }
 
 export const expensesTitleMap: ExpenseTitleMapType = {
