@@ -14,7 +14,8 @@ export const characterSlice = createSlice({
   initialState,
   reducers: {
     setCharacters: (state) => {
-      state.characters = generateCharacters();
+      state.characters =
+        state.characters.length === 0 ? generateCharacters() : state.characters;
     },
   },
 });

@@ -1,0 +1,10 @@
+.card {
+  padding: 10px;
+  position: relative;
+  z-index: 100;
+  background-color: #006064;
+}
+
+.active {
+  background-color: #e0e0e0;
+}

@@ -7,12 +7,10 @@ import {
   InitialPerson,
 } from "./typings";
 
-
 export enum Expenses {
   HOME = "home",
   CAR = "car",
   CREDIT_CARD = "credit-card",
-  expense = "expense"
 }
 
 export const expensesTitleMap: ExpenseTitleMapType = {
@@ -90,6 +88,24 @@ export const initialCharacters: InitialPerson[] = [
     photo: {
       img: charactersPhotos.KATE.img,
       avatar: charactersPhotos.KATE.avatar,
+    },
+  },
+  {
+    name: "Фред",
+    age: 21,
+    work: "Официант",
+    photo: {
+      img: charactersPhotos.FRED.img,
+      avatar: charactersPhotos.FRED.avatar,
+    },
+  },
+  {
+    name: "Джимми",
+    age: 25,
+    work: "Режиссёр",
+    photo: {
+      img: charactersPhotos.JIMM.img,
+      avatar: charactersPhotos.JIMM.avatar,
     },
   },
 ];

@@ -1,0 +1,4 @@
+.wrapper {
+  background: url("/src/assets/characters/banner.jpeg") center no-repeat;
+  background-size: cover;
+}

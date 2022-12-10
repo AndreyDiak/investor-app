@@ -1,8 +1,8 @@
 import { characterSlice } from "./slices/characters/characterSlice";
-import { spendsSlice } from "./slices/spends/spendsSlice";
 import { settingsSlice } from "./slices/settings/settingsSlice";
+import { spendsSlice } from "./slices/spends/spendsSlice";
 
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 // ...
 
 export const store = configureStore({
