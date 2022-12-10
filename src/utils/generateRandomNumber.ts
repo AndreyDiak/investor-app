@@ -1,0 +1,3 @@
+// return value from 0 to max - 1
+// if max === 3 return 0 / 1 / 2 ...
+export const generateRandomNumber = (max: number) => Math.floor(Math.random() * max);
