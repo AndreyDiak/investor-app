@@ -16,6 +16,7 @@ export interface Person extends InitialPerson {
   startMoney: number; // стартовые сбережения
   difficulty: DifficultyType;
   spendings: Expense[];
+  spendingsMonthPayment: number;
 }
 
 export type ExpenseType = Expenses.CAR | Expenses.HOME | Expenses.CREDIT_CARD;

@@ -1,32 +1,66 @@
+import { Card } from "antd";
+import { motion } from "framer-motion";
 import { Person } from "../../../features/slices/characters/typings";
-import { Avatar, Card } from "antd";
 interface Props {
   character: Person;
-  selected?: boolean;
 }
 
 import classes from "./CharacterCard.module.css";
+import { CharacterInfo } from "./CharacterInfo/CharacterInfo";
 
-export const CharactersCard = ({ character, selected }: Props) => {
+export const CharactersCard = ({ character }: Props) => {
   return (
     <Card
       hoverable
       style={{ width: 300 }}
-      cover={<img src={character.photo.img} />}
+      cover={
+        <motion.img
+          src={character.photo.img}
+          initial={{ opacity: 0.3, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 0.5,
+            ease: "easeInOut",
+          }}
+        />
+      }
       className={classes.card}
+      onClick={() => {
+        console.log(character);
+      }}
     >
-      {/* <Avatar size={"large"} src={character.photo.avatar} /> */}
       <Card.Meta
         title={
-          <div>
-            {character.name} <br />
-            {character.difficulty} <br />
-            {character.salary}
-          </div>
+          <motion.div
+            initial={{
+              opacity: 0.3,
+              x: -100,
+              y: 100,
+              rotate: -50,
+              z: 10,
+            }}
+            animate={{
+              opacity: 1,
+              x: 0,
+              y: 0,
+              rotate: 0,
+            }}
+            transition={{
+              duration: 0.7,
+              ease: "backOut",
+            }}
+          >
+            <CharacterInfo
+              name={character.name}
+              difficulty={character.difficulty}
+              salary={character.salary}
+              startMoney={character.startMoney}
+              avatar={character.photo.avatar}
+            />
+          </motion.div>
         }
-        description={character.work}
-        avatar={<Avatar src={character.photo.avatar} />}
-        className={""}
+        description={<div className={classes.description}>{character.work}</div>}
+        className={classes.meta}
       />
     </Card>
   );

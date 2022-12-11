@@ -1,0 +1,36 @@
+.info {
+  margin-bottom: 10px !important;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  margin: 0 auto;
+  align-items: center;
+  width: 95%;
+  color: #88b3af;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.money {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 20px;
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.header {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.5px solid #00897b;
+}
+
+.name {
+  font-size: 20px;
+  color: #e0e0e0;
+  font-weight: 500;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}

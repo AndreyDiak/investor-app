@@ -7,26 +7,54 @@ import {
   selectFilteredCharacters,
 } from "../../../features/slices";
 import { CharactersCard } from "../CharacterCard/CharacterCard";
-import classes from "./CharactersList.module.css";
 
-export const CharactersList = () => {
+import { motion } from "framer-motion";
+
+import classes from "./CharactersList.module.css";
+import { Person } from "../../../features/slices/characters/typings";
+
+interface Props {
+  selectCharacter: (character: Person) => void;
+}
+
+export const CharactersList = ({ selectCharacter }: Props) => {
   const characters = useAppSelector(selectFilteredCharacters);
   const dispatch = useAppDispatch();
   // const current = useAppSelector(selectCurrent);
 
   return (
-    <div className={classes.list}>
+    <motion.div
+      className={classes.list}
+      initial={{
+        opacity: 0.2,
+        scale: 0.5,
+      }}
+      animate={{
+        y: 0,
+        opacity: 1,
+        scale: 1,
+      }}
+      transition={{
+        duration: 0.7,
+        ease: "easeInOut",
+      }}
+    >
+      {/* turn left arrow */}
       <LeftOutlined
         className={classes.arrow}
         onClick={() => dispatch(decreaseCurrent())}
       />
+      {/* CharactersList */}
       {characters.map((character) => (
-        <CharactersCard character={character} />
+        <div onClick={() => selectCharacter(character)}>
+          <CharactersCard key={character.name} character={character} />
+        </div>
       ))}
+      {/* turn right arrow */}
       <RightOutlined
         className={classes.arrow}
         onClick={() => dispatch(increaseCurrent())}
       />
-    </div>
+    </motion.div>
   );
 };

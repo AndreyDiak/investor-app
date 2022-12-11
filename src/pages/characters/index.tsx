@@ -1,6 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Loader } from "../../components/Loader/Loader";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
 import { isCharactersCreated, setCharacters } from "../../features/slices";
+import { Person } from "../../features/slices/characters/typings";
+import { CharacterPreview } from "./CharacterPreview/CharacterPreview";
 import { CharactersList } from "./CharactersList/CharactersList";
 
 import classes from "./index.module.css";
@@ -8,6 +11,7 @@ import classes from "./index.module.css";
 const CharactersPage = () => {
   const dispatch = useAppDispatch();
   const isCharctersCreated = useAppSelector(isCharactersCreated);
+  const [previewCharacter, setPreviewCharacter] = useState<Person | null>(null);
 
   useEffect(() => {
     const generate = () => {
@@ -16,13 +20,22 @@ const CharactersPage = () => {
     generate();
   }, []);
 
-  if (!isCharctersCreated) {
-    return <div>Loading</div>;
-  }
-
   return (
     <div className={`${classes.wrapper} backgroundBanner defaultPage`}>
-      <CharactersList />
+      {!isCharactersCreated ? (
+        <Loader />
+      ) : (
+        <div>
+          {previewCharacter ? (
+            <CharacterPreview
+              character={previewCharacter}
+              close={() => setPreviewCharacter(null)}
+            />
+          ) : (
+            <CharactersList selectCharacter={setPreviewCharacter} />
+          )}
+        </div>
+      )}
     </div>
   );
 };

@@ -5,6 +5,16 @@
   background-color: #006064;
 }
 
-.active {
-  background-color: #e0e0e0;
+.card:hover {
+  background-color: #006b6e;
+}
+
+.description {
+  color: #b4b2b2;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.meta {
+  z-index: 100;
 }

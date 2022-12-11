@@ -22,19 +22,6 @@ export const generateCharacters = () => {
     const characterDifficulty = generateRandomNumber(3) as 0 | 1 | 2;
     const characterDifficultyValue = difficultyMap[characterDifficulty];
 
-    // generate salary
-    const salaryMinValue =
-      defaultSalary * difficultySalaryCoefficient[characterDifficultyValue];
-    const salaryMaxValue =
-      defaultStartMoney * difficultySalaryCoefficient[characterDifficultyValue];
-
-    const salary = salaryMinValue + generateRandomNumber(salaryMaxValue - salaryMinValue);
-
-    // generate start money
-    const startMoney =
-      salary +
-      defaultStartMoney * difficultyStaryMoneyCoefficient[characterDifficultyValue];
-
     // generate spendings
     const expenses: Expense[] = enum2array(Expenses).map(({ title, value }) => {
       const price =
@@ -54,6 +41,30 @@ export const generateCharacters = () => {
         paymentPercantage,
       };
     });
+
+    // суммарный платеж по всем кредитам
+    const expensesSummaryMonthPayment = expenses.reduce(
+      (total, item) => total + (item.paymentPercantage * item.startPrice) / 100,
+      0
+    );
+
+    // generate salary
+    const salaryMinValue =
+      defaultSalary * difficultySalaryCoefficient[characterDifficultyValue];
+    const salaryMaxValue =
+      defaultStartMoney * difficultySalaryCoefficient[characterDifficultyValue];
+
+    const salary =
+      salaryMinValue +
+      generateRandomNumber(salaryMaxValue - salaryMinValue) +
+      expensesSummaryMonthPayment;
+
+    // generate start money
+    const startMoney =
+      salary +
+      defaultStartMoney * difficultyStaryMoneyCoefficient[characterDifficultyValue] -
+      expensesSummaryMonthPayment;
+
     // return character
     return {
       ...character,
@@ -61,6 +72,7 @@ export const generateCharacters = () => {
       startMoney,
       difficulty: characterDifficultyValue,
       spendings: expenses,
+      spendingsMonthPayment: expensesSummaryMonthPayment,
     };
   });
 

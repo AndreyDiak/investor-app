@@ -37,14 +37,14 @@ export const defaultSpendingsMinPaymentPercantage = 2;
 export const defaultSpendingsMaxPaymentPercantage = 10;
 
 export const difficultySalaryCoefficient: DifficultyCoefficientMapType = {
-  easy: 0.4,
-  normal: 0.6,
-  hard: 0.8,
+  easy: 1,
+  normal: 0.8,
+  hard: 0.6,
 };
 export const difficultyStaryMoneyCoefficient: DifficultyCoefficientMapType = {
-  easy: 0.4,
-  normal: 0.6,
-  hard: 0.8,
+  easy: 0.9,
+  normal: 0.7,
+  hard: 0.5,
 };
 export const difficultySpendingsCoefficient: DifficultyCoefficientMapType = {
   easy: 3,
@@ -56,8 +56,8 @@ export const difficultySpendingsCoefficient: DifficultyCoefficientMapType = {
 export enum defaultMaxCardsInARow {
   PHONE = 1,
   TABLET = 2,
-  LAPTOP = 3,
-  DESKTOP = 4,
+  LAPTOP = 4,
+  DESKTOP = 5,
 }
 
 // only 4 characters available now...
@@ -108,7 +108,7 @@ export const initialCharacters: InitialPerson[] = [
     },
   },
   {
-    name: "Джимми",
+    name: "Джимм",
     age: 25,
     work: "Режиссёр",
     photo: {

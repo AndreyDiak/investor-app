@@ -4,6 +4,12 @@ export enum difficulty {
   HARD = "hard",
 }
 
+export const difficultyToTitleMap = {
+  easy: "Легко",
+  normal: "Нормально",
+  hard: "Сложно",
+};
+
 export enum timeSpeed {
   SLOW = 8,
   MEDIUM = 4,
