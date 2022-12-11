@@ -1,15 +1,17 @@
-import { characterSlice } from "./slices/characters/characterSlice";
-import { settingsSlice } from "./slices/settings/settingsSlice";
-import { spendsSlice } from "./slices/spends/spendsSlice";
+// import { charactersSlice } from "./slices/characters/charactersSlice";
+// import { settingsSlice } from "./slices/settings/settingsSlice";
+// import { spendsSlice } from "./slices/spends/spendsSlice";
 
 import { configureStore } from "@reduxjs/toolkit";
+import { characterSlice, spendsSlice, settingsSlice, charactersSlice } from "./slices";
 // ...
 
 export const store = configureStore({
   reducer: {
     spends: spendsSlice.reducer,
     settings: settingsSlice.reducer,
-    characters: characterSlice.reducer,
+    characters: charactersSlice.reducer,
+    character: characterSlice.reducer,
   },
 });
 

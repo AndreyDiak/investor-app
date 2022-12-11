@@ -1,11 +1,14 @@
 // import styled from "styled-components";
-import { Card } from "antd";
+import { useState } from "react";
 import styled from "styled-components";
 import { CloseButton } from "../../../components/CloseButton/CloseButton";
 import { MoneyIcon } from "../../../components/MoneyIcon/MoneyIcon";
+import { useAppDispatch } from "../../../features/hooks";
+import { setCharacter } from "../../../features/slices";
 import { Person } from "../../../features/slices/characters/typings";
 import { CharacterExpenses } from "../CharacterCard/CharacterExpenses/CharacterExpenses";
 import { CharacterInfo } from "../CharacterCard/CharacterInfo/CharacterInfo";
+import { CharacterSettings } from "../CharacterSettings/CharacterSettings";
 
 interface Props {
   character: Person;
@@ -13,54 +16,98 @@ interface Props {
 }
 
 export const CharacterPreview = ({ character, close }: Props) => {
+  const [settings, setSettings] = useState(false);
+
+  const dispatch = useAppDispatch();
+
+  const handleClick = () => {
+    setSettings(true);
+    dispatch(setCharacter(character));
+  };
+
   return (
     <Preview>
       <PreviewCard>
         <Close>
           <CloseButton handler={close} size={20} color="white" />
         </Close>
-        <PreviewAbout>
-          <Image src={character.photo.img} alt="" />
-          <Info>
-            <CharacterInfo
-              name={character.name}
-              difficulty={character.difficulty}
-              salary={character.salary}
-              startMoney={character.startMoney}
-              avatar={character.photo.avatar}
-            />
+        {!settings ? (
+          <>
+            <PreviewAbout>
+              <Image src={character.photo.img} alt="" />
+              <Info>
+                <CharacterInfo
+                  name={character.name}
+                  difficulty={character.difficulty}
+                  salary={character.salary}
+                  startMoney={character.startMoney}
+                  avatar={character.photo.avatar}
+                />
 
-            <div>
-              <Text>Ваши долги</Text>
-              <CharacterExpenses expenses={character.spendings} />
-              <InfoFooterText>
-                % - показывает сколько процентов от{" "}
-                <InfoFooterWarning>начальной суммы</InfoFooterWarning> вы выплачиваете в
-                месяц по этому долгу
-              </InfoFooterText>
-            </div>
-          </Info>
-        </PreviewAbout>
+                <div>
+                  <Text>Ваши долги</Text>
+                  <CharacterExpenses expenses={character.spendings} />
+                  <InfoFooterText>
+                    % - показывает сколько процентов от{" "}
+                    <InfoFooterWarning>начальной суммы</InfoFooterWarning> вы выплачиваете
+                    в месяц по этому долгу
+                  </InfoFooterText>
+                </div>
+              </Info>
+            </PreviewAbout>
 
-        {/* <CharactersCard character={character} /> */}
-        <Total>
-          <TotalGain>
-            Месячная выручка
-            <TotalMoney>
-              {character.salary} - {character.spendingsMonthPayment} ={" "}
-              {character.salary - character.spendingsMonthPayment} <MoneyIcon size="s" />{" "}
-            </TotalMoney>
-          </TotalGain>
-          <div>
-            <TotalButton>Продолжить</TotalButton>
-          </div>
-        </Total>
+            <Total>
+              <TotalGain>
+                <Column title="Зарплата" value={character.salary} />
+                <Column title="Долги" value={-character.spendingsMonthPayment} />
+                <Column
+                  title="Итого"
+                  value={character.salary - character.spendingsMonthPayment}
+                  iconEnabled
+                />
+              </TotalGain>
+              <TotalButton onClick={handleClick}>Продолжить</TotalButton>
+            </Total>
+          </>
+        ) : (
+          <CharacterSettings />
+        )}
       </PreviewCard>
     </Preview>
   );
 };
 
-const Preview = styled.div`
+interface ColumnProps {
+  title: string;
+  value: number;
+  iconEnabled?: boolean;
+}
+
+const Column = ({ title, value, iconEnabled }: ColumnProps) => {
+  return (
+    <div>
+      <Title
+        style={{
+          borderRight: iconEnabled ? "none" : "",
+        }}
+      >
+        {title}
+      </Title>
+      <Money>
+        <div
+          style={{
+            paddingTop: !iconEnabled ? "8px" : "",
+          }}
+        >
+          {value}
+        </div>
+        {iconEnabled && <MoneyIcon size="s" />}
+      </Money>
+    </div>
+  );
+};
+
+export const Preview = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
@@ -68,10 +115,11 @@ const Preview = styled.div`
   align-items: center;
 `;
 
-const PreviewCard = styled.div`
+export const PreviewCard = styled.div`
   padding: 30px;
   position: relative;
   width: 700px;
+  height: max-content;
   z-index: 100;
   border-radius: 20px;
   background-color: #006064;
@@ -96,25 +144,33 @@ const Total = styled.div`
 `;
 
 const TotalGain = styled.p`
-  padding-bottom: 5px;
-  margin-bottom: 5px;
+  display: flex;
+  column-gap: 20px;
+`;
+
+const Title = styled.div`
+  padding-right: 20px;
+  font-weight: 700;
+  border-right: 1px solid #0c595e;
+  font-size: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  :last-child {
+    padding-right: 0;
+    border-right: none;
+  }
+`;
+
+const Money = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  color: #88b3af;
   font-weight: 500;
   font-size: 20px;
-
-  width: max-content;
-  /* border-bottom: 1px solid #029199; */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 `;
 
-const TotalMoney = styled.div`
-  margin-top: 5px;
-  font-size: 18px;
-  display: flex;
-  font-weight: 900;
-  color: #88b3af;
-  align-items: center;
-`;
-
-const TotalButton = styled.button`
+export const TotalButton = styled.button`
   padding: 10px 15px;
   background-color: #006064;
   border-radius: 4px;
@@ -157,7 +213,6 @@ const InfoFooterText = styled.p`
 
 const Image = styled.img`
   max-width: 300px;
-  /* border-right: 0.5px solid #00897b; */
 `;
 
 const Info = styled.div`

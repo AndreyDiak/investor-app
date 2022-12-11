@@ -16,8 +16,8 @@ export const settingsSlice = createSlice({
   name: "settings",
   initialState,
   reducers: {
-    setTimeSpeed: (state, action?: PayloadAction<TimeSpeedType>) => {
-      state.timeSpeed = !!action?.payload ? action.payload : state.constTimeSpeed;
+    setTimeSpeed: (state, action: PayloadAction<TimeSpeedType>) => {
+      state.timeSpeed = action.payload;
     },
     setConstTimeSpeed: (state, action: PayloadAction<TimeSpeedType>) => {
       state.constTimeSpeed = action.payload;

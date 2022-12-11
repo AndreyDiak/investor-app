@@ -10,9 +10,7 @@ const initialState = {
   currentMaxInARow: defaultMaxCardsInARow.LAPTOP,
 };
 
-// export type SettingsState = typeof initialState;
-
-export const characterSlice = createSlice({
+export const charactersSlice = createSlice({
   name: "characters",
   initialState,
   reducers: {
@@ -57,7 +55,7 @@ export const characterSlice = createSlice({
 });
 
 export const { setCharacters, setCurrentMaxInARow, increaseCurrent, decreaseCurrent } =
-  characterSlice.actions;
+  charactersSlice.actions;
 
 // Selectors
 const selectCharacters = (state: RootState) => state.characters.characters;
@@ -87,4 +85,4 @@ export const selectFilteredCharacters = createSelector(
   }
 );
 
-export default characterSlice.reducer;
+export default charactersSlice.reducer;
