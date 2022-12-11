@@ -53,7 +53,12 @@ export const difficultySpendingsCoefficient: DifficultyCoefficientMapType = {
 };
 
 // сколько карточек мы отображаем на странице выбора
-export const defaultMaxCardsInRow = 4;
+export enum defaultMaxCardsInARow {
+  PHONE = 1,
+  TABLET = 2,
+  LAPTOP = 3,
+  DESKTOP = 4,
+}
 
 // only 4 characters available now...
 export const initialCharacters: InitialPerson[] = [
