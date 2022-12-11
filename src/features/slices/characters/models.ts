@@ -52,6 +52,9 @@ export const difficultySpendingsCoefficient: DifficultyCoefficientMapType = {
   hard: 5,
 };
 
+// сколько карточек мы отображаем на странице выбора
+export const defaultMaxCardsInRow = 4;
+
 // only 4 characters available now...
 export const initialCharacters: InitialPerson[] = [
   {

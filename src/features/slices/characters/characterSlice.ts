@@ -1,5 +1,6 @@
-import { AnyAction, createSlice, PayloadAction, ThunkAction } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
+import { defaultMaxCardsInRow } from './models';
 import { Person } from "./typings";
 import { generateCharacters } from "./utils/generateCharacters";
 
@@ -22,6 +23,16 @@ export const characterSlice = createSlice({
 
 export const { setCharacters } = characterSlice.actions;
 // Selectors
-export const selectCharacters = (state: RootState) => state.characters.characters;
+const selectCharacters = (state: RootState) => state.characters.characters;
+
+export const isCharactersCreated = createSelector(
+  selectCharacters,
+  (characters) => characters.length > 0
+)
+
+export const selectFilteredCharacters = createSelector(
+  selectCharacters,
+  (characters) => characters
+)
 
 export default characterSlice.reducer;
