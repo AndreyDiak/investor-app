@@ -39,7 +39,9 @@ export const generateCharacters = () => {
           difficultySpendingsCoefficientMax - difficultySpendingsCoefficientMin
         );
 
-      const price = defaultSpendingsPrices[value as ExpenseType] * totalCoefficient;
+      const price = Number(
+        (defaultSpendingsPrices[value as ExpenseType] * totalCoefficient).toFixed(0)
+      );
 
       const paymentPercantage =
         defaultSpendingsMinPaymentPercantage +
@@ -58,7 +60,8 @@ export const generateCharacters = () => {
 
     // суммарный платеж по всем кредитам
     const expensesSummaryMonthPayment = expenses.reduce(
-      (total, item) => total + (item.paymentPercantage * item.startPrice) / 100,
+      (total, item) =>
+        Math.floor(total + (item.paymentPercantage * item.startPrice) / 100),
       0
     );
 
