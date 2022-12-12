@@ -1,11 +1,11 @@
-import { difficulty } from "../settings/models";
-import { charactersPhotos } from "../../../assets/characters/characters";
+import { charactersPhotos } from "../../assets/characters/characters";
 import {
   DefaultExpensesPrices,
   DifficultyCoefficientMapType,
   ExpenseTitleMapType,
   InitialPerson,
-} from "./typings";
+} from "../../features/slices/characters/typings";
+import { difficulty } from "../settings/models";
 
 export enum Expenses {
   HOME = "home",
@@ -46,10 +46,10 @@ export const difficultyStaryMoneyCoefficient: DifficultyCoefficientMapType = {
   normal: 0.7,
   hard: 0.5,
 };
-export const difficultySpendingsCoefficient: DifficultyCoefficientMapType = {
-  easy: 3,
-  normal: 4,
-  hard: 5,
+export const difficultySpendingsCoefficient = {
+  easy: [0.5, 2],
+  normal: [2, 3.5],
+  hard: [3.5, 5],
 };
 
 // сколько карточек мы отображаем на странице выбора
@@ -114,6 +114,33 @@ export const initialCharacters: InitialPerson[] = [
     photo: {
       img: charactersPhotos.JIMM.img,
       avatar: charactersPhotos.JIMM.avatar,
+    },
+  },
+  {
+    name: "Брэд",
+    age: 31,
+    work: "Страховщик",
+    photo: {
+      img: charactersPhotos.BRAD.img,
+      avatar: charactersPhotos.BRAD.avatar,
+    },
+  },
+  {
+    name: "Лизи",
+    age: 26,
+    work: "Бухгалтер",
+    photo: {
+      img: charactersPhotos.LIZI.img,
+      avatar: charactersPhotos.LIZI.avatar,
+    },
+  },
+  {
+    name: "Изабель",
+    age: 19,
+    work: "Танцовщица",
+    photo: {
+      img: charactersPhotos.IZABEL.img,
+      avatar: charactersPhotos.IZABEL.avatar,
     },
   },
 ];

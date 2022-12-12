@@ -20,7 +20,6 @@ interface Props {
 export const CharactersList = ({ selectCharacter }: Props) => {
   const characters = useAppSelector(selectFilteredCharacters);
   const dispatch = useAppDispatch();
-  // const current = useAppSelector(selectCurrent);
 
   return (
     <motion.div

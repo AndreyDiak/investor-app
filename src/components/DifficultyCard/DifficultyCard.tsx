@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { difficultyToTitleMap } from "../../features/slices/settings/models";
+import { difficultyToTitleMap } from "../../models/settings/models";
 import { DifficultyType } from "../../features/slices/settings/typings";
 
 interface Props {

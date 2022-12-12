@@ -2,7 +2,7 @@ import type {
   HappenedSpend,
   IncreaseSpendsPriceFromDifficultyMap,
   SpendLevelToPriceType,
-} from "./typings";
+} from "../../features/slices/spends/typings";
 
 export enum SpendsLevel {
   LOW = "low",
@@ -25,14 +25,6 @@ export const increaseSpendsPriceFromDifficultyMap: IncreaseSpendsPriceFromDiffic
     normal: 2.0,
     hard: 2.5,
   };
-
-const filterQuery = ["id", "model"];
-
-const filter = <const>[...filterQuery];
-
-type Filter = typeof filter[number];
-
-const str: Filter = "";
 
 export const events: HappenedSpend[] = [
   {

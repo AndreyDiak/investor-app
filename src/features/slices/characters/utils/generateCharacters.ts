@@ -1,5 +1,8 @@
 import { enum2array } from "enum2array";
-import { generateRandomNumber } from "../../../../utils/generateRandomNumber";
+import {
+  generateRandomValue,
+  generateRoundRandomValue,
+} from "../../../../utils/generateRandom";
 import {
   defaultSalary,
   defaultSpendingsMaxPaymentPercantage,
@@ -13,23 +16,34 @@ import {
   Expenses,
   expensesTitleMap,
   initialCharacters,
-} from "../models";
+} from "../../../../models";
 import { Expense, ExpenseType, Person } from "../typings";
 
 // Generate characters
 export const generateCharacters = () => {
   const characters: Person[] = initialCharacters.map((character) => {
-    const characterDifficulty = generateRandomNumber(3) as 0 | 1 | 2;
+    const characterDifficulty = generateRoundRandomValue(3) as 0 | 1 | 2;
     const characterDifficultyValue = difficultyMap[characterDifficulty];
 
     // generate spendings
     const expenses: Expense[] = enum2array(Expenses).map(({ title, value }) => {
-      const price =
-        defaultSpendingsPrices[value as ExpenseType] *
-        difficultySpendingsCoefficient[characterDifficultyValue];
+      const difficultySpendingsCoefficientMin =
+        difficultySpendingsCoefficient[characterDifficultyValue][0];
+
+      const difficultySpendingsCoefficientMax =
+        difficultySpendingsCoefficient[characterDifficultyValue][1];
+
+      const totalCoefficient =
+        difficultySpendingsCoefficientMin +
+        generateRandomValue(
+          difficultySpendingsCoefficientMax - difficultySpendingsCoefficientMin
+        );
+
+      const price = defaultSpendingsPrices[value as ExpenseType] * totalCoefficient;
+
       const paymentPercantage =
         defaultSpendingsMinPaymentPercantage +
-        generateRandomNumber(
+        generateRoundRandomValue(
           defaultSpendingsMaxPaymentPercantage - defaultSpendingsMinPaymentPercantage
         );
       // return spendings
@@ -56,7 +70,7 @@ export const generateCharacters = () => {
 
     const salary =
       salaryMinValue +
-      generateRandomNumber(salaryMaxValue - salaryMinValue) +
+      generateRoundRandomValue(salaryMaxValue - salaryMinValue) +
       expensesSummaryMonthPayment;
 
     // generate start money

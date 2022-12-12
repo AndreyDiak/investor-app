@@ -1,6 +1,7 @@
 import { Avatar } from "antd";
 import { DifficultyCard } from "../../../../components/DifficultyCard/DifficultyCard";
 import { MoneyIcon } from "../../../../components/MoneyIcon/MoneyIcon";
+import { MoneyIconWithPrice } from "../../../../components/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
 import { DifficultyType } from "../../../../features/slices/settings/typings";
 
 import classes from "./CharacterInfo.module.css";
@@ -38,15 +39,11 @@ export const CharacterInfo = ({
       <div>
         <div className={classes.info}>
           Зарплата:
-          <div className={classes.money}>
-            {salary} <MoneyIcon size="s" />
-          </div>
+          <MoneyIconWithPrice price={salary} />
         </div>
         <div className={classes.info}>
           Сбережения:
-          <div className={classes.money}>
-            {startMoney} <MoneyIcon size="s" />
-          </div>
+          <MoneyIconWithPrice price={startMoney} />
         </div>
       </div>
     </div>

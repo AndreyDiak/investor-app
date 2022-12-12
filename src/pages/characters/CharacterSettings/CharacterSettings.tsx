@@ -1,14 +1,22 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Preview, PreviewCard } from "../CharacterPreview/CharacterPreview";
 import CharacterSettingsDifficulty from "./CharacterSettingsDifficulty/CharacterSettingsDifficulty";
+import CharacterSettingsDuration from "./CharacterSettingsDuration/CharacterSettingsDuration";
 import CharacterSettingsTimeSpeed from "./CharacterSettingsTimeSpeed/CharacterSettingsTimeSpeed";
 
 export const CharacterSettings = () => {
+  const navigate = useNavigate();
+
+  const onClickHandler = () => {
+    navigate("/game");
+  };
+
   return (
     <Settings>
       <CharacterSettingsTimeSpeed />
       <CharacterSettingsDifficulty />
-      <SettingsButton>Начать игру</SettingsButton>
+      <CharacterSettingsDuration />
+      <SettingsButton onClick={onClickHandler}>Начать игру</SettingsButton>
     </Settings>
   );
 };

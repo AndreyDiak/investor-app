@@ -1,4 +1,4 @@
-import { generateRandomNumber } from "../../../utils/generateRandomNumber";
+import { generateRoundRandomValue } from "../../../utils/generateRandom";
 import { DifficultyType } from "../settings/typings";
 import {
   AnyAction,
@@ -13,7 +13,7 @@ import {
   increaseSpendsPriceFromDifficultyMap,
   spendLevelToPrice,
   SpendsLevel,
-} from "./models";
+} from "../../../models";
 import type { HappenedSpend, Spend, SpendsLevelType } from "./typings";
 
 const initialState = {
@@ -57,28 +57,26 @@ export const selectCurrentEventsSummary = createSelector(
 type ThunkType = ThunkAction<void, RootState, unknown, AnyAction>;
 
 // Initial events with prices
-export const setAvailableEvents =
-  (difficulty: DifficultyType): ThunkType =>
-  (dispatch) => {
-    const difficultyCoefficient = increaseSpendsPriceFromDifficultyMap[difficulty];
-    const availableEvents: Spend[] = events.map((event) => {
-      // задаем цены с учетом сложности игры
-      const lowPrice = event.price;
-      const mediumPrice = lowPrice * difficultyCoefficient;
-      const highPrice = mediumPrice * difficultyCoefficient;
-      const luxuryPrice = highPrice * difficultyCoefficient;
-      return {
-        title: event.title,
-        price: [lowPrice, mediumPrice, highPrice, luxuryPrice],
-      };
-    });
-    dispatch(spendsSlice.actions.setAvailableEvents(availableEvents));
-  };
+export const generateInitialEvents = (difficulty: DifficultyType) => {
+  const difficultyCoefficient = increaseSpendsPriceFromDifficultyMap[difficulty];
+  const availableEvents: Spend[] = events.map((event) => {
+    // задаем цены с учетом сложности игры
+    const lowPrice = event.price;
+    const mediumPrice = lowPrice * difficultyCoefficient;
+    const highPrice = mediumPrice * difficultyCoefficient;
+    const luxuryPrice = highPrice * difficultyCoefficient;
+    return {
+      title: event.title,
+      price: [lowPrice, mediumPrice, highPrice, luxuryPrice],
+    };
+  });
+  // dispatch(spendsSlice.actions.setAvailableEvents(availableEvents));
+};
 
 export const weekSpends = (): ThunkType => (dispatch, getState) => {
   const availableEvents = getState().spends.availableEvents;
   const spendsLevel = getState().spends.spendsLevel;
-  const index = generateRandomNumber(availableEvents.length);
+  const index = generateRoundRandomValue(availableEvents.length);
 
   // обновить баланс кошелька
 

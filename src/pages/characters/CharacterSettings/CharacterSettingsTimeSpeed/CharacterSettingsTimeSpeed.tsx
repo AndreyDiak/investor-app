@@ -5,11 +5,8 @@ import {
   setConstTimeSpeed,
   setTimeSpeed as setTimeSpeedAction,
 } from "../../../../features/slices";
-import {
-  defaultTimeSpeed,
-  optionsTime,
-} from "../../../../features/slices/settings/models";
 import { TimeSpeedType } from "../../../../features/slices/settings/typings";
+import { defaultTimeSpeed, optionsTime } from "../../../../models";
 
 import classes from "./../CharacterSettings.module.css";
 

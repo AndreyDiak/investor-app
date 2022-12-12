@@ -1,6 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
-import { defaultMaxCardsInARow } from "./models";
+import { defaultMaxCardsInARow } from "../../../models";
 import { Person } from "./typings";
 import { generateCharacters } from "./utils/generateCharacters";
 

@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { CloseButton } from "../../../components/CloseButton/CloseButton";
 import { MoneyIcon } from "../../../components/MoneyIcon/MoneyIcon";
+import { MoneyIconWithPrice } from "../../../components/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
 import { useAppDispatch } from "../../../features/hooks";
 import { setCharacter } from "../../../features/slices";
 import { Person } from "../../../features/slices/characters/typings";
@@ -94,14 +95,17 @@ const Column = ({ title, value, iconEnabled }: ColumnProps) => {
         {title}
       </Title>
       <Money>
-        <div
-          style={{
-            paddingTop: !iconEnabled ? "8px" : "",
-          }}
-        >
-          {value}
-        </div>
-        {iconEnabled && <MoneyIcon size="s" />}
+        {iconEnabled ? (
+          <MoneyIconWithPrice price={value} color="#88b3af" />
+        ) : (
+          <div
+            style={{
+              paddingTop: 7,
+            }}
+          >
+            {value}
+          </div>
+        )}
       </Money>
     </div>
   );
@@ -161,9 +165,6 @@ const Title = styled.div`
 `;
 
 const Money = styled.div`
-  display: flex;
-  align-items: center;
-  column-gap: 10px;
   color: #88b3af;
   font-weight: 500;
   font-size: 20px;

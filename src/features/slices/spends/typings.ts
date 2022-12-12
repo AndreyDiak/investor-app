@@ -1,5 +1,5 @@
 import { DifficultyType } from "../settings/typings";
-import { SpendsLevel } from "./models";
+import { SpendsLevel } from "../../../models";
 
 export interface Spend {
   title: string;
