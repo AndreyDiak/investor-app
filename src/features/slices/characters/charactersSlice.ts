@@ -1,13 +1,12 @@
-import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
-import { defaultMaxCardsInARow } from "../../../models";
+import { selectMaxCardsInARow } from "../settings/settingsSlice";
 import { Person } from "./typings";
 import { generateCharacters } from "./utils/generateCharacters";
 
 const initialState = {
   characters: [] as Person[],
   current: 0,
-  currentMaxInARow: defaultMaxCardsInARow.LAPTOP,
 };
 
 export const charactersSlice = createSlice({
@@ -32,29 +31,10 @@ export const charactersSlice = createSlice({
         state.current = state.current - 1;
       }
     },
-    setCurrentMaxInARow: {
-      prepare: (screenWidth: number) => {
-        let maxCardsInARow = defaultMaxCardsInARow.PHONE;
-
-        if (screenWidth > 1440) {
-          maxCardsInARow = defaultMaxCardsInARow.DESKTOP;
-        } else if (screenWidth > 1024) {
-          maxCardsInARow = defaultMaxCardsInARow.LAPTOP;
-        } else if (screenWidth > 768) {
-          maxCardsInARow = defaultMaxCardsInARow.TABLET;
-        }
-        return {
-          payload: maxCardsInARow,
-        };
-      },
-      reducer: (state, action: PayloadAction<number>) => {
-        state.currentMaxInARow = action.payload;
-      },
-    },
   },
 });
 
-export const { setCharacters, setCurrentMaxInARow, increaseCurrent, decreaseCurrent } =
+export const { setCharacters, increaseCurrent, decreaseCurrent } =
   charactersSlice.actions;
 
 // Selectors
@@ -68,11 +48,7 @@ export const isCharactersCreated = createSelector(
 );
 
 export const selectFilteredCharacters = createSelector(
-  [
-    selectCharacters,
-    selectCurrent,
-    (state: RootState) => state.characters.currentMaxInARow,
-  ],
+  [selectCharacters, selectCurrent, selectMaxCardsInARow],
   (characters, current, currentMaxInRow) => {
     if (current + currentMaxInRow <= characters.length) {
       return characters.slice(current, current + currentMaxInRow);

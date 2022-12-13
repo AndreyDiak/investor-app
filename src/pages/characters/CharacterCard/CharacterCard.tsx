@@ -1,5 +1,7 @@
 import { Card } from "antd";
 import { motion } from "framer-motion";
+import { useAppSelector } from "../../../features/hooks";
+import { selectCardWidth } from "../../../features/slices";
 import { Person } from "../../../features/slices/characters/typings";
 interface Props {
   character: Person;
@@ -9,10 +11,13 @@ import classes from "./CharacterCard.module.css";
 import { CharacterInfo } from "./CharacterInfo/CharacterInfo";
 
 export const CharactersCard = ({ character }: Props) => {
+
+  const width = useAppSelector(selectCardWidth)
+
   return (
     <Card
       hoverable
-      style={{ width: 300 }}
+      style={{ width }}
       cover={
         <motion.img
           src={character.photo.img}

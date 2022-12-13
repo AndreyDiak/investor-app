@@ -1,0 +1,5 @@
+.page {
+  background: url("/src/assets/game/profile/banner.jpg") center no-repeat;
+  background-size: cover;
+  flex: 1;
+}

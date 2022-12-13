@@ -1,0 +1,12 @@
+.about {
+  display: flex;
+  column-gap: 20px;
+  align-items: center;
+}
+
+.text {
+  font-family: var(--font-family-default);
+  color: #fff;
+  font-size: var(--font-size-big);
+  font-weight: 500;
+}

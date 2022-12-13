@@ -1,0 +1,14 @@
+.link a {
+  text-decoration: none;
+  color: #fff;
+  font-family: var(--font-family-default);
+}
+
+.list {
+  display: flex;
+  column-gap: 10px;
+}
+
+.link a:hover {
+  color: var(--text-gray-dark);
+}

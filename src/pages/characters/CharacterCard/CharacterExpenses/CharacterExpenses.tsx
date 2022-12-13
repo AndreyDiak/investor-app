@@ -15,11 +15,7 @@ export const CharacterExpenses = ({ expenses }: Props) => {
           <ExpenseTitle>
             {expense.title} ({expense.paymentPercantage}%)
           </ExpenseTitle>
-          <MoneyIconWithPrice price={expense.remainPrice} color="#ddd" gap={10} />
-          {/* <ExpensePrice>
-            {expense.remainPrice}
-            <MoneyIcon size="s" />
-          </ExpensePrice> */}
+          <MoneyIconWithPrice price={expense.remainPrice} color="var(--text-gray)" gap={10} />
         </ExpenseLine>
       ))}
     </ExpenseList>
@@ -29,8 +25,7 @@ export const CharacterExpenses = ({ expenses }: Props) => {
 const ExpenseList = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  /* row-gap: 10px; */
+  align-items: center
 `;
 
 const ExpenseLine = styled.div`
@@ -51,14 +46,5 @@ const ExpenseLine = styled.div`
 
 const ExpenseTitle = styled.p`
   font-weight: 700;
-  color: #88b3af;
-`;
-
-const ExpensePrice = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 900;
-  font-size: 20px;
-  color: #dddddd;
+  color: var(--text-aqua);
 `;

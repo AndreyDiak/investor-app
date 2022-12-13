@@ -1,0 +1,6 @@
+.header {
+  width: 100%;
+  background: var(--bg-purple);
+  display: flex;
+  align-items: center;
+}

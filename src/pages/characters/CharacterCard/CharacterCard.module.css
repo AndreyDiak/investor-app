@@ -2,15 +2,18 @@
   padding: 10px;
   position: relative;
   z-index: 100;
-  background-color: #006064;
+  background-color: var(--aqua);
+  transition: 0.4s;
+  animation: ease-in-out;
 }
 
 .card:hover {
-  background-color: #006b6e;
+  background-color: var(--aqua-light);
+  scale: 1.05;
 }
 
 .description {
-  color: #b4b2b2;
+  color: var(--text-gray-dark);
   font-weight: 500;
   font-size: 16px;
 }
