@@ -1,5 +1,5 @@
-import { useAppSelector } from '../../features/hooks'
-import { selectCharacter } from '../../features/slices'
+import { useAppSelector } from '../../redux/hooks'
+import { selectCharacter } from '../../redux/slices'
 import classes from './Header.module.css'
 import { HeaderAbout } from './HeaderAbout/HeaderAbout'
 import { HeaderLinks } from './HeaderLinks/HeaderLinks'
@@ -10,8 +10,16 @@ export const Header = () => {
 
   return (
     <div className={classes.header}>
+      {/* Character photo and name */}
       <HeaderAbout avatar={character?.photo.avatar} name={character.name} />
+      {/* Change time buttons */}
+
+      {/* Links to others pages */}
       <HeaderLinks />
+
+      {/* Current time (day + month) */}
+
+      {/* Player balance? */}
     </div>
   )
 }

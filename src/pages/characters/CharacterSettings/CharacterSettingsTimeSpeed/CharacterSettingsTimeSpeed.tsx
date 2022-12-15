@@ -1,11 +1,11 @@
 import { Radio } from "antd";
 import { useState } from "react";
-import { useAppDispatch } from "../../../../features/hooks";
+import { useAppDispatch } from "../../../../redux/hooks";
 import {
   setConstTimeSpeed,
   setTimeSpeed as setTimeSpeedAction,
-} from "../../../../features/slices";
-import { TimeSpeedType } from "../../../../features/slices/settings/typings";
+} from "../../../../redux/slices";
+import { TimeSpeedType } from "../../../../redux/slices/settings/typings";
 import { defaultTimeSpeed, optionsTime } from "../../../../models";
 
 import classes from "./../CharacterSettings.module.css";

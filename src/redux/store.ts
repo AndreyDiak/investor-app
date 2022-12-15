@@ -1,3 +1,4 @@
+import { timeSlice } from './slices/game/time/timeSlice';
 // import { charactersSlice } from "./slices/characters/charactersSlice";
 // import { settingsSlice } from "./slices/settings/settingsSlice";
 // import { spendsSlice } from "./slices/spends/spendsSlice";
@@ -12,6 +13,7 @@ export const store = configureStore({
     settings: settingsSlice.reducer,
     characters: charactersSlice.reducer,
     character: characterSlice.reducer,
+    time: timeSlice.reducer
   },
 });
 

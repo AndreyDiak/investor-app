@@ -1,3 +1,4 @@
+import { Badge } from "antd"
 import { NavLink } from "react-router-dom"
 
 const links = [
@@ -19,7 +20,8 @@ const links = [
   },
   {
     label: 'Новости',
-    to: '/game/news'
+    to: '/game/news',
+    badge: true
   }
 ]
 
@@ -30,9 +32,18 @@ export const HeaderLinks = () => {
     <div className={classes.list}>
       {links.map(link => (
         <div className={classes.link}>
-          <NavLink to={link.to}>
-            {link.label}
-          </NavLink>
+          {
+            !link.badge ? (
+              <NavLink to={link.to}>
+                {link.label}
+              </NavLink>
+            ) : //TODO ждать релиза новостей
+              <Badge count={2} overflowCount={10}>
+                <NavLink to={link.to}>
+                  {link.label}
+                </NavLink>
+              </Badge>
+          }
         </div>
       ))}
     </div>

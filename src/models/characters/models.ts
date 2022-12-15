@@ -4,7 +4,7 @@ import {
   DifficultyCoefficientMapType,
   ExpenseTitleMapType,
   InitialPerson,
-} from "../../features/slices/characters/typings";
+} from "../../redux/slices/characters/typings";
 import { difficulty } from "../settings/models";
 
 export enum Expenses {

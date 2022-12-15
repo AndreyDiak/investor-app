@@ -1,5 +1,5 @@
-import { useAppSelector } from "../../features/hooks";
-import { selectCardWidth, selectPersonImageWidth } from "../../features/slices";
+import { useAppSelector } from "../../redux/hooks";
+import { selectCardWidth, selectPersonImageWidth } from "../../redux/slices";
 
 interface Props {
   image?: string;

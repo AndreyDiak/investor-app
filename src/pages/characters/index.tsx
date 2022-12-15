@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Loader } from "../../components/Loader/Loader";
-import { useAppDispatch } from "../../features/hooks";
-import { isCharactersCreated, setCharacters } from "../../features/slices";
-import { Person } from "../../features/slices/characters/typings";
+import { useAppDispatch } from "../../redux/hooks";
+import { isCharactersCreated, setCharacters } from "../../redux/slices";
+import { Person } from "../../redux/slices/characters/typings";
 import { CharacterPreview } from "./CharacterPreview/CharacterPreview";
 import { CharactersList } from "./CharactersList/CharactersList";
 

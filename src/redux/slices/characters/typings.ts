@@ -1,5 +1,5 @@
 import { DifficultyType } from "../settings/typings";
-import { Expenses } from "../../../models/";
+import { Expenses } from "../../../models";
 
 export interface InitialPerson {
   name: string;

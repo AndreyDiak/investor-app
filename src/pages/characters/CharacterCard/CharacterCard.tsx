@@ -1,8 +1,8 @@
 import { Card } from "antd";
 import { motion } from "framer-motion";
-import { useAppSelector } from "../../../features/hooks";
-import { selectCardWidth } from "../../../features/slices";
-import { Person } from "../../../features/slices/characters/typings";
+import { useAppSelector } from "../../../redux/hooks";
+import { selectCardWidth } from "../../../redux/slices";
+import { Person } from "../../../redux/slices/characters/typings";
 interface Props {
   character: Person;
 }

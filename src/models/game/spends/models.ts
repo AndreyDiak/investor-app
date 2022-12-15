@@ -2,7 +2,7 @@ import type {
   HappenedSpend,
   IncreaseSpendsPriceFromDifficultyMap,
   SpendLevelToPriceType,
-} from "../../features/slices/spends/typings";
+} from "../../../redux/slices/game/spends/typings";
 
 export enum SpendsLevel {
   LOW = "low",

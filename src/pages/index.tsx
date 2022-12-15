@@ -7,8 +7,8 @@ import "./../styles/variables.css"
 import { useEffect } from "react";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import { useAppDispatch } from "../features/hooks";
-import { setDevice } from "../features/slices";
+import { useAppDispatch } from "../redux/hooks";
+import { setDevice } from "../redux/slices";
 
 
 export const App = () => {
