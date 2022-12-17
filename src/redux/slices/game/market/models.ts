@@ -61,3 +61,8 @@ export const assetsRiskToConditionMap = {
   "upper-medium": { up: 0.4, down: 0.6 },
   high: { up: 0.3, down: 0.7 },
 };
+
+export const incomeToOpenMarket = {
+  stocks: 1000,
+  bonds: 1300,
+};

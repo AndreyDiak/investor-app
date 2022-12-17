@@ -21,4 +21,3 @@ export const companiesForStocks = [
   "АэроТехнологии",
   "ОАО НаСвязи",
 ];
-

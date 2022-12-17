@@ -45,8 +45,8 @@ export const CharactersList = ({ selectCharacter }: Props) => {
       />
       {/* CharactersList */}
       {characters.map((character) => (
-        <div onClick={() => selectCharacter(character)}>
-          <CharactersCard key={character.name} character={character} />
+        <div key={character.name} onClick={() => selectCharacter(character)}>
+          <CharactersCard character={character} />
         </div>
       ))}
       {/* turn right arrow */}

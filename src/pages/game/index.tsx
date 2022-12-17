@@ -3,13 +3,33 @@ import { GameRoutes } from "./_routes";
 import classes from './index.module.css'
 import { Header } from "../../components/Header/Header";
 import { useTime } from "../../hooks/useTime";
-import { useAppSelector } from "../../redux/hooks";
-import { selectDay } from "../../redux/slices/game/time/timeSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { increaseDay, selectDay, selectTimeSpeed } from "../../redux/slices";
+import React, { useEffect } from "react";
 
-const GamePage = () => {
+const GamePage = React.memo(() => {
 
   const day = useAppSelector(selectDay);
-  useTime(day); 
+
+  const timeSpeed = useAppSelector(selectTimeSpeed);
+
+  const dispatch = useAppDispatch()
+
+  const liveProcess = () => {
+    if (timeSpeed !== 0) {
+      setTimeout(() =>
+        dispatch(increaseDay())
+        , timeSpeed * 500)
+    }
+  }
+
+  useEffect(() => {
+    liveProcess()
+  }, [day])
+
+  // liveProcess()
+
+  useTime(day);
 
   return (
     <div className={classes.page}>
@@ -21,6 +41,6 @@ const GamePage = () => {
       {/* Popups */}
     </div>
   );
-};
+});
 
 export default GamePage;

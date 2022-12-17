@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { weekSpends } from "../redux/slices";
+import { checkStocks } from "../redux/slices/game/market/stocks/stocksSlice";
 import { selectDayInMonth, selectMonth, selectMonthIndex, setDayInMonth, setMonthIndex } from "../redux/slices/game/time/timeSlice"
 
 export const useTime = (day: number) => {
@@ -32,7 +33,7 @@ export const useTime = (day: number) => {
       }
 
       if (dayInMonth % 7 === 0) {
-        // обновление рынков
+        checkStocks() // обновление рынка
         weekSpends() // еженедельная трата
       }
 

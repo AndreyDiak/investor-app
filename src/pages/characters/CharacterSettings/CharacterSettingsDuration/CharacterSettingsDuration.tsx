@@ -42,7 +42,7 @@ const CharacterSettingsDuration = () => {
           <Header className="">Доступные рынки</Header>
           <MarketsList>
             {gameDurationMarkets[duration].map((market) => (
-              <MarketLine>{marketsAbout[market]}</MarketLine>
+              <MarketLine key={market}>{marketsAbout[market]}</MarketLine>
             ))}
           </MarketsList>
         </div>

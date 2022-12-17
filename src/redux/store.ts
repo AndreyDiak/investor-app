@@ -1,10 +1,12 @@
-import { timeSlice } from './slices/game/time/timeSlice';
-// import { charactersSlice } from "./slices/characters/charactersSlice";
-// import { settingsSlice } from "./slices/settings/settingsSlice";
-// import { spendsSlice } from "./slices/spends/spendsSlice";
-
-import { configureStore } from "@reduxjs/toolkit";
-import { characterSlice, spendsSlice, settingsSlice, charactersSlice } from "./slices";
+import { AnyAction, configureStore, ThunkAction } from "@reduxjs/toolkit";
+import {
+  characterSlice,
+  spendsSlice,
+  settingsSlice,
+  charactersSlice,
+  stocksSlice,
+  timeSlice,
+} from "./slices";
 // ...
 
 export const store = configureStore({
@@ -13,7 +15,8 @@ export const store = configureStore({
     settings: settingsSlice.reducer,
     characters: charactersSlice.reducer,
     character: characterSlice.reducer,
-    time: timeSlice.reducer
+    time: timeSlice.reducer,
+    stocks: stocksSlice.reducer,
   },
 });
 
@@ -21,3 +24,5 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
+// Thunks type
+export type ThunkType = ThunkAction<void, RootState, unknown, AnyAction>;

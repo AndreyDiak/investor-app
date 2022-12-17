@@ -11,7 +11,7 @@ export const CharacterExpenses = ({ expenses }: Props) => {
   return (
     <ExpenseList>
       {expenses.map((expense) => (
-        <ExpenseLine>
+        <ExpenseLine key={expense.title}>
           <ExpenseTitle>
             {expense.title} ({expense.paymentPercantage}%)
           </ExpenseTitle>
