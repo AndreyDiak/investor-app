@@ -5,9 +5,10 @@ interface Props {
   price: number;
   color?: string;
   gap?: number;
+  fontSize?: number;
 }
 
-export const MoneyIconWithPrice = ({ price, color, gap }: Props) => {
+export const MoneyIconWithPrice = ({ price, color, gap, fontSize }: Props) => {
   return (
     <Price
       style={{
@@ -23,8 +24,16 @@ export const MoneyIconWithPrice = ({ price, color, gap }: Props) => {
 const Price = styled.div`
   display: flex;
   align-items: center;
-  gap: 5px;
   font-size: 20px;
+  gap: 5px;
   font-weight: 900;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 18px;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 16px;
+  }
 `;

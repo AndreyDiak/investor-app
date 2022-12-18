@@ -1,6 +1,37 @@
 .header {
-  width: 100%;
+  padding: 10px;
   background: var(--bg-purple);
   display: flex;
+  justify-content: space-between;
   align-items: center;
+}
+
+.headerAbout {
+  display: flex;
+  column-gap: 30px;
+  align-items: center;
+}
+
+.headerInfo {
+  display: flex;
+  column-gap: 50px;
+  align-items: center;
+}
+
+@media screen and (max-width: 1024px) {
+  .headerAbout {
+    column-gap: 15px;
+  }
+  .headerInfo {
+    column-gap: 30px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .headerAbout {
+    column-gap: 10px;
+  }
+  .headerInfo {
+    column-gap: 20px;
+  }
 }

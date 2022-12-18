@@ -1,0 +1,18 @@
+.date {
+  font-size: var(--font-size-big);
+  font-family: var(--font-family-default);
+  font-weight: 500;
+  color: #fff;
+}
+
+@media screen and (max-width: 1024px) {
+  .date {
+    font-size: var(--font-size-normal);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .date {
+    font-size: var(--font-size-small);
+  }
+}
