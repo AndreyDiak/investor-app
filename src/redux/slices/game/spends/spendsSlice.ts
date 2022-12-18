@@ -47,8 +47,12 @@ export const spendsSlice = createSlice({
   },
 });
 
-export const { resetCurrentEvents, updateCurrentEvents, updateSpendsLevel } =
-  spendsSlice.actions;
+export const {
+  resetCurrentEvents,
+  updateCurrentEvents,
+  updateSpendsLevel,
+  setAvailableEvents,
+} = spendsSlice.actions;
 
 // Selectors
 export const selectAvailableEvents = (state: RootState) => state.spends.availableEvents;

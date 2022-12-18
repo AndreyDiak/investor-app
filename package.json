@@ -21,6 +21,7 @@
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.6",
+    "util-deprecate": "^1.0.2",
     "uuidv4": "^6.2.13"
   },
   "devDependencies": {

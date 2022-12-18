@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { setAvailableEvents, selectDifficulty } from "../../../redux/slices";
 import CharacterSettingsDifficulty from "./CharacterSettingsDifficulty/CharacterSettingsDifficulty";
 import CharacterSettingsDuration from "./CharacterSettingsDuration/CharacterSettingsDuration";
 import CharacterSettingsTimeSpeed from "./CharacterSettingsTimeSpeed/CharacterSettingsTimeSpeed";
@@ -8,15 +10,20 @@ import CharacterSettingsTimeSpeed from "./CharacterSettingsTimeSpeed/CharacterSe
 export const CharacterSettings = () => {
   const navigate = useNavigate();
 
-  const onClickHandler = () => {
+  const dispatch = useAppDispatch();
+
+  const difficulty = useAppSelector(selectDifficulty);
+
+  const startGame = () => {
     navigate("/game");
+    dispatch(setAvailableEvents(difficulty));
   };
 
   return (
     <motion.div
       initial={{
         opacity: 0,
-        y: 500
+        y: 500,
       }}
       animate={{
         y: 0,
@@ -26,13 +33,12 @@ export const CharacterSettings = () => {
         duration: 0.7,
         ease: "backInOut",
       }}
-
     >
       <Settings>
         <CharacterSettingsTimeSpeed />
         <CharacterSettingsDifficulty />
         <CharacterSettingsDuration />
-        <SettingsButton onClick={onClickHandler}>Начать игру</SettingsButton>
+        <SettingsButton onClick={startGame}>Начать игру</SettingsButton>
       </Settings>
     </motion.div>
   );

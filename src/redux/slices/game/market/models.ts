@@ -63,6 +63,6 @@ export const assetsRiskToConditionMap = {
 };
 
 export const incomeToOpenMarket = {
-  stocks: 1000,
+  stocks: 500,
   bonds: 1300,
 };

@@ -1,22 +1,8 @@
-import { NavLink, useRoutes } from "react-router-dom";
-import { useAppSelector } from "../../redux/hooks";
-import { selectCharacter } from "../../redux/slices";
+import React from "react";
+import { useRoutes } from "react-router-dom";
 import ProfilePage from "./profile";
 
-export const GameRoutes = () => {
-
-  const character = useAppSelector(selectCharacter)
-
-  console.log(character)
-
-  if (character === null) {
-    return <div>
-      <NavLink to='/'>
-        Back to main
-      </NavLink>
-    </div>
-  }
-
+export const GameRoutes = React.memo(() => {
   const routes = useRoutes([
     {
       path: "/",
@@ -31,4 +17,4 @@ export const GameRoutes = () => {
   ]);
 
   return routes;
-};
+});

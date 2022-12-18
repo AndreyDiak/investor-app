@@ -21,9 +21,9 @@ export const spendLevelToPrice: SpendLevelToPriceType = {
 // init coefficient of event price increase
 export const increaseSpendsPriceFromDifficultyMap: IncreaseSpendsPriceFromDifficultyMap =
   {
-    easy: 1.5,
-    normal: 2.0,
-    hard: 2.5,
+    easy: 3,
+    normal: 4,
+    hard: 5,
   };
 
 export const events: HappenedSpend[] = [

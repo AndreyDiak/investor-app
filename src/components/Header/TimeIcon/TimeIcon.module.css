@@ -1,0 +1,11 @@
+.icon {
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 100ms;
+  animation: ease-in;
+}
+
+.icon:hover {
+  transform: scale(1.05);
+}

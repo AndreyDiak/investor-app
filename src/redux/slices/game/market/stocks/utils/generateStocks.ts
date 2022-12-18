@@ -1,4 +1,4 @@
-import { uuid } from "uuidv4";
+import { v4 as uuidv4 } from "uuid";
 import { companiesForStocks } from "../../../../../../models";
 import { numberToRisk } from "../../../../../../utils/market/numberToRisk";
 import { DifficultyType } from "../../../../settings/typings";
@@ -30,10 +30,10 @@ export const generateStocks = (difficulty: DifficultyType) => {
       ? 0 // нет дивидендов
       : generateRoundRandomValue(normalPriceChange - 1) + 1; // процент дивов
 
-    const count = generateRoundRandomValue(50) + 50; // от 50 до 100 акций на рынке
+    const count = generateRoundRandomValue(100) + 10; // от 10 до 110 акций на рынке
 
     const stock: Stock = {
-      id: "",
+      id: uuidv4(),
       title: company,
       count: count,
       risk: risk,

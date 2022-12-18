@@ -1,28 +1,33 @@
-import { useAppSelector } from '../../redux/hooks'
-import { selectCharacter } from '../../redux/slices'
-import { selectDay } from '../../redux/slices/game/time/timeSlice'
-import classes from './Header.module.css'
-import { HeaderAbout } from './HeaderAbout/HeaderAbout'
-import { HeaderLinks } from './HeaderLinks/HeaderLinks'
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import {
+  selectCharacter,
+  selectDay,
+  selectDayInMonth,
+  selectMonth,
+  selectWalletBalance,
+} from "../../redux/slices";
+import { MoneyIconWithPrice } from "../MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
+import classes from "./Header.module.css";
+import { HeaderAbout } from "./HeaderAbout/HeaderAbout";
+import { HeaderDate } from "./HeaderDate/HeaderDate";
+import { HeaderLinks } from "./HeaderLinks/HeaderLinks";
+import { HeaderTimeButtons } from "./HeaderTimeButtons/HeaderTimeButtons";
 
 export const Header = () => {
+  const balance = useAppSelector(selectWalletBalance);
 
-  const character = useAppSelector(selectCharacter)!
-  const day = useAppSelector(selectDay)
   return (
     <div className={classes.header}>
       {/* Character photo and name */}
-      <HeaderAbout avatar={character?.photo.avatar} name={character.name} />
+      <HeaderAbout />
       {/* Change time buttons */}
-      <div>
-        day: {day}
-      </div>
+      <HeaderTimeButtons />
       {/* Links to others pages */}
       <HeaderLinks />
-
       {/* Current time (day + month) */}
-
+      <HeaderDate />
       {/* Player balance? */}
+      <MoneyIconWithPrice price={balance} />
     </div>
-  )
-}
+  );
+};

@@ -5,7 +5,7 @@ import { Person } from "../../characters/typings";
 const initialState = {
   character: null as null | Person,
   totalIncome: 0, // зарплата с учетом всех долгов
-  wallet: 0, // текущие накопления
+  walletBalance: 0, // текущие накопления
 };
 
 export const characterSlice = createSlice({
@@ -15,16 +15,16 @@ export const characterSlice = createSlice({
     setCharacter: (state, action: PayloadAction<Person>) => {
       state.character = action.payload;
       state.totalIncome = action.payload.salary - action.payload.spendingsMonthPayment;
-      state.wallet = action.payload.startMoney;
+      state.walletBalance = action.payload.startMoney;
     },
     setWallet: (state, action: PayloadAction<number>) => {
-      state.wallet = action.payload;
+      state.walletBalance = action.payload;
     },
     increaseWallet: (state, action: PayloadAction<number>) => {
-      state.wallet += action.payload;
+      state.walletBalance += action.payload;
     },
     decreaseWallet: (state, action: PayloadAction<number>) => {
-      state.wallet -= action.payload;
+      state.walletBalance -= action.payload;
     },
     setTotalIncome: (state, action: PayloadAction<number>) => {
       state.totalIncome = action.payload;
@@ -37,5 +37,7 @@ export const { setCharacter, setTotalIncome, setWallet, increaseWallet, decrease
 
 // Selectors
 export const selectCharacter = (state: RootState) => state.character.character;
+
+export const selectWalletBalance = (state: RootState) => state.character.walletBalance;
 
 export default characterSlice.reducer;

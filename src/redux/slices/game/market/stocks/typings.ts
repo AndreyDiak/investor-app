@@ -10,9 +10,15 @@ export interface Stock {
 
   priceChangeDueToNews: number; // сколько недель цена должна расти или падать
   // если не равен 0 то у акции не должно менятся condition
-  
+
   dividendsPercentage: number; // процент девидендов с акции
   // если равен 0 - то девиндев нет
 
   minPrice: number; // минимальная цена акции на рынке
+}
+
+export interface MyStock {
+  id: string;
+  count: number; // кол-во купленных акций
+  price: number; // цена по которой куплены акции
 }

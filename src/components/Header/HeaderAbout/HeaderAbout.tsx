@@ -1,21 +1,18 @@
 import { Avatar } from "antd";
+import { useAppSelector } from "../../../redux/hooks";
+import { selectCharacter } from "../../../redux/slices";
 
-interface Props {
-  avatar: string;
-  name: string;
-}
+import classes from "./HeaderAbout.module.css";
 
-import classes from './HeaderAbout.module.css'
+export const HeaderAbout = () => {
+  const character = useAppSelector(selectCharacter)!;
 
-export const HeaderAbout = ({ avatar, name }: Props) => {
   return (
     <div className={classes.about}>
       <div>
-        <Avatar src={avatar} size={'default'} />
+        <Avatar src={character.photo.avatar} size={"default"} />
       </div>
-      <div className={classes.text}>
-        {name}
-      </div>
+      <div className={classes.text}>{character.name}</div>
     </div>
-  )
-}
+  );
+};

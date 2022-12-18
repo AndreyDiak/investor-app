@@ -1,7 +1,16 @@
 import { createChance } from "../../../../../../utils/createChance";
-import { generateRandomValue, generateRoundRandomValue } from "../../../../../../utils/generateRandom";
+import {
+  generateRandomValue,
+  generateRoundRandomValue,
+} from "../../../../../../utils/generateRandom";
 import { DifficultyType } from "../../../../settings/typings";
-import { assetsDiffToNormalPriceChangeMap, assetsRiskToConditionMap, conditions, defaultAssetsCountChange, priceNotChangeChance } from "../../models";
+import {
+  assetsDiffToNormalPriceChangeMap,
+  assetsRiskToConditionMap,
+  conditions,
+  defaultAssetsCountChange,
+  priceNotChangeChance,
+} from "../../models";
 import { Condition } from "../../typings";
 import { Stock } from "../typings";
 
@@ -22,7 +31,10 @@ export const indexingStocks = (stocks: Stock[], difficulty: DifficultyType) => {
       const priceDiffFromRisk = assetsRiskToConditionMap[stock.risk];
       // новая цена на акцию
       const priceDiffCoefficient = Number(
-        (priceDiffFromRisk.down / 10 + generateRandomValue(normalPriceChange / 100)).toFixed(2)
+        (
+          priceDiffFromRisk.down / 10 +
+          generateRandomValue(normalPriceChange / 100)
+        ).toFixed(2)
       );
       // можно ли понизить цену?
       const isAbleToDecrease =
@@ -51,7 +63,7 @@ export const indexingStocks = (stocks: Stock[], difficulty: DifficultyType) => {
             ? stock.count + countDifference
             : stock.count - countDifference
           : stock.count + countDifference,
-      price: [...stock.price, newPrice],
+      price: [...stock.price, Number(newPrice.toFixed(1))],
       condition,
       priceChangeDueToNews:
         stock.priceChangeDueToNews !== 0 ? stock.priceChangeDueToNews - 1 : 0,

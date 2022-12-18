@@ -7,9 +7,10 @@ export const generateInitialEvents = (difficulty: DifficultyType) => {
   const availableEvents: Spend[] = events.map((event) => {
     // задаем цены с учетом сложности игры
     const lowPrice = event.price;
-    const mediumPrice = lowPrice * difficultyCoefficient;
-    const highPrice = mediumPrice * difficultyCoefficient;
-    const luxuryPrice = highPrice * difficultyCoefficient;
+    const mediumPrice = Math.floor(lowPrice * difficultyCoefficient);
+    const highPrice = Math.floor(mediumPrice * difficultyCoefficient);
+    const luxuryPrice = Math.floor(highPrice * difficultyCoefficient);
+
     return {
       title: event.title,
       price: [lowPrice, mediumPrice, highPrice, luxuryPrice],
