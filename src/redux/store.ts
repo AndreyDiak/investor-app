@@ -6,6 +6,7 @@ import {
   charactersSlice,
   stocksSlice,
   timeSlice,
+  newsSlice,
 } from "./slices";
 // ...
 
@@ -17,6 +18,7 @@ export const store = configureStore({
     character: characterSlice.reducer,
     time: timeSlice.reducer,
     stocks: stocksSlice.reducer,
+    news: newsSlice.reducer,
   },
 });
 

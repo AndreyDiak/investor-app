@@ -39,7 +39,8 @@ export const generateStocks = (difficulty: DifficultyType) => {
       risk: risk,
       price: [price],
       condition: conditions.NOT_CHANGED, // начальная цена не меняется
-      priceChangeDueToNews: 0, // новости не влияют на акцию
+      priceChangeIntervalDueToNews: 0, // новости не влияют на акцию
+      priceGrowOfFallDueToNews: conditions.NOT_CHANGED,
       dividendsPercentage: dividends,
       minPrice: minPrice,
     };

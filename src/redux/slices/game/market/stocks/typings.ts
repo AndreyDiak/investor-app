@@ -8,8 +8,9 @@ export interface Stock {
   price: number[]; // цена на акции
   condition: Condition; // спала цена или выросла от последней цены
 
-  priceChangeDueToNews: number; // сколько недель цена должна расти или падать
+  priceChangeIntervalDueToNews: number; // сколько недель цена должна расти или падать
   // если не равен 0 то у акции не должно менятся condition
+  priceGrowOfFallDueToNews: Condition;
 
   dividendsPercentage: number; // процент девидендов с акции
   // если равен 0 - то девиндев нет

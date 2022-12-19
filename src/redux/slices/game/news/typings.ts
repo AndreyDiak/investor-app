@@ -15,3 +15,11 @@ export interface NewsEvents {
     }[];
   }[];
 }
+
+export interface News {
+  date: string;
+  kind: NewsKinds;
+  type: NewsTopics;
+  text: string;
+  stock: null | string;
+}

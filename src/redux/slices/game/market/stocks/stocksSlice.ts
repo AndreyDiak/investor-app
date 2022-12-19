@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ThunkType } from "../../../../store";
 import { incomeToOpenMarket } from "../models";
+import { Condition } from "../typings";
 import { MyStock, Stock } from "./typings";
 import { generateStocks, indexingStocks as index } from "./utils";
 
@@ -19,10 +20,18 @@ export const stocksSlice = createSlice({
     indexingStocks: (state, action: PayloadAction<Stock[]>) => {
       state.stocks = action.payload;
     },
+    setStockInterval: (
+      state,
+      action: PayloadAction<{ id: string; type: Condition; interval: number }>
+    ) => {
+      const index = state.stocks.findIndex((stock) => stock.id === action.payload.id);
+      state.stocks[index].priceChangeIntervalDueToNews = action.payload.interval;
+      state.stocks[index].priceGrowOfFallDueToNews = action.payload.type;
+    },
   },
 });
 
-export const { setInitialStocks, indexingStocks } = stocksSlice.actions;
+export const { setInitialStocks, indexingStocks, setStockInterval } = stocksSlice.actions;
 
 // Selectors
 
