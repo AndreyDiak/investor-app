@@ -37,7 +37,7 @@ const ProfilePage = () => {
     },
     {
       title: "Кол-во детей",
-      payment: 3,
+      payment: 0,
     },
   ];
 
@@ -45,7 +45,7 @@ const ProfilePage = () => {
     <div className={classes.page}>
       <div className={classes.content}>
         <div className={classes.personImage}>
-          <PersonImage image={character?.photo.img} />
+          <PersonImage image={character?.photo.img} size={400} />
         </div>
         <div className={classes.cards}>
           {/* character income */}

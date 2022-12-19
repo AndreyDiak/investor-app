@@ -25,8 +25,13 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  overflow: scroll;
+  overflow-y: scroll;
+  scrollbar-width: 0;
   row-gap: 10px;
+}
+
+.list::-webkit-scrollbar {
+  display: none;
 }
 
 .item {

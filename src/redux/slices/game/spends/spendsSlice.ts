@@ -19,8 +19,6 @@ const initialState = {
   currentEvents: [] as HappenedSpend[],
 };
 
-// export type SettingsState = typeof initialState;
-
 export const spendsSlice = createSlice({
   name: "spends",
   initialState,
