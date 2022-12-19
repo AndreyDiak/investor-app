@@ -1,5 +1,5 @@
 .page {
-  background: url("/src/assets/game/profile/banner.jpg") center no-repeat;
+  background: url("/src/assets/game/news/banner-news.jpg") center no-repeat;
   width: 100%;
   background-size: cover;
   position: relative;
@@ -11,7 +11,7 @@
 
 .page::after {
   content: "";
-  background: rgba(244, 212, 189, 0.4);
+  background: rgba(1, 83, 95, 0.4);
   position: absolute;
   width: 100%;
   height: 100%;
@@ -29,22 +29,4 @@
   top: 0;
   left: 0;
   z-index: 1;
-}
-
-.content {
-  display: flex;
-  align-items: center;
-  column-gap: 50px;
-}
-
-.personImage {
-  position: relative;
-  z-index: 100;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 30px;
-  row-gap: 30px;
 }

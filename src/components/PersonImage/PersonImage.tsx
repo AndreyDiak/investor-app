@@ -3,13 +3,19 @@ import { selectCardWidth, selectPersonImageWidth } from "../../redux/slices";
 
 interface Props {
   image?: string;
+  size?: number;
 }
 
-export const PersonImage = ({ image }: Props) => {
-
+export const PersonImage = ({ image, size }: Props) => {
   const width = useAppSelector(selectPersonImageWidth);
 
-  return <img src={image} alt="" style={{
-    maxWidth: width
-  }} />
-}
+  return (
+    <img
+      src={image}
+      alt=""
+      style={{
+        maxWidth: size ? size : width,
+      }}
+    />
+  );
+};

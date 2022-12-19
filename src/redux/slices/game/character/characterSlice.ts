@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AnyAction, createSlice, PayloadAction, ThunkAction } from "@reduxjs/toolkit";
 import { RootState } from "../../../store";
 import { Person } from "../../characters/typings";
 
@@ -39,5 +39,14 @@ export const { setCharacter, setTotalIncome, setWallet, increaseWallet, decrease
 export const selectCharacter = (state: RootState) => state.character.character;
 
 export const selectWalletBalance = (state: RootState) => state.character.walletBalance;
+
+export const selectTotalIncome = (state: RootState) => state.character.totalIncome;
+
+type ThunkType = ThunkAction<void, RootState, unknown, AnyAction>;
+
+export const monthPayment = (): ThunkType => (dispatch, getState) => {
+  const income = getState().character.totalIncome;
+  dispatch(increaseWallet(income));
+};
 
 export default characterSlice.reducer;

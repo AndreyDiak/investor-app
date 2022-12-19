@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { weekSpends } from "../redux/slices";
+import { monthPayment, weekSpends } from "../redux/slices";
 import { checkStocks } from "../redux/slices/game/market/stocks/stocksSlice";
 import {
   setDayMonth,
@@ -26,10 +26,11 @@ export const useTime = (day: number) => {
         newMonthIndex = 0;
       }
 
-      dispatch(setMonthIndex(newMonthIndex));
-      dispatch(setFirstDayInMonth());
-      // конец месяца
-      // выплата ЗП и обновление дохода от всех пассивных источников
+      dispatch(setMonthIndex(newMonthIndex)); // новый месяц
+      dispatch(setFirstDayInMonth()); // ставим первый день
+      dispatch(monthPayment()); // месячная выплата зп и с других доходов
+      // обновление дохода из разных источников дохода
+      // обнуление месячных трат
     } else {
       if (dayInMonth === 14 || dayInMonth === 28) {
         // обновление новостей
