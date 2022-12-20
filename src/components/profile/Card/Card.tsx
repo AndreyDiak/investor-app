@@ -1,5 +1,5 @@
 import React from "react";
-import { MoneyIconWithPrice } from "../MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
+import { MoneyIconWithPrice } from "../../common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
 
 interface Item {
   title: string;

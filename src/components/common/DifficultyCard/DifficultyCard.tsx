@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { difficultyToTitleMap } from "../../models/settings/models";
-import { DifficultyType } from "../../redux/slices/settings/typings";
+import { difficultyToTitleMap } from "../../../models/settings/models";
+import { DifficultyType } from "../../../redux/slices/settings/typings";
 
 interface Props {
   difficulty: DifficultyType;

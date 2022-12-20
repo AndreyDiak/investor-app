@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { monthPayment, weekSpends } from "../redux/slices";
+import { generateNews, monthPayment, weekSpends } from "../redux/slices";
 import { checkStocks } from "../redux/slices/game/market/stocks/stocksSlice";
 import {
   setDayMonth,
@@ -22,8 +22,15 @@ export const useTime = (day: number) => {
     if (dayInMonth === month.duration) {
       let newMonthIndex = monthIndex + 1;
 
+      // если новый год
       if (monthIndex === 11) {
         newMonthIndex = 0;
+      }
+      // если февраль
+      if (monthIndex === 1) {
+        dispatch(generateNews()); // генерирование новости
+        dispatch(checkStocks()); // обновление рынка
+        dispatch(weekSpends()); // еженедельная трата
       }
 
       dispatch(setMonthIndex(newMonthIndex)); // новый месяц
@@ -33,7 +40,7 @@ export const useTime = (day: number) => {
       // обнуление месячных трат
     } else {
       if (dayInMonth === 14 || dayInMonth === 28) {
-        // обновление новостей
+        dispatch(generateNews()) // генерирование новости
       }
 
       if (dayInMonth % 7 === 0 && dayInMonth !== 0) {

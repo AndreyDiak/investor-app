@@ -1,9 +1,11 @@
+import { newsTopics } from "./../../news/models";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ThunkType } from "../../../../store";
 import { incomeToOpenMarket } from "../models";
 import { Condition } from "../typings";
 import { MyStock, Stock } from "./typings";
 import { generateStocks, indexingStocks as index } from "./utils";
+import { openTopic } from "../../news/newsSlice";
 
 const initialState = {
   stocks: [] as Stock[],
@@ -48,6 +50,9 @@ export const checkStocks = (): ThunkType => (dispatch, getState) => {
     const income = getState().character.totalIncome;
 
     if (incomeToOpenMarket["stocks"] < income) {
+      // открываем возможность показывать новости про акции
+      dispatch(openTopic(newsTopics.MARKET));
+      // создаем акции
       // если наш доход больше чем необходимый минимум
       const newStocks = generateStocks(difficulty);
       dispatch(setInitialStocks(newStocks));

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Loader } from "../../components/Loader/Loader";
+import { Loader } from "../../components/common/Loader/Loader";
 import { useAppDispatch } from "../../redux/hooks";
 import { isCharactersCreated, setCharacters } from "../../redux/slices";
 import { Person } from "../../redux/slices/characters/typings";

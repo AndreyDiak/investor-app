@@ -1,8 +1,8 @@
 // import styled from "styled-components";
 import { useState } from "react";
 import styled from "styled-components";
-import { CloseButton } from "../../../components/CloseButton/CloseButton";
-import { MoneyIconWithPrice } from "../../../components/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
+import { CloseButton } from "../../../components/common/CloseButton/CloseButton";
+import { MoneyIconWithPrice } from "../../../components/common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
 import { useAppDispatch } from "../../../redux/hooks";
 import { setCharacter } from "../../../redux/slices";
 import { Person } from "../../../redux/slices/characters/typings";
@@ -11,7 +11,7 @@ import { CharacterInfo } from "../CharacterCard/CharacterInfo/CharacterInfo";
 import { CharacterSettings } from "../CharacterSettings/CharacterSettings";
 
 import { motion } from 'framer-motion';
-import { PersonImage } from "../../../components/PersonImage/PersonImage";
+import { PersonImage } from "../../../components/common/PersonImage/PersonImage";
 
 interface Props {
   character: Person;

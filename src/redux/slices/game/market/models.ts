@@ -28,6 +28,11 @@ export enum marketFilters {
   BONDS = "bonds",
 }
 
+export const marketFiltersToLabelMap = {
+  stocks: "Акции",
+  bonds: "Облигации",
+};
+
 export const defaultMinPrice = 35;
 export const defaultAssetsCountChange = 10;
 export const priceNotChangeChance = 0.1;

@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../redux/hooks";
 import { selectWalletBalance } from "../../redux/slices";
-import { MoneyIconWithPrice } from "../MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
+import { MoneyIconWithPrice } from "../common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
 import { HeaderAbout } from "./HeaderAbout/HeaderAbout";
 import { HeaderDate } from "./HeaderDate/HeaderDate";
 import { HeaderLinks } from "./HeaderLinks/HeaderLinks";

@@ -1,7 +1,7 @@
 import { Avatar } from "antd";
-import { DifficultyCard } from "../../../../components/DifficultyCard/DifficultyCard";
-import { MoneyIcon } from "../../../../components/MoneyIcon/MoneyIcon";
-import { MoneyIconWithPrice } from "../../../../components/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
+import { DifficultyCard } from "../../../../components/common/DifficultyCard/DifficultyCard";
+import { MoneyIcon } from "../../../../components/common/MoneyIcon/MoneyIcon";
+import { MoneyIconWithPrice } from "../../../../components/common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
 import { DifficultyType } from "../../../../redux/slices/settings/typings";
 
 import classes from "./CharacterInfo.module.css";

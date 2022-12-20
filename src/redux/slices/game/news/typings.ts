@@ -17,9 +17,12 @@ export interface NewsEvents {
 }
 
 export interface News {
+  id: string;
   date: string;
   kind: NewsKinds;
   type: NewsTopics;
   text: string;
   stock: null | string;
+  money: null | number;
+  isChecked: boolean;
 }

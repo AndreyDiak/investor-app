@@ -1,5 +1,7 @@
 import { Badge } from "antd";
 import { NavLink } from "react-router-dom";
+import { useAppSelector } from "../../../redux/hooks";
+import { selectNotCheckedNewsLength } from "../../../redux/slices";
 
 const links = [
   {
@@ -28,6 +30,9 @@ const links = [
 import classes from "./HeaderLinks.module.css";
 
 export const HeaderLinks = () => {
+
+  const newsToRead = useAppSelector(selectNotCheckedNewsLength);
+
   return (
     <div className={classes.list}>
       {links.map((link) => (
@@ -36,7 +41,7 @@ export const HeaderLinks = () => {
             <NavLink to={link.to}>{link.label}</NavLink>
           ) : (
             //TODO ждать релиза новостей
-            <Badge count={2} overflowCount={10}>
+            <Badge count={newsToRead} overflowCount={10}>
               <NavLink to={link.to}>{link.label}</NavLink>
             </Badge>
           )}

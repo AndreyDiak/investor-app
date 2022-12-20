@@ -1,10 +1,12 @@
 .page {
+  padding-top: 30px;
   background: url("/src/assets/game/news/banner-news.jpg") center no-repeat;
   width: 100%;
   background-size: cover;
   position: relative;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  overflow: hidden;
   justify-content: center;
   flex: 1;
 }
@@ -29,4 +31,17 @@
   top: 0;
   left: 0;
   z-index: 1;
+}
+
+.list {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+.list::-webkit-scrollbar {
+  display: none;
 }

@@ -81,7 +81,7 @@ export const selectGameDuration = (state: RootState) => state.settings.gameDurat
 
 export const selectDifficulty = (state: RootState) => state.settings.difficulty;
 
-const selectDevice = (state: RootState) => state.settings.device;
+export const selectDevice = (state: RootState) => state.settings.device;
 
 export const selectMaxCardsInARow = createSelector(
   selectDevice,
