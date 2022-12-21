@@ -1,0 +1,27 @@
+.title {
+  margin-bottom: 20px;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: var(--font-family-default);
+  font-weight: 700;
+  text-align: center;
+}
+
+.list {
+  padding: 20px;
+  width: 450px;
+  flex: 1;
+}
+
+.assets {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  overflow-y: scroll;
+  max-height: 70vh;
+  scrollbar-width: none;
+}
+
+/* .assets::-webkit-scrollbar {
+  display: none;
+} */

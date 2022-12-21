@@ -1,6 +1,6 @@
 import { newsTopics } from "./../../news/models";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ThunkType } from "../../../../store";
+import { RootState, ThunkType } from "../../../../store";
 import { incomeToOpenMarket } from "../models";
 import { Condition } from "../typings";
 import { MyStock, Stock } from "./typings";
@@ -36,6 +36,8 @@ export const stocksSlice = createSlice({
 export const { setInitialStocks, indexingStocks, setStockInterval } = stocksSlice.actions;
 
 // Selectors
+
+export const selectStocks = (state: RootState) => state.stocks.stocks;
 
 // Thunks
 

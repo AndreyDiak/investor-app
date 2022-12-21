@@ -4,10 +4,10 @@ import { devices } from "../../../../models";
 import { optionsMarketFilters } from "../../../../models/game/market/models";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectDevice } from "../../../../redux/slices";
-import { marketFilters } from "../../../../redux/slices/game/market/models";
+import { marketAssets } from "../../../../redux/slices/game/market/models";
 
 const DesktopMarketNavigation = optionsMarketFilters
-  .filter(option => option.to !== marketFilters.PORTFOLIO)
+  .filter(option => option.to !== marketAssets.PORTFOLIO)
 
 export const MarketNavigation = () => {
 
@@ -28,7 +28,7 @@ export const MarketNavigation = () => {
   }
 
   return (
-    <Select defaultValue={marketFilters.STOCKS}>
+    <Select defaultValue={marketAssets.STOCKS}>
       {optionsMarketFilters.map((option, index) => <Select.Option key={index}>
         <NavLink to={option.to}>{option.label}</NavLink>
       </Select.Option>)}

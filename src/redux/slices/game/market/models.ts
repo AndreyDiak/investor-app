@@ -22,7 +22,7 @@ export enum conditions {
   NOT_CHANGED = "not-changed",
 }
 
-export enum marketFilters {
+export enum marketAssets {
   PORTFOLIO = "portfolio",
   STOCKS = "stocks",
   BONDS = "bonds",

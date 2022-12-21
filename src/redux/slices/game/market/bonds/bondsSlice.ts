@@ -1,19 +1,16 @@
-import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {  
-  stocks: [],
-  myStocks: []
+const initialState = {
+  bonds: [],
 };
 
 export const bondsSlice = createSlice({
   name: "bonds",
   initialState,
-  reducers: {
-    
-  },
+  reducers: {},
 });
 
-export const { } = bondsSlice.actions;
+export const {} = bondsSlice.actions;
 
 // Selectors
 

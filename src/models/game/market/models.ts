@@ -1,4 +1,4 @@
-import { marketFilters } from "../../../redux/slices/game/market/models";
+import { marketAssets } from "../../../redux/slices/game/market/models";
 
 // TODO: возможно, облигации будут открываться позже
 // и тогда нужно делать какой либо ableToShow, который
@@ -7,14 +7,14 @@ import { marketFilters } from "../../../redux/slices/game/market/models";
 export const optionsMarketFilters = [
   {
     label: "Портфель",
-    to: marketFilters.PORTFOLIO,
+    to: marketAssets.PORTFOLIO,
   },
   {
     label: "Акции",
-    to: marketFilters.STOCKS,
+    to: marketAssets.STOCKS,
   },
   {
     label: "Облигации",
-    to: marketFilters.BONDS,
+    to: marketAssets.BONDS,
   },
 ];

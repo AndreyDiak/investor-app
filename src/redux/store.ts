@@ -1,12 +1,13 @@
 import { AnyAction, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import {
   characterSlice,
-  spendsSlice,
-  settingsSlice,
   charactersSlice,
+  newsSlice,
+  popupsSlice,
+  settingsSlice,
+  spendsSlice,
   stocksSlice,
   timeSlice,
-  newsSlice,
 } from "./slices";
 // ...
 
@@ -19,6 +20,7 @@ export const store = configureStore({
     time: timeSlice.reducer,
     stocks: stocksSlice.reducer,
     news: newsSlice.reducer,
+    popups: popupsSlice.reducer,
   },
 });
 

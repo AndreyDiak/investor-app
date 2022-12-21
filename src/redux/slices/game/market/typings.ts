@@ -1,11 +1,13 @@
-import { assetsFilters, conditions, marketFilters, assetsRisk } from "./models";
+import { assetsFilters, conditions, marketAssets, assetsRisk } from "./models";
 
 export type Condition = conditions.UP | conditions.DOWN | conditions.NOT_CHANGED;
 
-export type MarketFilters =
-  | marketFilters.BONDS
-  | marketFilters.PORTFOLIO
-  | marketFilters.STOCKS;
+export type MarketAssets =
+  | marketAssets.BONDS
+  | marketAssets.PORTFOLIO
+  | marketAssets.STOCKS;
+
+// export type MarketListAssets = marketAssets.STOCKS | marketAssets.BONDS;
 
 export type AssetsFilter =
   | assetsFilters.CONDITION

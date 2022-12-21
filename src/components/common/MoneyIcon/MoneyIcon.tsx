@@ -1,4 +1,4 @@
-import money from "./../../assets/money/money_3.png";
+import money from '../../../assets/money/money_3.png'
 
 import classes from "./MoneyIcon.module.css";
 
