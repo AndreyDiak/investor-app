@@ -4,7 +4,7 @@
 import { marketAssets } from "../../../redux/slices/game/market/models";
 import { Stock } from "../../../redux/slices/game/market/stocks/typings";
 import { MarketAssets } from "../../../redux/slices/game/market/typings"
-import { AssetCard } from "../AssetCard/AssetCard";
+import { AssetCard } from "../cards/AssetCard/AssetCard";
 
 interface Props {
   type: MarketAssets;

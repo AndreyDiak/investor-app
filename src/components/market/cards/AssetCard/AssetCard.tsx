@@ -1,9 +1,9 @@
 import { FallOutlined, RiseOutlined, ShrinkOutlined } from "@ant-design/icons";
 import { Button, Divider, Popover } from "antd";
-import { Stock } from "../../../redux/slices/game/market/stocks/typings";
-import { MoneyIconWithPrice } from "../../common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
+import { Stock } from "../../../../redux/slices/game/market/stocks/typings";
+import { MoneyIconWithPrice } from "../../../common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
 
-import classes from './AssetCard.module.css';
+import classes from '../cards.module.css';
 
 interface Props {
    asset: Stock;
@@ -17,6 +17,11 @@ const stockConditionToIconMap = {
 }
 
 export const AssetCard = ({ asset, index }: Props) => {
+
+   const onClickHandler = () => {
+
+   }
+
    return (
       <div className={classes.card}>
          {/* Название */}
@@ -42,7 +47,7 @@ export const AssetCard = ({ asset, index }: Props) => {
             )}
          </div>
          <div>
-            <Button className={classes.button}>
+            <Button className={classes.button} onClick={onClickHandler}>
                Открыть график
             </Button>
          </div>

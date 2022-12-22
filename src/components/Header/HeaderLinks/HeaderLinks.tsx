@@ -40,7 +40,6 @@ export const HeaderLinks = () => {
           {!link.badge ? (
             <NavLink to={link.to}>{link.label}</NavLink>
           ) : (
-            //TODO ждать релиза новостей
             <Badge count={newsToRead} overflowCount={10}>
               <NavLink to={link.to}>{link.label}</NavLink>
             </Badge>

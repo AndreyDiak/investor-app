@@ -20,6 +20,7 @@ export interface Stock {
 
 export interface MyStock {
   id: string;
+  title: string;
   count: number; // кол-во купленных акций
   price: number; // цена по которой куплены акции
 }

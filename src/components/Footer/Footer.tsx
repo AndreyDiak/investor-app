@@ -43,7 +43,6 @@ export const Footer = () => {
               <img src={icon.icon} className={classes.iconImg} />
             </NavLink>
           ) : (
-            //TODO ждать релиза новостей
             <Badge count={newsToRead} overflowCount={10}>
               <NavLink to={icon.to}>
                 <img src={icon.icon} className={classes.iconImg} />

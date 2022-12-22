@@ -9,7 +9,7 @@
 
 .list {
   padding: 20px;
-  width: 450px;
+  width: 90%;
   flex: 1;
 }
 
@@ -22,6 +22,6 @@
   scrollbar-width: none;
 }
 
-/* .assets::-webkit-scrollbar {
+.assets::-webkit-scrollbar {
   display: none;
-} */
+}

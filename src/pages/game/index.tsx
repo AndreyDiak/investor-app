@@ -31,8 +31,6 @@ const GamePage = React.memo(() => {
       <Header />
       {/* Pages */}
       <GameRoutes />
-      {/* Popups */}
-
       {/* Footer */}
       <Footer />
     </div>

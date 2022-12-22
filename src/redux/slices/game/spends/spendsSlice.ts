@@ -69,9 +69,10 @@ type ThunkType = ThunkAction<void, RootState, unknown, AnyAction>;
 export const weekSpends = (): ThunkType => (dispatch, getState) => {
   const availableEvents = getState().spends.availableEvents;
   const spendsLevel = getState().spends.spendsLevel;
+
+  //  TODO: возможно, иногда ломается если выпадает последний индекс...
   const index = generateRoundRandomValue(availableEvents.length);
 
-  // TODO обновить баланс кошелька
   const event = {
     title: availableEvents[index].title,
     price: availableEvents[index].price[spendLevelToPrice[spendsLevel]],
