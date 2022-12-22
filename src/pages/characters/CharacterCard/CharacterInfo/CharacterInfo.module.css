@@ -6,7 +6,7 @@
   margin: 0 auto;
   align-items: center;
   width: 95%;
-  color: #88b3af;
+  color: var(--text-aqua);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -30,7 +30,7 @@
 
 .name {
   font-size: 20px;
-  color: #e0e0e0;
+  color: var(--text-gray);
   font-weight: 500;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }

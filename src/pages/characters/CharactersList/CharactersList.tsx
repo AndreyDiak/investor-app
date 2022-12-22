@@ -1,17 +1,17 @@
 import { RightOutlined } from "@ant-design/icons";
 import { LeftOutlined } from "@ant-design/icons/lib/icons";
-import { useAppDispatch, useAppSelector } from "../../../features/hooks";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import {
   decreaseCurrent,
   increaseCurrent,
   selectFilteredCharacters,
-} from "../../../features/slices";
+} from "../../../redux/slices";
 import { CharactersCard } from "../CharacterCard/CharacterCard";
 
 import { motion } from "framer-motion";
 
 import classes from "./CharactersList.module.css";
-import { Person } from "../../../features/slices/characters/typings";
+import { Person } from "../../../redux/slices/characters/typings";
 
 interface Props {
   selectCharacter: (character: Person) => void;
@@ -45,8 +45,8 @@ export const CharactersList = ({ selectCharacter }: Props) => {
       />
       {/* CharactersList */}
       {characters.map((character) => (
-        <div onClick={() => selectCharacter(character)}>
-          <CharactersCard key={character.name} character={character} />
+        <div key={character.name} onClick={() => selectCharacter(character)}>
+          <CharactersCard character={character} />
         </div>
       ))}
       {/* turn right arrow */}

@@ -1,10 +1,10 @@
 import { Radio } from "antd";
 import { useState } from "react";
 import styled from "styled-components";
-import { MoneyIconWithPrice } from "../../../../components/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
-import { useAppDispatch, useAppSelector } from "../../../../features/hooks";
-import { selectGameDuration, setGameDuration } from "../../../../features/slices";
-import { GameDurationType } from "../../../../features/slices/settings/typings";
+import { MoneyIconWithPrice } from "../../../../components/common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { selectGameDuration, setGameDuration } from "../../../../redux/slices";
+import { GameDurationType } from "../../../../redux/slices/settings/typings";
 import {
   gameDurationAbout,
   gameDurationIncomeToWin,
@@ -42,7 +42,7 @@ const CharacterSettingsDuration = () => {
           <Header className="">Доступные рынки</Header>
           <MarketsList>
             {gameDurationMarkets[duration].map((market) => (
-              <MarketLine>{marketsAbout[market]}</MarketLine>
+              <MarketLine key={market}>{marketsAbout[market]}</MarketLine>
             ))}
           </MarketsList>
         </div>
@@ -80,7 +80,7 @@ const Header = styled.div`
 const Text = styled.div`
   max-width: 400px;
   margin-top: 5px;
-  color: rgb(207, 207, 207);
+  color: var(--text-aqua);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 400;
 `;
@@ -91,16 +91,16 @@ const MarketsList = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 10px;
-  background-color: #023d3f;
+  background-color: var(--aqua-dark);
 `;
 
 const MarketLine = styled.div`
   padding-bottom: 10px;
-  color: rgb(199, 198, 198);
+  color: var(--text-aqua);
   font-size: 14px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 500;
-  border-bottom: 0.5px solid white;
+  border-bottom: 0.5px solid var(--text-aqua-light);
   :last-child {
     border-bottom: none;
   }
@@ -108,10 +108,10 @@ const MarketLine = styled.div`
 
 const Income = styled.div`
   padding: 15px auto;
-  background-color: #023d3f;
+  background-color: var(--aqua-dark);
   display: flex;
   border-radius: 5px;
-  color: rgb(207, 207, 207);
+  color: var(--text-gray-dark);
   column-gap: 10px;
   justify-content: center;
   align-items: center;

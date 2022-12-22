@@ -13,6 +13,12 @@
   color: #fff;
   z-index: 10;
   cursor: pointer;
+  transition: 0.5s;
+  animation: ease-in-out;
+}
+
+.arrow:hover {
+  scale: 1.2;
 }
 
 .arrow:hover {

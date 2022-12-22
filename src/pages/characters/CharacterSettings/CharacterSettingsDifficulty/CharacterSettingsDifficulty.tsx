@@ -1,11 +1,11 @@
 import { Radio } from "antd";
 import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../../../features/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import {
   selectDifficulty,
   setDifficulty as setDifficultyAction,
-} from "../../../../features/slices";
-import { DifficultyType } from "../../../../features/slices/settings/typings";
+} from "../../../../redux/slices";
+import { DifficultyType } from "../../../../redux/slices/settings/typings";
 import { optionsDifficulty } from "../../../../models";
 
 import classes from "./../CharacterSettings.module.css";

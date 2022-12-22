@@ -1,0 +1,21 @@
+.about {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+}
+
+.text {
+  font-family: var(--font-family-default);
+  color: #fff;
+  font-size: var(--font-size-big);
+  font-weight: 500;
+}
+
+@media screen and (max-width: 1024px) {
+  .about {
+    column-gap: 7px;
+  }
+  .text {
+    font-size: var(--font-size-default);
+  }
+}

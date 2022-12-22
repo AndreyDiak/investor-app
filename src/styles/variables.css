@@ -1,0 +1,21 @@
+:root {
+  --aqua: #006064;
+  --aqua-light: #006b6e;
+  --aqua-dark: #033a3b;
+
+  --text-aqua: #88b3af;
+  --text-aqua-light: #e0fffa;
+  --text-aqua-lighten: #e0fffa;
+
+  --text-gray: #e0e0e0;
+  --text-gray-dark: #b4b2b2;
+
+  --bg-purple: #673c74;
+
+  --font-family-default: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  --font-size-huge: 32px;
+  --font-size-big: 22px;
+  --font-size-normal: 18px;
+  --font-size-small: 16px;
+}

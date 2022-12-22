@@ -16,12 +16,6 @@ export enum Markets {
   BUSINESS = "business",
 }
 
-export const difficultyToTitleMap = {
-  easy: "Легко",
-  normal: "Нормально",
-  hard: "Сложно",
-};
-
 export enum timeSpeed {
   SLOW = 8,
   MEDIUM = 4,
@@ -29,8 +23,44 @@ export enum timeSpeed {
   STOP = 0,
 }
 
-// default diff value
-// export const defaultDiffilculty = difficulty.EASY;
+export enum devices {
+  PHONE = "phone",
+  TABLET = "tablet",
+  LAPTOP = "laptop",
+  DESKTOP = "desktop",
+}
+
+export const defaultDevice = devices.LAPTOP;
+
+// сколько карточек мы отображаем на странице выбора
+export const defaultMaxCardsInARow = {
+  phone: 1,
+  tablet: 2,
+  laptop: 4,
+  desktop: 5,
+};
+// ширина карточки в px
+export const defaultCardWidth = {
+  phone: 220,
+  tablet: 260,
+  laptop: 280,
+  desktop: 300,
+};
+
+const DifferenceWidthBetweenCardAndImage = 20; // px
+
+export const defaultPersonImageWidth = {
+  phone: defaultCardWidth.phone - DifferenceWidthBetweenCardAndImage,
+  tablet: defaultCardWidth.tablet - DifferenceWidthBetweenCardAndImage,
+  laptop: defaultCardWidth.laptop - DifferenceWidthBetweenCardAndImage,
+  desktop: defaultCardWidth.desktop - DifferenceWidthBetweenCardAndImage,
+};
+
+export const difficultyToTitleMap = {
+  easy: "Легко",
+  normal: "Нормально",
+  hard: "Сложно",
+};
 
 export const optionsTime = [
   {

@@ -1,0 +1,10 @@
+.icons {
+  display: flex;
+  column-gap: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+  .icons {
+    column-gap: 5px;
+  }
+}

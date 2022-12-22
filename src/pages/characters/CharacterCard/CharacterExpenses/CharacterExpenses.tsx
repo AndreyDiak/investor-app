@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { MoneyIcon } from "../../../../components/MoneyIcon/MoneyIcon";
-import { MoneyIconWithPrice } from "../../../../components/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
-import { Expense } from "../../../../features/slices/characters/typings";
+import { MoneyIcon } from "../../../../components/common/MoneyIcon/MoneyIcon";
+import { MoneyIconWithPrice } from "../../../../components/common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
+import { Expense } from "../../../../redux/slices/characters/typings";
 
 interface Props {
   expenses: Expense[];
@@ -11,15 +11,11 @@ export const CharacterExpenses = ({ expenses }: Props) => {
   return (
     <ExpenseList>
       {expenses.map((expense) => (
-        <ExpenseLine>
+        <ExpenseLine key={expense.title}>
           <ExpenseTitle>
             {expense.title} ({expense.paymentPercantage}%)
           </ExpenseTitle>
-          <MoneyIconWithPrice price={expense.remainPrice} color="#ddd" gap={10} />
-          {/* <ExpensePrice>
-            {expense.remainPrice}
-            <MoneyIcon size="s" />
-          </ExpensePrice> */}
+          <MoneyIconWithPrice price={expense.remainPrice} color="var(--text-gray)" gap={10} />
         </ExpenseLine>
       ))}
     </ExpenseList>
@@ -29,8 +25,7 @@ export const CharacterExpenses = ({ expenses }: Props) => {
 const ExpenseList = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  /* row-gap: 10px; */
+  align-items: center
 `;
 
 const ExpenseLine = styled.div`
@@ -51,14 +46,5 @@ const ExpenseLine = styled.div`
 
 const ExpenseTitle = styled.p`
   font-weight: 700;
-  color: #88b3af;
-`;
-
-const ExpensePrice = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 900;
-  font-size: 20px;
-  color: #dddddd;
+  color: var(--text-aqua);
 `;

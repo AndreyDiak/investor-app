@@ -1,0 +1,37 @@
+.link a {
+  text-decoration: none;
+  color: #fff;
+  font-family: var(--font-family-default);
+  font-weight: 700;
+  font-size: var(--font-size-big);
+}
+
+.link {
+  transition: 300s;
+  animation: ease-in-out;
+}
+
+.list {
+  display: flex;
+  column-gap: 12px;
+}
+
+.link a:hover {
+  color: var(--aqua);
+}
+
+@media screen and (max-width: 1024px) {
+  .link a {
+    font-size: var(--font-size-normal);
+  }
+
+  .list {
+    column-gap: 7px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .list {
+    display: none;
+  }
+}

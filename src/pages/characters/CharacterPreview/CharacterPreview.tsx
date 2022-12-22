@@ -1,15 +1,17 @@
 // import styled from "styled-components";
 import { useState } from "react";
 import styled from "styled-components";
-import { CloseButton } from "../../../components/CloseButton/CloseButton";
-import { MoneyIcon } from "../../../components/MoneyIcon/MoneyIcon";
-import { MoneyIconWithPrice } from "../../../components/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
-import { useAppDispatch } from "../../../features/hooks";
-import { setCharacter } from "../../../features/slices";
-import { Person } from "../../../features/slices/characters/typings";
+import { CloseButton } from "../../../components/common/CloseButton/CloseButton";
+import { MoneyIconWithPrice } from "../../../components/common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
+import { useAppDispatch } from "../../../redux/hooks";
+import { setCharacter } from "../../../redux/slices";
+import { Person } from "../../../redux/slices/characters/typings";
 import { CharacterExpenses } from "../CharacterCard/CharacterExpenses/CharacterExpenses";
 import { CharacterInfo } from "../CharacterCard/CharacterInfo/CharacterInfo";
 import { CharacterSettings } from "../CharacterSettings/CharacterSettings";
+
+import { motion } from 'framer-motion';
+import { PersonImage } from "../../../components/common/PersonImage/PersonImage";
 
 interface Props {
   character: Person;
@@ -28,52 +30,68 @@ export const CharacterPreview = ({ character, close }: Props) => {
 
   return (
     <Preview>
-      <PreviewCard>
-        <Close>
-          <CloseButton handler={close} size={20} color="white" />
-        </Close>
-        {!settings ? (
-          <>
-            <PreviewAbout>
-              <Image src={character.photo.img} alt="" />
-              <Info>
-                <CharacterInfo
-                  name={character.name}
-                  difficulty={character.difficulty}
-                  salary={character.salary}
-                  startMoney={character.startMoney}
-                  avatar={character.photo.avatar}
-                />
+      <motion.div
+        initial={{
+          opacity: 0.2,
+          scale: 0.5
+        }}
+        animate={{
+          opacity: 1,
+          scale: 1
+        }}
+        transition={{
+          duration: 0.7,
+          ease: 'easeInOut'
+        }}
+      >
+        <PreviewCard>
+          <Close>
+            <CloseButton handler={close} size={20} color="white" />
+          </Close>
+          {!settings ? (
+            <>
+              <PreviewAbout>
+                <PersonImage image={character.photo.img} />
+                {/* <Image src={character.photo.img} alt="" /> */}
+                <Info>
+                  <CharacterInfo
+                    name={character.name}
+                    difficulty={character.difficulty}
+                    salary={character.salary}
+                    startMoney={character.startMoney}
+                    avatar={character.photo.avatar}
+                  />
 
-                <div>
-                  <Text>Ваши долги</Text>
-                  <CharacterExpenses expenses={character.spendings} />
-                  <InfoFooterText>
-                    % - показывает сколько процентов от{" "}
-                    <InfoFooterWarning>начальной суммы</InfoFooterWarning> вы выплачиваете
-                    в месяц по этому долгу
-                  </InfoFooterText>
-                </div>
-              </Info>
-            </PreviewAbout>
+                  <div>
+                    <Text>Ваши долги</Text>
+                    <CharacterExpenses expenses={character.spendings} />
+                    <InfoFooterText>
+                      % - показывает сколько процентов от{" "}
+                      <InfoFooterWarning>начальной суммы</InfoFooterWarning> вы выплачиваете
+                      в месяц по этому долгу
+                    </InfoFooterText>
+                  </div>
+                </Info>
+              </PreviewAbout>
 
-            <Total>
-              <TotalGain>
-                <Column title="Зарплата" value={character.salary} />
-                <Column title="Долги" value={-character.spendingsMonthPayment} />
-                <Column
-                  title="Итого"
-                  value={character.salary - character.spendingsMonthPayment}
-                  iconEnabled
-                />
-              </TotalGain>
-              <TotalButton onClick={handleClick}>Продолжить</TotalButton>
-            </Total>
-          </>
-        ) : (
-          <CharacterSettings />
-        )}
-      </PreviewCard>
+              <Total>
+                <TotalGain>
+                  <Column title="Зарплата" value={character.salary} />
+                  <Column title="Долги" value={-character.spendingsMonthPayment} />
+                  <Column
+                    title="Итого"
+                    value={character.salary - character.spendingsMonthPayment}
+                    iconEnabled
+                  />
+                </TotalGain>
+                <TotalButton onClick={handleClick}>Продолжить</TotalButton>
+              </Total>
+            </>
+          ) : (
+            <CharacterSettings />
+          )}
+        </PreviewCard>
+      </motion.div>
     </Preview>
   );
 };
@@ -140,7 +158,7 @@ const Total = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  background-color: #033a3b;
+  background-color: var(--aqua-dark);
   border-radius: 5px;
   color: #fff;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -165,7 +183,7 @@ const Title = styled.div`
 `;
 
 const Money = styled.div`
-  color: #88b3af;
+  color: var(--text-aqua);
   font-weight: 500;
   font-size: 20px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -173,7 +191,7 @@ const Money = styled.div`
 
 export const TotalButton = styled.button`
   padding: 10px 15px;
-  background-color: #006064;
+  background-color: var(--aqua);
   border-radius: 4px;
   border: 1px solid white;
   color: white;
@@ -181,7 +199,7 @@ export const TotalButton = styled.button`
   font-weight: 700;
   cursor: pointer;
   :hover {
-    background-color: #002b2c;
+    background-color: var(--aqua-light);
   }
 `;
 
@@ -194,7 +212,7 @@ const Close = styled.div`
 const Text = styled.p`
   margin-bottom: 10px;
   font-size: 24px;
-  color: #e0fffa;
+  color: var(--text-aqua-lighten);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 500;
 `;
@@ -207,13 +225,9 @@ const InfoFooterWarning = styled.span`
 const InfoFooterText = styled.p`
   margin-top: 10px;
   font-size: 14px;
-  color: #a6dbd2;
+  color: var(--text-aqua);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 400;
-`;
-
-const Image = styled.img`
-  max-width: 300px;
 `;
 
 const Info = styled.div`
