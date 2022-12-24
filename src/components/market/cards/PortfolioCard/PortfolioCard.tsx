@@ -1,22 +1,65 @@
-import { MyStock } from '../../../../redux/slices/game/market/stocks/typings'
-import { MoneyIconWithPrice } from '../../../common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice';
+import { useCallback } from "react";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { openModal, selectStockById } from "../../../../redux/slices";
+import { conditions } from "../../../../redux/slices/game/market/models";
+import { Portfolio } from "../../../../redux/slices/game/market/portfolio/typings";
+import { popups } from "../../../../redux/slices/game/modal/models";
+import { MoneyIconWithPrice } from "../../../common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
+import { stockConditionToIconMap } from "../AssetCard/AssetCard";
 
-import classes from '../cards.module.css';
+import classes from "../cards.module.css";
 
 interface Props {
-   asset: MyStock
+   asset: Portfolio;
 }
 
 export const PortfolioCard = ({ asset }: Props) => {
+   const dispatch = useAppDispatch();
+
+   const stockFromMarket = useAppSelector(selectStockById(asset.id));
+
+   const myPrice = useCallback(() => asset.price[0], [])();
+
+   const marketPrice = stockFromMarket?.price[stockFromMarket.price.length - 1]!;
+
+   let condition;
+
+   const isProfit = myPrice < marketPrice;
+
+   if (myPrice < marketPrice) {
+      condition = conditions.UP;
+   } else {
+      if (myPrice > marketPrice) {
+         condition = conditions.DOWN;
+      } else {
+         condition = conditions.NOT_CHANGED;
+      }
+   }
+
+   const onClickHandler = () => {
+      dispatch(openModal(popups.MARKET, asset));
+   };
    return (
-      <div className={classes.card}>
+      <div className={classes.card} onClick={onClickHandler}>
          <div className={classes.title}>
             {asset.title}
+            <div className={classes.condition}>{stockConditionToIconMap[condition]}</div>
          </div>
          <div className={classes.info}>
-            <MoneyIconWithPrice price={asset.price} />
-            {asset.id} шт
+            <div>
+               <div className={classes.price}>
+                  Цена покупки: <MoneyIconWithPrice price={myPrice} />
+               </div>
+               <div className={classes.price}>
+                  Цена продажи:{" "}
+                  <MoneyIconWithPrice
+                     price={marketPrice}
+                     color={isProfit ? "#128900" : "#820000"}
+                  />
+               </div>
+            </div>
+            {asset.count} шт
          </div>
       </div>
-   )
-}
+   );
+};

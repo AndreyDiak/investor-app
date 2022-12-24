@@ -5,23 +5,22 @@ import { selectCheckedNews, selectNotCheckedNews } from "../../../redux/slices";
 import classes from "./index.module.css";
 
 const NewsPage = () => {
+   const [filter, setFilter] = useState("");
 
-  const [filter, setFilter] = useState('')
+   // прочитанные новости
+   const checkedNews = useAppSelector(selectCheckedNews);
+   // не прочитанные новости
+   const notCheckedNews = useAppSelector(selectNotCheckedNews);
 
-  // прочитанные новости
-  const checkedNews = useAppSelector(selectCheckedNews);
-  // не прочитанные новости
-  const notCheckedNews = useAppSelector(selectNotCheckedNews);
-
-  return (
-    <div className={classes.page}>
-      <div className={classes.list}>
-        {notCheckedNews.map(news => (
-          <NewsCard news={news} />
-        ))}
+   return (
+      <div className={classes.page}>
+         <div className={classes.list}>
+            {notCheckedNews.map((news) => (
+               <NewsCard news={news} />
+            ))}
+         </div>
       </div>
-    </div>
-  );
+   );
 };
 
 export default NewsPage;
