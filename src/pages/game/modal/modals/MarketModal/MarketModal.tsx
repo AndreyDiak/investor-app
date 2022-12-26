@@ -1,13 +1,10 @@
 import { useAppSelector } from "../../../../../redux/hooks";
-import {
-   selectModalInfo, selectPortfolioById
-} from "../../../../../redux/slices";
+import { selectModalInfo, selectPortfolioById } from "../../../../../redux/slices";
 import { MarketModalMenu } from "./MarketModalMenu/MarketModalMenu";
 
 import { useState } from "react";
 import { MarketModalButton } from "./MarketModalButton/MarketModalButton";
 import { MarketModalLine } from "./MarketModalLine/MarketModalLine";
-
 
 import { Mode } from "../../../../../redux/slices/game/modal/models";
 import { ModeType } from "../../../../../redux/slices/game/modal/typings";
@@ -16,7 +13,6 @@ import classes from "./MarketModal.module.css";
 import { selectMarketAssetById } from "../../../../../redux/slices/game/market/marketSlice";
 
 export const MarketModal = () => {
-
    const { assetId, mode } = useAppSelector(selectModalInfo);
 
    const [modalMode, setModalMode] = useState<ModeType>(mode);

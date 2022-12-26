@@ -81,12 +81,20 @@ const labels = [
 ];
 
 export const MarketModalLine = ({ price }: { price: number[] }) => {
+   let priceData;
+
+   if (price.length > 48) {
+      priceData = price.slice(price.length - 48);
+   } else {
+      priceData = price;
+   }
+
    const data = {
       labels,
       datasets: [
          {
             label: "цена за шт.",
-            data: price,
+            data: priceData,
             fill: false,
             borderColor: "rgb(255, 99, 132)",
             lineTension: 0.4,

@@ -27,15 +27,22 @@ export const newsSlice = createSlice({
       updateNews: (state, action: PayloadAction<{ news: News }>) => {
          state.news.push(action.payload.news);
       },
-      checkNews: (state, action: PayloadAction<{ id: string }>) => {
-         const index = state.news.findIndex((item) => item.id === action.payload.id);
+      checkNewsById: (state, action: PayloadAction<string>) => {
+         console.log("hell");
+         const index = state.news.findIndex((item) => item.id === action.payload);
          state.news[index].isChecked = true;
+      },
+      checkAllNews: (state) => {
+         state.news = state.news.map((news) => ({
+            ...news,
+            isChecked: true,
+         }));
       },
       openTopic: (state, action: PayloadAction<NewsTopics>) => {
          switch (action.payload) {
             case newsTopics.PERSONAL:
                state.newsTemplate[0].ableToShow = true;
-
+               break;
             case newsTopics.MARKET:
                state.newsTemplate[1].ableToShow = true;
          }
@@ -43,7 +50,7 @@ export const newsSlice = createSlice({
    },
 });
 
-export const { updateNews, openTopic, checkNews } = newsSlice.actions;
+export const { updateNews, openTopic, checkNewsById, checkAllNews } = newsSlice.actions;
 
 // Selectors
 
@@ -85,6 +92,8 @@ export const generateNews = (): ThunkType => (dispatch, getState) => {
          generateRoundRandomValue(newsTemplate.filter((news) => news.ableToShow).length)
       ];
 
+   console.log(newsTemplate.filter((news) => news.ableToShow).length);
+
    // выбираем тип новости / neutral | negative | positive
    const templateKind =
       templateTopic.events[generateRoundRandomValue(templateTopic.events.length)];
@@ -93,7 +102,7 @@ export const generateNews = (): ThunkType => (dispatch, getState) => {
    const event =
       templateKind.titles[generateRoundRandomValue(templateKind.titles.length)];
 
-   let news: News = {
+   const news: News = {
       id: uuidv4(),
       date,
       kind: templateKind.type,
@@ -112,29 +121,36 @@ export const generateNews = (): ThunkType => (dispatch, getState) => {
          }
          break;
       case newsTopics.MARKET:
-         // рандомим акцию
-         // TODO: возможно стоит добавить облигации
-         const stocks = getState().stocks.stocks;
-         const stock = stocks[generateRoundRandomValue(stocks.length)];
+         {
+            // рандомим акцию
+            // TODO: добавить облигации, когда они будут готовы
+            const stocks = getState().stocks.stocks;
+            const stock = stocks[generateRoundRandomValue(stocks.length)];
 
-         news.stock = stock.title;
+            news.stock = {
+               title: stock.title,
+               id: stock.id,
+            };
 
-         // если новость хорошая или плохая
-         // то мы должны засетать воздействие новости на акцию
-         if (templateKind.type != newsKinds.NEUTRAL) {
-            // рост или спад
-            const priceChangeType =
-               templateKind.type === newsKinds.POSITIVE ? conditions.UP : conditions.DOWN;
-            // интервал воздействия новости
-            const interval = generateRoundRandomValue(3) + 2;
+            // если новость хорошая или плохая
+            // то мы должны засетать воздействие новости на акцию
+            if (templateKind.type != newsKinds.NEUTRAL) {
+               // рост или спад
+               const priceChangeType =
+                  templateKind.type === newsKinds.POSITIVE
+                     ? conditions.UP
+                     : conditions.DOWN;
+               // интервал воздействия новости
+               const interval = generateRoundRandomValue(3) + 2;
 
-            dispatch(
-               setStockInterval({
-                  id: stock.id,
-                  type: priceChangeType,
-                  interval,
-               })
-            );
+               dispatch(
+                  setStockInterval({
+                     id: stock.id,
+                     type: priceChangeType,
+                     interval,
+                  })
+               );
+            }
          }
 
          break;

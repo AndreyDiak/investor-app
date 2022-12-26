@@ -1,3 +1,4 @@
+import React from "react";
 import { CloseButton } from "../../../components/common/CloseButton/CloseButton";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import {
@@ -15,7 +16,7 @@ export const ModalTemplate = () => {
    const dispatch = useAppDispatch();
 
    const isOpen = useAppSelector(selectIsModalOpen);
-   const modalType = useAppSelector(selectModalType)!;
+   const modalType = useAppSelector(selectModalType);
 
    const constTimeSpeed = useAppSelector(selectConstTimeSpeed);
 

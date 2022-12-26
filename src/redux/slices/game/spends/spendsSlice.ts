@@ -79,7 +79,6 @@ export const weekSpends = (): ThunkType => (dispatch, getState) => {
    const availableEvents = getState().spends.availableEvents;
    const spendsLevel = getState().spends.spendsLevel;
 
-   //  TODO: возможно, иногда ломается если выпадает последний индекс...
    const index = generateRoundRandomValue(availableEvents.length);
 
    const event = {

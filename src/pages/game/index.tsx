@@ -40,4 +40,6 @@ const GamePage = React.memo(() => {
    );
 });
 
+GamePage.displayName = "GamePage";
+
 export default GamePage;

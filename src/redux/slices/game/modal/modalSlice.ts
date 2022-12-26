@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState, ThunkType } from "../../../store";
 import { setTimeSpeed } from "../../settings/settingsSlice";
@@ -38,9 +39,7 @@ export const { closeModal } = modalSlice.actions;
 
 export const selectIsModalOpen = (state: RootState) => state.modal.isOpen;
 
-export const selectModalType = (state: RootState) => state.modal.type;
-
-// export const selectAsset = (state: RootState) => state.modal.assetId;
+export const selectModalType = (state: RootState) => state.modal.type!;
 
 export const selectModalInfo = (state: RootState) => ({
    mode: state.modal.mode!,

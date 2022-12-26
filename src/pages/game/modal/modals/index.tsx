@@ -1,3 +1,4 @@
+import React from "react";
 import { ReactNode } from "react";
 import { PopupType } from "../../../../redux/slices/game/modal/typings";
 import { MarketModal } from "./MarketModal/MarketModal";

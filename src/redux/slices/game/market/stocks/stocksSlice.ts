@@ -37,7 +37,7 @@ const mock = [
 ];
 
 const initialState = {
-   stocks: mock as Stock[],
+   stocks: [] as Stock[],
 };
 
 export const stocksSlice = createSlice({
@@ -100,6 +100,7 @@ export const checkStocks = (): ThunkType => (dispatch, getState) => {
 
       if (incomeToOpenMarket["stocks"] < income) {
          // открываем возможность показывать новости про акции
+         console.log("he");
          dispatch(openTopic(newsTopics.MARKET));
 
          // создаем акции

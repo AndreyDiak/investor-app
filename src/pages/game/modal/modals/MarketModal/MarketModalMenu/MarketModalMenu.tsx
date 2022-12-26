@@ -1,3 +1,4 @@
+import React from "react";
 import { InputNumber } from "antd";
 import { useCallback, useEffect, useState } from "react";
 import { MoneyIconWithPrice } from "../../../../../../components/common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
@@ -117,8 +118,9 @@ export const MarketModalMenu = ({ asset, mode }: Props) => {
                </div>
             </div>
             <button
-               className={`${classes.confirm} ${isAbleToBuy ? classes.active : classes.disabled
-                  }`}
+               className={`${classes.confirm} ${
+                  isAbleToBuy ? classes.active : classes.disabled
+               }`}
                disabled={!isAbleToBuy}
                onClick={onConfirmHandler}
             >

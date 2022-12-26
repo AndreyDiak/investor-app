@@ -27,3 +27,5 @@ export const GameRoutes = React.memo(() => {
 
   return routes;
 });
+
+GameRoutes.displayName = "GameRoutes"
