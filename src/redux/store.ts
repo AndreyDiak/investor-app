@@ -7,6 +7,7 @@ import {
    settingsSlice,
    spendsSlice,
    stocksSlice,
+   bondsSlice,
    timeSlice,
    portfolioSlice,
 } from "./slices";
@@ -14,15 +15,23 @@ import {
 
 export const store = configureStore({
    reducer: {
+      // game pages
       spends: spendsSlice.reducer,
+      news: newsSlice.reducer,
+      character: characterSlice.reducer,
+
+      // market
+      bonds: bondsSlice.reducer,
+      stocks: stocksSlice.reducer,
+      portfolio: portfolioSlice.reducer,
+
+      // game helpers
+      modal: modalSlice.reducer,
+      time: timeSlice.reducer,
+
+      // game start
       settings: settingsSlice.reducer,
       characters: charactersSlice.reducer,
-      character: characterSlice.reducer,
-      time: timeSlice.reducer,
-      stocks: stocksSlice.reducer,
-      news: newsSlice.reducer,
-      modal: modalSlice.reducer,
-      portfolio: portfolioSlice.reducer,
    },
 });
 

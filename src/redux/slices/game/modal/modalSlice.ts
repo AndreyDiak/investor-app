@@ -1,16 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState, ThunkType } from "../../../store";
 import { setTimeSpeed } from "../../settings/settingsSlice";
-import { AssetsType } from "../market/typings";
 import { ModeType, PopupType } from "./typings";
-
-// TODO : пробрасывать состояние
-// покупка или продажа
 
 const initialState = {
    isOpen: false,
    type: null as null | PopupType,
-   asset: null as null | AssetsType,
+   assetId: null as null | string,
    mode: null as null | ModeType,
 };
 
@@ -20,16 +16,16 @@ export const modalSlice = createSlice({
    reducers: {
       openModal: (
          state,
-         action: PayloadAction<{ type: PopupType; mode: ModeType; asset: AssetsType }>
+         action: PayloadAction<{ type: PopupType; mode: ModeType; assetId: string }>
       ) => {
          state.isOpen = true;
          state.type = action.payload.type;
-         state.asset = action.payload.asset;
+         state.assetId = action.payload.assetId;
          state.mode = action.payload.mode;
       },
       closeModal: (state) => {
          state.isOpen = false;
-         state.asset = null;
+         state.assetId = null;
          state.type = null;
          state.mode = null;
       },
@@ -44,19 +40,17 @@ export const selectIsModalOpen = (state: RootState) => state.modal.isOpen;
 
 export const selectModalType = (state: RootState) => state.modal.type;
 
-export const selectAsset = (state: RootState) => state.modal.asset;
+// export const selectAsset = (state: RootState) => state.modal.assetId;
 
-export const selectModal = (state: RootState) => ({
-   isOpen: state.modal.isOpen,
-   type: state.modal.type,
-   mode: state.modal.mode,
-   asset: state.modal.asset,
+export const selectModalInfo = (state: RootState) => ({
+   mode: state.modal.mode!,
+   assetId: state.modal.assetId!,
 });
 
 export const openModal =
-   (type: PopupType, mode: ModeType, asset: AssetsType): ThunkType =>
+   (type: PopupType, mode: ModeType, assetId: string): ThunkType =>
    (dispatch) => {
-      dispatch(modalSlice.actions.openModal({ type, mode, asset }));
+      dispatch(modalSlice.actions.openModal({ type, mode, assetId }));
       dispatch(setTimeSpeed(0));
    };
 

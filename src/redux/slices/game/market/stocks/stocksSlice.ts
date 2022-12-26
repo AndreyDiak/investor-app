@@ -2,7 +2,7 @@ import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState, ThunkType } from "../../../../store";
 import { openTopic } from "../../news/newsSlice";
 import { incomeToOpenMarket, marketAssets } from "../models";
-import { Condition } from "../typings";
+import { Condition, ToggleAssetCountType } from "../typings";
 import { newsTopics } from "./../../news/models";
 import { Stock } from "./typings";
 import { generateStocks, indexingStocks as index } from "./utils";
@@ -63,7 +63,7 @@ export const stocksSlice = createSlice({
          action: PayloadAction<{
             id: string;
             count: number;
-            type: "increase" | "decrease";
+            type: ToggleAssetCountType;
          }>
       ) => {
          const index = state.stocks.findIndex((stock) => stock.id === action.payload.id);
@@ -95,7 +95,6 @@ export const checkStocks = (): ThunkType => (dispatch, getState) => {
    if (stocks.length !== 0) {
       const newStocks = index(stocks, difficulty);
       dispatch(indexingStocks(newStocks));
-      // TODO: сделать обновление цен в портфеле пользователя
    } else {
       const income = getState().character.totalIncome;
 

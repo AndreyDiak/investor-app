@@ -18,51 +18,14 @@ import { Mode } from "../../../../../../redux/slices/game/modal/models";
 import { ModeType } from "../../../../../../redux/slices/game/modal/typings";
 
 import classes from "./MarketModalMenu.module.css";
+import { buttons } from "./models";
 
 interface Props {
    asset: AssetsType;
    mode: ModeType;
 }
 
-const values = [
-   {
-      label: "мин",
-      value: "min",
-   },
-   {
-      label: "-1",
-      value: -1,
-   },
-   {
-      label: "-5",
-      value: -5,
-   },
-   {
-      label: "-10",
-      value: -10,
-   },
-   {
-      label: "+10",
-      value: 10,
-   },
-   {
-      label: "+5",
-      value: 5,
-   },
-   {
-      label: "+1",
-      value: 1,
-   },
-   {
-      label: "макс",
-      value: "max",
-   },
-];
-
-// TODO : не пробрасывать весь ассет
-// так как появляется баг с количеством
-// пробрасовать отдельно
-// мб можно обойтись id type count last price?
+// TODO : мб пробрасовать только нужные значения а не весь asset?
 
 export const MarketModalMenu = ({ asset, mode }: Props) => {
    const balance = useAppSelector(selectWalletBalance);
@@ -90,7 +53,7 @@ export const MarketModalMenu = ({ asset, mode }: Props) => {
             setCount(count + value);
          }
       },
-      [count]
+      [count, asset]
    );
    // изменение цены
    useEffect(() => {
@@ -141,7 +104,7 @@ export const MarketModalMenu = ({ asset, mode }: Props) => {
                   />
                   <div>
                      <div className={classes.buttons}>
-                        {values.map((btn) => (
+                        {buttons.map((btn) => (
                            <button
                               onClick={() => onCountChange(btn.value)}
                               className={classes.button}
@@ -154,9 +117,8 @@ export const MarketModalMenu = ({ asset, mode }: Props) => {
                </div>
             </div>
             <button
-               className={`${classes.confirm} ${
-                  isAbleToBuy ? classes.active : classes.disabled
-               }`}
+               className={`${classes.confirm} ${isAbleToBuy ? classes.active : classes.disabled
+                  }`}
                disabled={!isAbleToBuy}
                onClick={onConfirmHandler}
             >

@@ -5,9 +5,9 @@ import { conditions } from "../../../../redux/slices/game/market/models";
 import { Portfolio } from "../../../../redux/slices/game/market/portfolio/typings";
 import { Mode, popups } from "../../../../redux/slices/game/modal/models";
 import { MoneyIconWithPrice } from "../../../common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
-import { stockConditionToIconMap } from "../AssetCard/AssetCard";
 
 import classes from "../cards.module.css";
+import { ConditionBlock } from "../ConditionBlock/ConditionBlock";
 
 interface Props {
    asset: Portfolio;
@@ -37,13 +37,14 @@ export const PortfolioCard = ({ asset }: Props) => {
    }
 
    const onClickHandler = () => {
-      dispatch(openModal(popups.MARKET, Mode.SELL, asset));
+      dispatch(openModal(popups.MARKET, Mode.SELL, asset.id));
    };
+
    return (
       <div className={classes.card} onClick={onClickHandler}>
          <div className={classes.title}>
             {asset.title}
-            <div className={classes.condition}>{stockConditionToIconMap[condition]}</div>
+            <div className={classes.condition}><ConditionBlock condition={condition} /></div>
          </div>
          <div className={classes.info}>
             <div>

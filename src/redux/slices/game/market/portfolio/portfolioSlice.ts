@@ -1,5 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { decreaseWallet, increaseWallet } from "../../character/characterSlice";
+import { toggleMarketAssetsCount } from "../marketSlice";
 import { toggleStockCount } from "../stocks/stocksSlice";
 import type { Stock } from "../stocks/typings";
 import { MarketAssetsToBuy } from "../typings";
@@ -69,16 +70,8 @@ export const buyAsset =
       dispatch(portfolioSlice.actions.addToPortfolio(item));
       // вычет из баланса
       dispatch(decreaseWallet(price));
-
-      // TODO: если облигации то нужно условие
       // обновление акций на рынке
-      dispatch(
-         toggleStockCount({
-            id: asset.id,
-            count,
-            type: "decrease",
-         })
-      );
+      dispatch(toggleMarketAssetsCount(asset.id, asset.type, count, "decrease"));
    };
 
 export const sellAsset =
@@ -92,15 +85,8 @@ export const sellAsset =
       );
       // обновление баланса
       dispatch(increaseWallet(price));
-      // TODO: если облигации то нужно условие
       // обновление акций на рынке
-      dispatch(
-         toggleStockCount({
-            id: asset.id,
-            count,
-            type: "increase",
-         })
-      );
+      dispatch(toggleMarketAssetsCount(asset.id, asset.type, count, "increase"));
    };
 
 export default portfolioSlice.reducer;

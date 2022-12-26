@@ -12,6 +12,8 @@ export type MarketAssetsToBuy = Stock;
 
 export type MarketAssetsToBuyType = marketAssets.BONDS | marketAssets.STOCKS;
 
+export type ToggleAssetCountType = "increase" | "decrease";
+
 export type MarketAssets =
    | marketAssets.BONDS
    | marketAssets.PORTFOLIO
