@@ -1,6 +1,8 @@
 import { Badge } from "antd";
 import { NavLink } from "react-router-dom";
 import { footerIcons } from "../../assets";
+import { useAppSelector } from "../../redux/hooks";
+import { selectNotCheckedNewsLength } from "../../redux/slices";
 
 import classes from "./Footer.module.css";
 
@@ -29,6 +31,9 @@ const icons = [
 ];
 
 export const Footer = () => {
+
+  const newsToRead = useAppSelector(selectNotCheckedNewsLength);
+
   return (
     <div className={classes.icons}>
       {icons.map((icon) => (
@@ -38,8 +43,7 @@ export const Footer = () => {
               <img src={icon.icon} className={classes.iconImg} />
             </NavLink>
           ) : (
-            //TODO ждать релиза новостей
-            <Badge count={2} overflowCount={10}>
+            <Badge count={newsToRead} overflowCount={10}>
               <NavLink to={icon.to}>
                 <img src={icon.icon} className={classes.iconImg} />
               </NavLink>

@@ -1,0 +1,32 @@
+.modal {
+   font-family: var(--font-family-default);
+}
+
+.title {
+   text-align: center;
+   font-size: var(--font-size-big);
+}
+
+.bold {
+   font-weight: 700;
+}
+
+.chart {
+   padding: 10px;
+   width: 650px;
+}
+
+.mode {
+   text-align: center;
+   margin: 5px 0 10px;
+   padding: 5px 0 10px;
+   border-top: 1px solid var(--aqua-market);
+   border-bottom: 1px solid var(--aqua-market);
+}
+
+.buttons {
+   margin-top: 5px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}

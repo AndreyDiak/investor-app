@@ -1,7 +1,8 @@
-import { Card } from "../../../components/Card/Card";
-import { PersonImage } from "../../../components/PersonImage/PersonImage";
+import { Card } from "../../../components/profile/Card/Card";
+import { NewsCard } from "../../../components/news/NewsCard/NewsCard";
+import { PersonImage } from "../../../components/common/PersonImage/PersonImage";
 import { useAppSelector } from "../../../redux/hooks";
-import { selectCharacter, selectTotalIncome } from "../../../redux/slices";
+import { selectCharacter, selectLastNews, selectTotalIncome } from "../../../redux/slices";
 
 import classes from "./index.module.css";
 
@@ -9,6 +10,8 @@ const ProfilePage = () => {
   const character = useAppSelector(selectCharacter)!;
 
   const income = useAppSelector(selectTotalIncome);
+
+  const lastNews = useAppSelector(selectLastNews);
 
   const CardExpenses = character.spendings.map((spend) => ({
     title: spend.title,
@@ -61,7 +64,15 @@ const ProfilePage = () => {
             <Card title="Био" list={CardBio} isText />
           </div>
           {/* last news + close button? */}
-          <div></div>
+          {lastNews ? (
+            <div>
+              <NewsCard news={lastNews} />
+            </div>
+          ) : (
+            <div>
+              Новостей нет
+            </div>
+          )}
         </div>
       </div>
     </div>

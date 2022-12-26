@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { MoneyIcon } from "../../../../components/MoneyIcon/MoneyIcon";
-import { MoneyIconWithPrice } from "../../../../components/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
+import { MoneyIcon } from "../../../../components/common/MoneyIcon/MoneyIcon";
+import { MoneyIconWithPrice } from "../../../../components/common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
 import { Expense } from "../../../../redux/slices/characters/typings";
 
 interface Props {

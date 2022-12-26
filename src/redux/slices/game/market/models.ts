@@ -22,11 +22,16 @@ export enum conditions {
   NOT_CHANGED = "not-changed",
 }
 
-export enum marketFilters {
+export enum marketAssets {
   PORTFOLIO = "portfolio",
   STOCKS = "stocks",
   BONDS = "bonds",
 }
+
+export const marketFiltersToLabelMap = {
+  stocks: "Акции",
+  bonds: "Облигации",
+};
 
 export const defaultMinPrice = 35;
 export const defaultAssetsCountChange = 10;

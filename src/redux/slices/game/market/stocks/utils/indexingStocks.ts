@@ -25,7 +25,11 @@ export const indexingStocks = (stocks: Stock[], difficulty: DifficultyType) => {
     let newPrice: number;
     let condition: Condition;
 
+    let priceChangeIntervalDueToNews = stock.priceChangeIntervalDueToNews;
+    let priceGrowOfFallDueToNews = stock.priceGrowOfFallDueToNews;
+
     // шанс 10 процентов на то, что цена не изменится
+    // работает всегда, даже если на акцию влияет новость
     if (createChance(priceNotChangeChance)) {
       // вероятность повышения / понижения
       const priceDiffFromRisk = assetsRiskToConditionMap[stock.risk];
@@ -38,9 +42,9 @@ export const indexingStocks = (stocks: Stock[], difficulty: DifficultyType) => {
       );
 
       // если это акция подвержена новости
-      if (stock.priceChangeIntervalDueToNews !== 0) {
+      if (priceChangeIntervalDueToNews !== 0) {
         // рост или падение
-        const growOrFall = stock.priceGrowOfFallDueToNews;
+        const growOrFall = priceGrowOfFallDueToNews;
         // новая цена
         newPrice =
           growOrFall === conditions.UP
@@ -48,20 +52,33 @@ export const indexingStocks = (stocks: Stock[], difficulty: DifficultyType) => {
             : lastPrice - lastPrice * priceDiffCoefficient;
         // сетаем состояние акции
         condition = stock.condition === growOrFall ? stock.condition : growOrFall;
+        // уменьшаем срок подвержения на одну неделю
+        priceChangeIntervalDueToNews--;
+        if (priceChangeIntervalDueToNews === 0) {
+          priceGrowOfFallDueToNews = conditions.NOT_CHANGED;
+        }
       } else {
-        // можно ли понизить цену?
-        const isAbleToDecrease =
-          stock.priceChangeIntervalDueToNews === 0
-            ? lastPrice * (1 - priceDiffCoefficient) > stock.minPrice
-            : false;
-        // новая цена
-        newPrice = isAbleToDecrease
-          ? createChance(priceDiffFromRisk.up)
+        // можно ли понизить цену
+        // если нет то заставляем расти акцию
+        if (lastPrice * (1 - priceDiffCoefficient) < stock.minPrice) {
+          // вручную заставляем заставляем расти акцию
+          // в течение 2-4 недель
+          priceChangeIntervalDueToNews = generateRoundRandomValue(3) + 2;
+          priceGrowOfFallDueToNews = conditions.UP;
+
+          newPrice = lastPrice + lastPrice * priceDiffCoefficient;
+          condition = conditions.UP;
+        } else {
+          // можно понизить цену
+          // новая цена, либо рост либо падание
+          // все зависит от шанса акции на рост
+          // что в свою очередь зависит от риска акции
+          newPrice = createChance(priceDiffFromRisk.up)
             ? lastPrice + lastPrice * priceDiffCoefficient
-            : lastPrice - lastPrice * priceDiffCoefficient
-          : lastPrice + lastPrice * priceDiffCoefficient;
-        // сетаем состояние акции
-        condition = lastPrice > newPrice ? conditions.DOWN : conditions.UP;
+            : lastPrice - lastPrice * priceDiffCoefficient;
+          // сетаем состояние акции
+          condition = lastPrice > newPrice ? conditions.DOWN : conditions.UP;
+        }
       }
     } else {
       // цена не меняется
@@ -81,10 +98,8 @@ export const indexingStocks = (stocks: Stock[], difficulty: DifficultyType) => {
           : stock.count + countDifference,
       price: [...stock.price, Number(newPrice.toFixed(1))],
       condition,
-      priceChangeDueToNews:
-        stock.priceChangeIntervalDueToNews !== 0
-          ? stock.priceChangeIntervalDueToNews - 1
-          : 0,
+      priceChangeIntervalDueToNews,
+      priceGrowOfFallDueToNews,
     };
   });
 };

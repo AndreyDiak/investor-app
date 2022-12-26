@@ -1,25 +1,38 @@
 import { AnyAction, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import {
-  characterSlice,
-  spendsSlice,
-  settingsSlice,
-  charactersSlice,
-  stocksSlice,
-  timeSlice,
-  newsSlice,
+   characterSlice,
+   charactersSlice,
+   newsSlice,
+   modalSlice,
+   settingsSlice,
+   spendsSlice,
+   stocksSlice,
+   bondsSlice,
+   timeSlice,
+   portfolioSlice,
 } from "./slices";
 // ...
 
 export const store = configureStore({
-  reducer: {
-    spends: spendsSlice.reducer,
-    settings: settingsSlice.reducer,
-    characters: charactersSlice.reducer,
-    character: characterSlice.reducer,
-    time: timeSlice.reducer,
-    stocks: stocksSlice.reducer,
-    news: newsSlice.reducer,
-  },
+   reducer: {
+      // game pages
+      spends: spendsSlice.reducer,
+      news: newsSlice.reducer,
+      character: characterSlice.reducer,
+
+      // market
+      bonds: bondsSlice.reducer,
+      stocks: stocksSlice.reducer,
+      portfolio: portfolioSlice.reducer,
+
+      // game helpers
+      modal: modalSlice.reducer,
+      time: timeSlice.reducer,
+
+      // game start
+      settings: settingsSlice.reducer,
+      characters: charactersSlice.reducer,
+   },
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

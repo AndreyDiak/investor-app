@@ -1,7 +1,7 @@
 import { Radio } from "antd";
 import { useState } from "react";
 import styled from "styled-components";
-import { MoneyIconWithPrice } from "../../../../components/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
+import { MoneyIconWithPrice } from "../../../../components/common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { selectGameDuration, setGameDuration } from "../../../../redux/slices";
 import { GameDurationType } from "../../../../redux/slices/settings/typings";
