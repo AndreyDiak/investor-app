@@ -4,3 +4,8 @@ export enum popups {
    REALTY = "realty",
    BUSINESS = "business",
 }
+
+export enum Mode {
+   BUY = "buy",
+   SELL = "sell",
+}

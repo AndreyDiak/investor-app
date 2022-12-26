@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { openModal, selectStockById } from "../../../../redux/slices";
 import { conditions } from "../../../../redux/slices/game/market/models";
 import { Portfolio } from "../../../../redux/slices/game/market/portfolio/typings";
-import { popups } from "../../../../redux/slices/game/modal/models";
+import { Mode, popups } from "../../../../redux/slices/game/modal/models";
 import { MoneyIconWithPrice } from "../../../common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
 import { stockConditionToIconMap } from "../AssetCard/AssetCard";
 
@@ -37,7 +37,7 @@ export const PortfolioCard = ({ asset }: Props) => {
    }
 
    const onClickHandler = () => {
-      dispatch(openModal(popups.MARKET, asset));
+      dispatch(openModal(popups.MARKET, Mode.SELL, asset));
    };
    return (
       <div className={classes.card} onClick={onClickHandler}>

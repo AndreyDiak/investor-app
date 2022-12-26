@@ -2,7 +2,7 @@ import { FallOutlined, RiseOutlined, ShrinkOutlined } from "@ant-design/icons";
 import { Button, Popover } from "antd";
 import { useAppDispatch } from "../../../../redux/hooks";
 import { openModal } from "../../../../redux/slices";
-import { popups } from "../../../../redux/slices/game/modal/models";
+import { Mode, popups } from "../../../../redux/slices/game/modal/models";
 import { MoneyIconWithPrice } from "../../../common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
 
 import { MarketAssetsToBuy } from "../../../../redux/slices/game/market/typings";
@@ -25,7 +25,7 @@ export const AssetCard = ({ asset, index }: Props) => {
    const dispatch = useAppDispatch();
 
    const onClickHandler = () => {
-      dispatch(openModal(popups.MARKET, asset));
+      dispatch(openModal(popups.MARKET, Mode.BUY, asset));
    };
 
    return (

@@ -11,14 +11,11 @@ import { MarketModalButton } from "./MarketModalButton/MarketModalButton";
 import { MarketModalLine } from "./MarketModalLine/MarketModalLine";
 
 import { marketAssets } from "../../../../../redux/slices/game/market/models";
-import classes from "./MarketModal.module.css";
-// виды операций на маркете
-export enum Mode {
-   BUY = "buy",
-   SELL = "sell",
-}
 
-export type ModeType = Mode.BUY | Mode.SELL;
+import { ModeType } from "../../../../../redux/slices/game/modal/typings";
+import { Mode } from "../../../../../redux/slices/game/modal/models";
+
+import classes from "./MarketModal.module.css";
 
 export const MarketModal = () => {
    const asset = useAppSelector(selectAsset);

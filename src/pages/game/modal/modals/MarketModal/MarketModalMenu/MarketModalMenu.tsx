@@ -14,7 +14,8 @@ import {
    AssetsType,
    MarketAssetsToBuy,
 } from "../../../../../../redux/slices/game/market/typings";
-import { Mode, ModeType } from "../MarketModal";
+import { Mode } from "../../../../../../redux/slices/game/modal/models";
+import { ModeType } from "../../../../../../redux/slices/game/modal/typings";
 
 import classes from "./MarketModalMenu.module.css";
 
