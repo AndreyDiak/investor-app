@@ -6,10 +6,10 @@ import {
    assetsDiffToNormalPriceChangeMap,
    assetsDiffToPriceMap,
    conditions,
-   defaultMinPrice,
    marketAssets,
    stocksDiffToDividendsChance,
 } from "../../models";
+import { defaultStockMinPrice } from "../models";
 import { Stock } from "../typings";
 import { createChance } from "./../../../../../../utils/createChance";
 import { generateRoundRandomValue } from "./../../../../../../utils/generateRandom";
@@ -23,7 +23,8 @@ export const generateStocks = (difficulty: DifficultyType) => {
       const risk = numberToRisk(generateRoundRandomValue(4));
       // возможно стоит придумать более тонкую настройку
       const minPrice =
-         generateRoundRandomValue(defaultMinPrice) + defaultMinPrice / normalPriceChange; // минимальная цена за акцию
+         generateRoundRandomValue(defaultStockMinPrice) +
+         defaultStockMinPrice / normalPriceChange; // минимальная цена за акцию
 
       const price = minPrice + generateRoundRandomValue(minPrice * priceCoefficient);
 
