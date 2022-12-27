@@ -1,6 +1,10 @@
-import { companiesForBonds } from '../../../../../../models';
+import { generateRoundRandomValue } from "./../../../../../../utils/generateRandom";
+import { companiesForBonds } from "../../../../../../models";
 export const generateBonds = () => {
-  return companiesForBonds.map(company => {
+   // количество облигаций
+   const bondsCount = generateRoundRandomValue(15) + 5;
+
+   return Array(bondsCount).map(() => {
     
-  })
-}
+   });
+};

@@ -1,8 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { decreaseWallet, increaseWallet } from "../../character/characterSlice";
 import { toggleMarketAssetsCount } from "../marketSlice";
-import { toggleStockCount } from "../stocks/stocksSlice";
-import type { Stock } from "../stocks/typings";
 import { MarketAssetsToBuy } from "../typings";
 import { RootState, ThunkType } from "./../../../../store";
 import type { Portfolio } from "./typings";
