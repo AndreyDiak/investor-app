@@ -1,13 +1,18 @@
 import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-import { openModal, selectStockById } from "../../../../redux/slices";
-import { conditions } from "../../../../redux/slices/game/market/models";
-import { Portfolio } from "../../../../redux/slices/game/market/portfolio/typings";
-import { Mode, popups } from "../../../../redux/slices/game/modal/models";
+
+import {
+   Mode,
+   popups,
+   Portfolio,
+   openModal,
+   selectStockById,
+   Conditions,
+} from "../../../../redux/slices";
 import { MoneyIconWithPrice } from "../../../common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
+import { ConditionBlock } from "../ConditionBlock/ConditionBlock";
 
 import classes from "../cards.module.css";
-import { ConditionBlock } from "../ConditionBlock/ConditionBlock";
 
 interface Props {
    asset: Portfolio;
@@ -27,12 +32,12 @@ export const PortfolioCard = ({ asset }: Props) => {
    const isProfit = myPrice < marketPrice;
 
    if (myPrice < marketPrice) {
-      condition = conditions.UP;
+      condition = Conditions.UP;
    } else {
       if (myPrice > marketPrice) {
-         condition = conditions.DOWN;
+         condition = Conditions.DOWN;
       } else {
-         condition = conditions.NOT_CHANGED;
+         condition = Conditions.NOT_CHANGED;
       }
    }
 
@@ -44,7 +49,9 @@ export const PortfolioCard = ({ asset }: Props) => {
       <div className={classes.card} onClick={onClickHandler}>
          <div className={classes.title}>
             {asset.title}
-            <div className={classes.condition}><ConditionBlock condition={condition} /></div>
+            <div className={classes.condition}>
+               <ConditionBlock condition={condition} />
+            </div>
          </div>
          <div className={classes.info}>
             <div>

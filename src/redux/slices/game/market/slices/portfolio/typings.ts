@@ -1,4 +1,4 @@
-import { MarketAssetsToBuyType } from "../typings";
+import { MarketAssetsToBuyType } from "../../typings";
 
 export interface Portfolio {
    id: string;

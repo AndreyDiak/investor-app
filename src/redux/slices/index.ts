@@ -1,3 +1,3 @@
-export * from "./characters/charactersSlice";
-export * from "./settings/settingsSlice";
+export * from "./characters";
+export * from "./settings";
 export * from "./game";

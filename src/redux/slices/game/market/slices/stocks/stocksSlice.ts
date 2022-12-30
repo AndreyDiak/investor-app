@@ -1,16 +1,20 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState, ThunkType } from "../../../../store";
-import { openTopic } from "../../news/newsSlice";
-import { incomeToOpenMarket, marketAssets } from "../models";
-import { Condition, ToggleAssetCountType } from "../typings";
-import { newsTopics } from "./../../news/models";
+import { RootState, ThunkType } from "../../../../../store";
+import { openTopic, newsTopics } from "../../../news";
+import {
+   AssetsFilter,
+   Conditions,
+   incomeToOpenMarket,
+   MarketAssetsType,
+} from "../../../../../../models/game/market/models";
+import { ToggleAssetCountType } from "../../typings";
 import { Stock } from "./typings";
 import { generateStocks, indexingStocks as index } from "./utils";
 
 const mock = [
    {
       condition: "not-changed",
-      type: marketAssets.STOCKS,
+      type: MarketAssetsType.STOCKS,
       count: 62,
       dividendsPercentage: 0,
       id: "3a30cb8b-ebd3-480c-a7a1-84b8c1d4a414",
@@ -23,7 +27,7 @@ const mock = [
    },
    {
       condition: "not-changed",
-      type: marketAssets.STOCKS,
+      type: MarketAssetsType.STOCKS,
       count: 87,
       dividendsPercentage: 3,
       id: "f459261d-cecc-404a-9860-5952ab504abf",
@@ -52,7 +56,7 @@ export const stocksSlice = createSlice({
       },
       setStockInterval: (
          state,
-         action: PayloadAction<{ id: string; type: Condition; interval: number }>
+         action: PayloadAction<{ id: string; type: Conditions; interval: number }>
       ) => {
          const index = state.stocks.findIndex((stock) => stock.id === action.payload.id);
          state.stocks[index].priceChangeIntervalDueToNews = action.payload.interval;
@@ -86,6 +90,9 @@ export const selectStocks = (state: RootState) => state.stocks.stocks;
 export const selectStockById = (id: string) =>
    createSelector(selectStocks, (stocks) => stocks.find((stock) => stock.id === id));
 
+export const selectFilteredStocks = (filter: AssetsFilter) =>
+   createSelector(selectStocks, (stocks) => {});
+
 // Thunks
 
 export const checkStocks = (): ThunkType => (dispatch, getState) => {
@@ -106,7 +113,7 @@ export const checkStocks = (): ThunkType => (dispatch, getState) => {
          // создаем акции
          // если наш доход больше чем необходимый минимум
          const newStocks = generateStocks(difficulty);
-         console.log(newStocks);
+
          dispatch(setInitialStocks(newStocks));
       }
    }

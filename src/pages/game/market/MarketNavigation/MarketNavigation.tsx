@@ -1,37 +1,36 @@
 import { Button, Select } from "antd";
 import { NavLink } from "react-router-dom";
-import { devices } from "../../../../models";
-import { optionsMarketFilters } from "../../../../models/game/market/models";
-import { useAppSelector } from "../../../../redux/hooks";
-import { selectDevice } from "../../../../redux/slices";
-import { marketAssets } from "../../../../redux/slices/game/market/models";
 
-const DesktopMarketNavigation = optionsMarketFilters
-  .filter(option => option.to !== marketAssets.PORTFOLIO)
+import { optionsMarketFilters, Devices } from "../../../../models";
+import { useAppSelector } from "../../../../redux/hooks";
+import { MarketAssetsType, selectDevice } from "../../../../redux/slices";
+
+const DesktopMarketNavigation = optionsMarketFilters.filter(
+   (option) => option.to !== MarketAssetsType.PORTFOLIO
+);
 
 export const MarketNavigation = () => {
+   const device = useAppSelector(selectDevice);
 
-  const device = useAppSelector(selectDevice);
+   if (device === Devices.DESKTOP || device === Devices.LAPTOP) {
+      return (
+         <>
+            {DesktopMarketNavigation.map((option, index) => (
+               <Button key={index}>
+                  <NavLink to={option.to}>{option.label}</NavLink>
+               </Button>
+            ))}
+         </>
+      );
+   }
 
-  if (device === devices.DESKTOP || device === devices.LAPTOP) {
-    return (
-      <>
-        {DesktopMarketNavigation.map((option, index) => (
-          <Button key={index}>
-            <NavLink to={option.to}>
-              {option.label}
-            </NavLink>
-          </Button>
-        ))}
-      </>
-    )
-  }
-
-  return (
-    <Select defaultValue={marketAssets.STOCKS}>
-      {optionsMarketFilters.map((option, index) => <Select.Option key={index}>
-        <NavLink to={option.to}>{option.label}</NavLink>
-      </Select.Option>)}
-    </Select>
-  )
-}
+   return (
+      <Select defaultValue={MarketAssetsType.STOCKS}>
+         {optionsMarketFilters.map((option, index) => (
+            <Select.Option key={index}>
+               <NavLink to={option.to}>{option.label}</NavLink>
+            </Select.Option>
+         ))}
+      </Select>
+   );
+};

@@ -21,13 +21,9 @@ export const MarketModal = () => {
 
    const marketAsset = useAppSelector(selectMarketAssetById(assetId));
 
-   const onSellHandler = () => {
-      setModalMode(Mode.SELL);
-   };
+   const onSellHandler = () => setModalMode(Mode.SELL);
 
-   const onBuyHandler = () => {
-      setModalMode(Mode.BUY);
-   };
+   const onBuyHandler = () => setModalMode(Mode.BUY);
 
    return (
       <div className={classes.modal}>
@@ -43,13 +39,13 @@ export const MarketModal = () => {
                {!!portfolioAsset && (
                   <MarketModalButton
                      text="Продать"
-                     active={mode === Mode.SELL}
+                     active={modalMode === Mode.SELL}
                      handler={onSellHandler}
                   />
                )}
                <MarketModalButton
                   text="Купить"
-                  active={mode === Mode.BUY}
+                  active={modalMode === Mode.BUY}
                   handler={onBuyHandler}
                />
             </div>

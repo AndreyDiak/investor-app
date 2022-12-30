@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { generateNews, monthPayment, weekSpends } from "../redux/slices";
-import { checkStocks } from "../redux/slices/game/market/stocks/stocksSlice";
+import { checkStocks, generateNews, monthPayment, weekSpends } from "../redux/slices";
+
 import {
    setDayMonth,
    selectDayInMonth,

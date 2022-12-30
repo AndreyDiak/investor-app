@@ -1,18 +1,18 @@
-import { assetsRisk } from './../../redux/slices/game/market/models';
+import { AssetsRisk } from "./../../redux/slices";
 
 export const numberToRisk = (n: number) => {
-  switch(n) {
-    case 4:
-      return assetsRisk.HIGH;
-    case 3:
-      return assetsRisk.UPPER_MEDIUM;
-    case 2:
-      return assetsRisk.MEDIUM;
-    case 1:
-      return assetsRisk.LOW;
-    case 0:
-      return assetsRisk.SUPER_LOW;
-    default:
-      return assetsRisk.MEDIUM;
-  }
-}
+   switch (n) {
+      case 4:
+         return AssetsRisk.HIGH;
+      case 3:
+         return AssetsRisk.UPPER_MEDIUM;
+      case 2:
+         return AssetsRisk.MEDIUM;
+      case 1:
+         return AssetsRisk.LOW;
+      case 0:
+         return AssetsRisk.SUPER_LOW;
+      default:
+         return AssetsRisk.MEDIUM;
+   }
+};

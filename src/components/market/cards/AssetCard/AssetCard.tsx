@@ -1,16 +1,14 @@
-import { FallOutlined, RiseOutlined, ShrinkOutlined } from "@ant-design/icons";
-import { Button, Popover } from "antd";
+import { Popover } from "antd";
 import { useAppDispatch } from "../../../../redux/hooks";
-import { openModal } from "../../../../redux/slices";
+import { Assets, openModal } from "../../../../redux/slices";
 import { Mode, popups } from "../../../../redux/slices/game/modal/models";
 import { MoneyIconWithPrice } from "../../../common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
 
-import { MarketAssetsToBuy } from "../../../../redux/slices/game/market/typings";
 import classes from "../cards.module.css";
 import { ConditionBlock } from "../ConditionBlock/ConditionBlock";
 
 interface Props {
-   asset: MarketAssetsToBuy;
+   asset: Assets;
    index: number;
 }
 
@@ -52,11 +50,6 @@ export const AssetCard = ({ asset, index }: Props) => {
                <div>Дивиденды {asset.dividendsPercentage}%</div>
             )}
          </div>
-         {/* <div>
-            <Button className={classes.button} onClick={onClickHandler}>
-               Открыть график
-            </Button>
-         </div> */}
       </div>
    );
 };

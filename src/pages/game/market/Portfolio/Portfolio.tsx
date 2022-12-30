@@ -1,7 +1,6 @@
-import { MarketList } from "../../../../components/market/MarketList/MarketList";
+import { MarketList } from "../../../../components";
 import { useAppSelector } from "../../../../redux/hooks";
-import { selectPortfolio } from "../../../../redux/slices";
-import { marketAssets } from "../../../../redux/slices/game/market/models";
+import { MarketAssetsType, selectPortfolio } from "../../../../redux/slices";
 
 export const Portfolio = () => {
    // получаем акции и облигации
@@ -14,7 +13,7 @@ export const Portfolio = () => {
          }}
       >
          <MarketList
-            type={marketAssets.PORTFOLIO}
+            type={MarketAssetsType.PORTFOLIO}
             title={"Ваш портфель"}
             list={portfolio}
          />

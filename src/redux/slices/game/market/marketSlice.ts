@@ -1,9 +1,9 @@
-import { selectStocks, toggleStockCount } from "./stocks/stocksSlice";
 import { createSelector } from "@reduxjs/toolkit";
-import { selectBonds } from "./bonds/bondsSlice";
-import { MarketAssetsToBuyType, ToggleAssetCountType } from "./typings";
+
 import { ThunkType } from "../../../store";
-import { marketAssets } from "./models";
+import { MarketAssetsType } from "../../../../models/game/market/models";
+import { selectBonds, selectStocks, toggleStockCount } from "./slices";
+import { AllAssetsType, ToggleAssetCountType } from "./typings";
 
 // Selectors
 export const selectMarketAssets = createSelector(
@@ -21,16 +21,16 @@ export const selectMarketAssetById = (id: string) =>
 export const toggleMarketAssetsCount =
    (
       assetId: string,
-      assetType: MarketAssetsToBuyType,
+      assetType: AllAssetsType,
       count: number,
       type: ToggleAssetCountType
    ): ThunkType =>
    (dispatch) => {
       switch (assetType) {
-         case marketAssets.STOCKS:
+         case MarketAssetsType.STOCKS:
             dispatch(toggleStockCount({ id: assetId, count, type }));
             break;
-         case marketAssets.BONDS:
+         case MarketAssetsType.BONDS:
             break;
          default:
             return null;

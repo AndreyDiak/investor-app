@@ -9,8 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import { generateRoundRandomValue } from "../../../../utils/generateRandom";
 import { RootState } from "../../../store";
 import { increaseWallet } from "../character/characterSlice";
-import { conditions } from "../market/models";
-import { setStockInterval } from "../market/stocks/stocksSlice";
+import { Conditions, setStockInterval } from "../market";
 import { months } from "../time/models";
 import { marketNews, newsKinds, newsTopics, personNews } from "./models";
 import { News, NewsTopics } from "./typings";
@@ -138,8 +137,8 @@ export const generateNews = (): ThunkType => (dispatch, getState) => {
                // рост или спад
                const priceChangeType =
                   templateKind.type === newsKinds.POSITIVE
-                     ? conditions.UP
-                     : conditions.DOWN;
+                     ? Conditions.UP
+                     : Conditions.DOWN;
                // интервал воздействия новости
                const interval = generateRoundRandomValue(3) + 2;
 

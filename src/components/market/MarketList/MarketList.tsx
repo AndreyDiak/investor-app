@@ -1,19 +1,19 @@
 // обертка над любыми типами активов на рынке
 // акции / облигации / опционы и тд.
 
-import { marketAssets } from "../../../redux/slices/game/market/models";
 import {
-   AssetsType,
-   MarketAssets,
-   MarketAssetsToBuy,
-} from "../../../redux/slices/game/market/typings";
-import { AssetCard } from "../cards/AssetCard/AssetCard";
-import { PortfolioCard } from "../cards/PortfolioCard/PortfolioCard";
+   AllAssets,
+   AllAssetsType,
+   Assets,
+   MarketAssetsType,
+   Portfolio,
+} from "../../../redux/slices";
+import { AssetCard, PortfolioCard } from "../cards";
 
 interface Props {
-   type: MarketAssets;
+   type: MarketAssetsType;
    title: string;
-   list: AssetsType[]; // Bonds and others
+   list: AllAssets[]; // Bonds and others
 }
 
 import classes from "./MarketList.module.css";
@@ -29,14 +29,10 @@ export const MarketList = ({ type, title, list }: Props) => {
          <div className={classes.assets}>
             {list.map((item, index) => (
                <>
-                  {type === marketAssets.PORTFOLIO ? (
-                     <PortfolioCard asset={item} key={index} />
+                  {type === MarketAssetsType.PORTFOLIO ? (
+                     <PortfolioCard asset={item as Portfolio} key={index} />
                   ) : (
-                     <AssetCard
-                        asset={item as MarketAssetsToBuy}
-                        index={index}
-                        key={index}
-                     />
+                     <AssetCard asset={item as Assets} index={index} key={index} />
                   )}
                </>
             ))}

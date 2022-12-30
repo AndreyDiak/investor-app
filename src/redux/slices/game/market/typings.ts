@@ -1,38 +1,13 @@
-import { assetsFilters, conditions, marketAssets, assetsRisk } from "./models";
-import { Portfolio } from "./portfolio/typings";
-import { Stock } from "./stocks/typings";
+import { MarketAssetsType } from "../../../../models/game/market/models";
+import { Bond } from "./slices/bonds/typings";
+import { Portfolio } from "./slices/portfolio/typings";
+import { Stock } from "./slices/stocks/typings";
 
-// цена выросла, упала или не изменилось вовсе
-export type Condition = conditions.UP | conditions.DOWN | conditions.NOT_CHANGED;
-
-// вид актива / Акция / что-то из порфтеля
-export type AssetsType = Stock | Portfolio;
-
-export type MarketAssetsToBuy = Stock;
-
-export type MarketAssetsToBuyType = marketAssets.BONDS | marketAssets.STOCKS;
+// виды активов, доступных для покупки
+export type Assets = Stock | Bond;
+export type AssetsType = MarketAssetsType.STOCKS | MarketAssetsType.BONDS;
+// виды активов и личный портфель
+export type AllAssets = Assets | Portfolio;
+export type AllAssetsType = AssetsType | MarketAssetsType.PORTFOLIO;
 
 export type ToggleAssetCountType = "increase" | "decrease";
-
-export type MarketAssets =
-   | marketAssets.BONDS
-   | marketAssets.PORTFOLIO
-   | marketAssets.STOCKS;
-
-// export type MarketListAssets = marketAssets.STOCKS | marketAssets.BONDS;
-
-export type AssetsFilter =
-   | assetsFilters.CONDITION
-   | assetsFilters.COUNT
-   | assetsFilters.DIVIDENDS
-   | assetsFilters.NONE
-   | assetsFilters.PRICE
-   | assetsFilters.RISK
-   | assetsFilters.TITLE;
-
-export type AssetsRisk =
-   | assetsRisk.SUPER_LOW
-   | assetsRisk.LOW
-   | assetsRisk.MEDIUM
-   | assetsRisk.UPPER_MEDIUM
-   | assetsRisk.HIGH;
