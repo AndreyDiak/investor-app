@@ -1,0 +1,6 @@
+.filter {
+   display: flex;
+   column-gap: 10px;
+   margin: 0 auto;
+   width: 90%;
+}

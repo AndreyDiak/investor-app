@@ -1,7 +1,7 @@
 import { FallOutlined, RiseOutlined, ShrinkOutlined } from "@ant-design/icons";
-import { Condition } from "../../../../redux/slices/game/market/typings";
+import { Conditions } from "../../../../models";
 
-import classes from './ConditionBlock.module.css'
+import classes from "./ConditionBlock.module.css";
 
 const stockConditionToIconMap = {
    up: <RiseOutlined className={classes.icon} style={{ color: "#128900" }} />,
@@ -11,5 +11,5 @@ const stockConditionToIconMap = {
    ),
 };
 
-export const ConditionBlock = ({ condition }: { condition: Condition }) =>
-   stockConditionToIconMap[condition]
+export const ConditionBlock = ({ condition }: { condition: Conditions }) =>
+   stockConditionToIconMap[condition];

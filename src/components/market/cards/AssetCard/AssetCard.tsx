@@ -27,20 +27,9 @@ export const AssetCard = ({ asset, index }: Props) => {
                {index + 1} - {asset.title}
             </div>
             {/* Состояние */}
-            <Popover
-               className={classes.condition}
-               content={
-                  <div className={classes.popover}>
-                     <p>Прошлая цена</p>
-                     <MoneyIconWithPrice
-                        color="black"
-                        price={asset.price[asset.price.length - 2]}
-                     />
-                  </div>
-               }
-            >
+            <div className={classes.condition}>
                <ConditionBlock condition={asset.condition} />
-            </Popover>
+            </div>
          </div>
          <div className={classes.info}>
             {/* Цена */}

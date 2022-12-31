@@ -1,9 +1,14 @@
 import { createSelector } from "@reduxjs/toolkit";
 
 import { ThunkType } from "../../../store";
-import { MarketAssetsType } from "../../../../models/game/market/models";
-import { selectBonds, selectStocks, toggleStockCount } from "./slices";
-import { AllAssetsType, ToggleAssetCountType } from "./typings";
+import { AssetsFilter, MarketAssetsType } from "../../../../models";
+import {
+   selectBonds,
+   selectFilteredStocks,
+   selectStocks,
+   toggleStockCount,
+} from "./slices";
+import { AllAssetsType, AssetsType, ToggleAssetCountType } from "./typings";
 
 // Selectors
 export const selectMarketAssets = createSelector(

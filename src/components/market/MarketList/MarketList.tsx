@@ -1,13 +1,7 @@
 // обертка над любыми типами активов на рынке
 // акции / облигации / опционы и тд.
 
-import {
-   AllAssets,
-   AllAssetsType,
-   Assets,
-   MarketAssetsType,
-   Portfolio,
-} from "../../../redux/slices";
+import { AllAssets, Assets, MarketAssetsType, Portfolio } from "../../../redux/slices";
 import { AssetCard, PortfolioCard } from "../cards";
 
 interface Props {

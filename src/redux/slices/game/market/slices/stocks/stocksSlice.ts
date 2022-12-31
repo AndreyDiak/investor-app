@@ -1,13 +1,14 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState, ThunkType } from "../../../../../store";
-import { openTopic, newsTopics } from "../../../news";
 import {
    AssetsFilter,
    Conditions,
    incomeToOpenMarket,
    MarketAssetsType,
-} from "../../../../../../models/game/market/models";
+} from "../../../../../../models";
+import { RootState, ThunkType } from "../../../../../store";
+import { newsTopics, openTopic } from "../../../news";
 import { ToggleAssetCountType } from "../../typings";
+import { filterAsset } from "../../utils/filterAsset";
 import { Stock } from "./typings";
 import { generateStocks, indexingStocks as index } from "./utils";
 
@@ -90,8 +91,8 @@ export const selectStocks = (state: RootState) => state.stocks.stocks;
 export const selectStockById = (id: string) =>
    createSelector(selectStocks, (stocks) => stocks.find((stock) => stock.id === id));
 
-export const selectFilteredStocks = (filter: AssetsFilter) =>
-   createSelector(selectStocks, (stocks) => {});
+export const selectFilteredStocks = (filter: AssetsFilter, search = "") =>
+   createSelector(selectStocks, (stocks) => filterAsset(stocks, filter, search));
 
 // Thunks
 
