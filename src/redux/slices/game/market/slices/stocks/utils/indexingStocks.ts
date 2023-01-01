@@ -1,8 +1,9 @@
-import { Difficulty } from "./../../../../../../../models/settings/models";
 import {
    generateRandomValue,
    generateRoundRandomValue,
-} from "../../../../../../../utils/generateRandom";
+   roundMultiply,
+   createChance,
+} from "../../../../../../../utils";
 import {
    defaultStockCountChange,
    defaultStockPriceNotChangeChance,
@@ -12,8 +13,8 @@ import { Stock } from "../typings";
 import {
    assetsRiskToConditionMap,
    Conditions,
-} from "../../../../../../../models/game/market/models";
-import { createChance } from "../../../../../../../utils/createChance";
+   Difficulty,
+} from "../../../../../../../models";
 
 export const indexingStocks = (stocks: Stock[], difficulty: Difficulty) => {
    const normalPriceChange = stocksDiffToNormalPriceChangeMap[difficulty];
@@ -35,11 +36,8 @@ export const indexingStocks = (stocks: Stock[], difficulty: Difficulty) => {
          // вероятность повышения / понижения
          const priceDiffFromRisk = assetsRiskToConditionMap[stock.risk];
          // новая цена на акцию ( коэф )
-         const priceDiffCoefficient = Number(
-            (
-               priceDiffFromRisk.down / 10 +
-               generateRandomValue(normalPriceChange / 100)
-            ).toFixed(2)
+         const priceDiffCoefficient = roundMultiply(
+            priceDiffFromRisk.down / 10 + generateRandomValue(normalPriceChange / 100)
          );
 
          // если это акция подвержена новости
@@ -97,7 +95,7 @@ export const indexingStocks = (stocks: Stock[], difficulty: Difficulty) => {
                   ? stock.count + countDifference
                   : stock.count - countDifference
                : stock.count + countDifference,
-         price: [...stock.price, Number(newPrice.toFixed(1))],
+         price: [...stock.price, roundMultiply(newPrice, 1)],
          condition,
          priceChangeIntervalDueToNews,
          priceGrowOfFallDueToNews,

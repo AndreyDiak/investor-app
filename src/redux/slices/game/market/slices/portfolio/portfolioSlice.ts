@@ -1,8 +1,10 @@
+import { roundMultiply } from "./../../../../../../utils";
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { MarketAssetsType } from "../../../../../../models";
+import { RootState, ThunkType } from "../../../../../store";
 import { decreaseWallet, increaseWallet } from "../../../character/characterSlice";
 import { toggleMarketAssetsCount } from "../../marketSlice";
-import { MarketAssetsToBuy } from "../../typings";
-import { RootState, ThunkType } from "../../../../../store";
+import { AllAssetsType, Assets } from "../../typings";
 import type { Portfolio } from "./typings";
 
 const initialState = {
@@ -54,15 +56,25 @@ export const selectPortfolioById = (id: string) =>
       portfolio.find((item) => item.id === id)
    );
 
+// TODO: сделать только id и type нельзя пробрасывать весь asset
+
 export const buyAsset =
-   (asset: MarketAssetsToBuy, count: number, price: number): ThunkType =>
+   (asset: Assets, count: number, price: number): ThunkType =>
    (dispatch) => {
       const item: Portfolio = {
          id: asset.id,
-         type: asset.type,
+         type: MarketAssetsType.PORTFOLIO,
          title: asset.title,
          count: count,
          price: [asset.price[asset.price.length - 1]],
+         dividends:
+            asset.dividendsPercentage !== 0
+               ? roundMultiply(
+                    asset.price[asset.price.length - 1] *
+                       count *
+                       (asset.dividendsPercentage / 100)
+                 )
+               : 0,
       };
       // добавление в портфель
       dispatch(portfolioSlice.actions.addToPortfolio(item));
@@ -73,18 +85,18 @@ export const buyAsset =
    };
 
 export const sellAsset =
-   (asset: Portfolio, count: number, price: number): ThunkType =>
+   (assetId: string, assetType: AllAssetsType, count: number, price: number): ThunkType =>
    (dispatch) => {
       dispatch(
          portfolioSlice.actions.removeFromPortfolio({
-            id: asset.id,
+            id: assetId,
             count,
          })
       );
       // обновление баланса
       dispatch(increaseWallet(price));
       // обновление акций на рынке
-      dispatch(toggleMarketAssetsCount(asset.id, asset.type, count, "increase"));
+      dispatch(toggleMarketAssetsCount(assetId, assetType, count, "increase"));
    };
 
 export default portfolioSlice.reducer;

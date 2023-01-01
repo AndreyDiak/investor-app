@@ -41,8 +41,10 @@ const mock = {
 
 const initialState = {
    character: mock as null | Person,
-   totalIncome: 976, // зарплата с учетом всех долгов
-   walletBalance: 1628, // текущие накопления
+   initialIncome: 0, // зарплата игрока
+   totalCredit: 0, // суммарный кредит игрока
+   passiveIncome: 0, // пассивный доход
+   walletBalance: 0, // текущие накопления
 };
 
 export const characterSlice = createSlice({
@@ -51,7 +53,9 @@ export const characterSlice = createSlice({
    reducers: {
       setCharacter: (state, action: PayloadAction<Person>) => {
          state.character = action.payload;
-         state.totalIncome = action.payload.salary - action.payload.spendingsMonthPayment;
+         state.initialIncome = action.payload.salary;
+         state.totalCredit = action.payload.spendingsMonthPayment;
+         state.passiveIncome = 0;
          state.walletBalance = action.payload.startMoney;
       },
       setWallet: (state, action: PayloadAction<number>) => {
@@ -63,13 +67,10 @@ export const characterSlice = createSlice({
       decreaseWallet: (state, action: PayloadAction<number>) => {
          state.walletBalance = Number((state.walletBalance - action.payload).toFixed(1));
       },
-      setTotalIncome: (state, action: PayloadAction<number>) => {
-         state.totalIncome = action.payload;
-      },
    },
 });
 
-export const { setCharacter, setTotalIncome, setWallet, increaseWallet, decreaseWallet } =
+export const { setCharacter, setWallet, increaseWallet, decreaseWallet } =
    characterSlice.actions;
 
 // Selectors
@@ -77,12 +78,12 @@ export const selectCharacter = (state: RootState) => state.character.character;
 
 export const selectWalletBalance = (state: RootState) => state.character.walletBalance;
 
-export const selectTotalIncome = (state: RootState) => state.character.totalIncome;
+export const selectInitialIncome = (state: RootState) => state.character.initialIncome;
 
 type ThunkType = ThunkAction<void, RootState, unknown, AnyAction>;
 
 export const monthPayment = (): ThunkType => (dispatch, getState) => {
-   const income = getState().character.totalIncome;
+   const income = getState().character.initialIncome;
    dispatch(increaseWallet(income));
 };
 

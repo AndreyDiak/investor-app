@@ -1,10 +1,15 @@
 import { v4 as uuidv4 } from "uuid";
-import { companiesForStocks, Difficulty } from "../../../../../../../models";
-import { numberToRisk } from "../../../../../../../utils/market/numberToRisk";
 import {
+   companiesForStocks,
+   Difficulty,
    Conditions,
    MarketAssetsType,
-} from "../../../../../../../models/game/market/models";
+} from "../../../../../../../models";
+import {
+   numberToRisk,
+   createChance,
+   generateRoundRandomValue,
+} from "../../../../../../../utils";
 
 import {
    defaultStockCountChange,
@@ -14,8 +19,6 @@ import {
    stocksDiffToPriceMap,
 } from "../models";
 import { Stock } from "../typings";
-import { createChance } from "./../../../../../../../utils/createChance";
-import { generateRoundRandomValue } from "./../../../../../../../utils/generateRandom";
 
 export const generateStocks = (difficulty: Difficulty) => {
    // коеффициент изменения цены

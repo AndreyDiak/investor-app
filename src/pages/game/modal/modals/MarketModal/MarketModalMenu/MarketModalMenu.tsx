@@ -1,28 +1,26 @@
-import React from "react";
 import { InputNumber } from "antd";
 import { useCallback, useEffect, useState } from "react";
-import { MoneyIconWithPrice } from "../../../../../../components/common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
+import { MoneyIconWithPrice } from "../../../../../../components";
 import { useAppDispatch, useAppSelector } from "../../../../../../redux/hooks";
 import {
    buyAsset,
    closeModal,
+   Portfolio,
    selectConstTimeSpeed,
    selectWalletBalance,
    sellAsset,
    setTimeSpeed,
+   Assets,
+   Mode,
+   ModeType,
 } from "../../../../../../redux/slices";
-import {
-   AssetsType,
-   MarketAssetsToBuy,
-} from "../../../../../../redux/slices/game/market/typings";
-import { Mode } from "../../../../../../redux/slices/game/modal/models";
-import { ModeType } from "../../../../../../redux/slices/game/modal/typings";
+import { roundMultiply } from "../../../../../../utils/roundMultiply";
 
 import classes from "./MarketModalMenu.module.css";
 import { buttons } from "./models";
 
 interface Props {
-   asset: AssetsType;
+   asset: Assets;
    mode: ModeType;
 }
 
@@ -35,9 +33,15 @@ export const MarketModalMenu = ({ asset, mode }: Props) => {
    const dispatch = useAppDispatch();
 
    const [count, setCount] = useState<number>(1); // кол-во для покупки или продаже
+   // суммарная цена акций (зависит от кол-ва)
    const [price, setPrice] = useState<number>(
       count * asset.price[asset.price.length - 1]
-   ); // суммарная цена (зависит от кол-ва)
+   );
+   // суммарная цена дивидендов
+   const [dididends, setDividends] = useState<number>(
+      roundMultiply(price * (asset.dividendsPercentage / 100))
+   );
+   // хватает ли нам денег
    const [isAbleToBuy, setIsAbleToBuy] = useState<boolean>(
       mode === Mode.BUY ? balance > count * price : true
    );
@@ -58,12 +62,13 @@ export const MarketModalMenu = ({ asset, mode }: Props) => {
    );
    // изменение цены
    useEffect(() => {
-      setPrice(Number((asset.price[asset.price.length - 1] * count).toFixed(1)));
+      setPrice(roundMultiply(asset.price[asset.price.length - 1] * count));
    }, [count]);
 
    // проверка на возможность покупки
    useEffect(() => {
       setIsAbleToBuy(mode === Mode.BUY ? balance > price : true);
+      setDividends(roundMultiply(price * (asset.dividendsPercentage / 100)));
    }, [price]);
 
    // обнуляем значения при смене режима
@@ -75,9 +80,10 @@ export const MarketModalMenu = ({ asset, mode }: Props) => {
    const onConfirmHandler = () => {
       if (mode === Mode.BUY) {
          // покупка
-         dispatch(buyAsset(asset as MarketAssetsToBuy, count, price));
+         dispatch(buyAsset(asset, count, price));
       } else {
-         dispatch(sellAsset(asset, count, price));
+         // продажа
+         dispatch(sellAsset(asset.id, asset.type, count, price));
       }
       // закрытие модалки
       dispatch(closeModal());
@@ -95,6 +101,12 @@ export const MarketModalMenu = ({ asset, mode }: Props) => {
                <div className={classes.available}>
                   Цена: <MoneyIconWithPrice price={price} />
                </div>
+               {!!asset.dividendsPercentage && (
+                  <div className={`${classes.available} ${classes.dividends}`}>
+                     Выплаты с дивидендов:
+                     <MoneyIconWithPrice price={dididends} />
+                  </div>
+               )}
                <div className={classes.count}>
                   <InputNumber
                      min={0}

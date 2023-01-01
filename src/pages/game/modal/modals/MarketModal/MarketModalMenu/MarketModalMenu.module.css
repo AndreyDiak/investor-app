@@ -2,6 +2,7 @@
    display: flex;
    align-items: flex-end;
    justify-content: space-between;
+   position: relative;
 }
 
 .count {
@@ -57,4 +58,10 @@
    font-weight: 700;
    color: #fff;
    background-color: var(--aqua-market);
+}
+
+.dividends {
+   position: absolute;
+   top: 0;
+   right: 0;
 }

@@ -1,9 +1,8 @@
-import { AssetsRisk, Conditions } from "../../../../../../models/game/market/models";
-import { AllAssetsType } from "../../typings";
+import { AssetsRisk, Conditions, MarketAssetsType } from "../../../../../../models";
 
 export interface Bond {
    id: string;
-   type: AllAssetsType;
+   type: MarketAssetsType.BONDS;
    title: string; // название
    count: number; // кол-во на рынке
    risk: AssetsRisk; // риск от LOW до HIGH
