@@ -1,4 +1,5 @@
-import { Difficulty, Expenses } from "../../../models";
+import { Difficulty } from "../../../models";
+import { Expense } from "../game/credit/typings";
 
 export interface InitialPerson {
    name: string;
@@ -16,26 +17,4 @@ export interface Person extends InitialPerson {
    difficulty: Difficulty;
    spendings: Expense[];
    spendingsMonthPayment: number;
-}
-
-export type ExpenseType = Expenses.CAR | Expenses.HOME | Expenses.CREDIT_CARD;
-
-export type ExpenseTitleMapType = {
-   [title in ExpenseType]: string;
-};
-
-export type DefaultExpensesPrices = {
-   [title in ExpenseType]: number;
-};
-
-export type DifficultyCoefficientMapType = {
-   [difficulty in Difficulty]: number;
-};
-
-export interface Expense {
-   type: ExpenseType;
-   title: string;
-   startPrice: number;
-   remainPrice: number;
-   paymentPercantage: number;
 }

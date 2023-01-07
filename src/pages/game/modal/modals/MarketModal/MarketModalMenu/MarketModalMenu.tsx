@@ -3,18 +3,17 @@ import { useCallback, useEffect, useState } from "react";
 import { MoneyIconWithPrice } from "../../../../../../components";
 import { useAppDispatch, useAppSelector } from "../../../../../../redux/hooks";
 import {
+   Assets,
    buyAsset,
    closeModal,
-   Portfolio,
+   Mode,
+   ModeType,
    selectConstTimeSpeed,
    selectWalletBalance,
    sellAsset,
    setTimeSpeed,
-   Assets,
-   Mode,
-   ModeType,
 } from "../../../../../../redux/slices";
-import { roundMultiply } from "../../../../../../utils/roundMultiply";
+import { round } from "../../../../../../utils";
 
 import classes from "./MarketModalMenu.module.css";
 import { buttons } from "./models";
@@ -39,7 +38,7 @@ export const MarketModalMenu = ({ asset, mode }: Props) => {
    );
    // суммарная цена дивидендов
    const [dididends, setDividends] = useState<number>(
-      roundMultiply(price * (asset.dividendsPercentage / 100))
+      round(price * (asset.dividendsPercentage / 100))
    );
    // хватает ли нам денег
    const [isAbleToBuy, setIsAbleToBuy] = useState<boolean>(
@@ -62,13 +61,13 @@ export const MarketModalMenu = ({ asset, mode }: Props) => {
    );
    // изменение цены
    useEffect(() => {
-      setPrice(roundMultiply(asset.price[asset.price.length - 1] * count));
+      setPrice(round(asset.price[asset.price.length - 1] * count));
    }, [count]);
 
    // проверка на возможность покупки
    useEffect(() => {
       setIsAbleToBuy(mode === Mode.BUY ? balance > price : true);
-      setDividends(roundMultiply(price * (asset.dividendsPercentage / 100)));
+      setDividends(round(price * (asset.dividendsPercentage / 100)));
    }, [price]);
 
    // обнуляем значения при смене режима

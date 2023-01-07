@@ -1,23 +1,23 @@
 import { NewsEvents } from "./typings";
 
 // TODO: новости про недвижимость, новости про бизнесс
-export enum newsTopics {
+export enum NewsTopics {
    PERSONAL = "person",
    MARKET = "market",
 }
 
-export enum newsKinds {
+export enum NewsKinds {
    POSITIVE = "positive",
    NEUTRAL = "neutral",
    NEGATIVE = "negative",
 }
 
 export const personNews: NewsEvents = {
-   type: newsTopics.PERSONAL,
+   type: NewsTopics.PERSONAL,
    ableToShow: true,
    events: [
       {
-         type: newsKinds.POSITIVE,
+         type: NewsKinds.POSITIVE,
          titles: [
             { title: "Вы получили бонус на работе. Так держать!", amount: 300 },
             { title: "Разовая выплата от правительства", amount: 550 },
@@ -37,7 +37,7 @@ export const personNews: NewsEvents = {
          ],
       },
       {
-         type: newsKinds.NEUTRAL,
+         type: NewsKinds.NEUTRAL,
          titles: [
             {
                title: "Хочешь сбежать от повседневности — не останавливайся в развитии.",
@@ -59,7 +59,7 @@ export const personNews: NewsEvents = {
          ],
       },
       {
-         type: newsKinds.NEGATIVE,
+         type: NewsKinds.NEGATIVE,
          titles: [
             { title: "Вы проиграли в лотерее", amount: -450 },
             { title: "Онлайн казино дело такое!", amount: -1000 },
@@ -79,11 +79,11 @@ export const personNews: NewsEvents = {
 };
 
 export const marketNews: NewsEvents = {
-   type: newsTopics.MARKET,
+   type: NewsTopics.MARKET,
    ableToShow: false,
    events: [
       {
-         type: newsKinds.POSITIVE,
+         type: NewsKinds.POSITIVE,
          titles: [
             {
                title: "Компания получила инвестиции, возможно, вам следует проследить за ней!",
@@ -106,7 +106,7 @@ export const marketNews: NewsEvents = {
          ],
       },
       {
-         type: newsKinds.NEUTRAL,
+         type: NewsKinds.NEUTRAL,
          titles: [
             { title: "На рынке акций всё спокойно! Можете не волноваться!" },
             {
@@ -118,7 +118,7 @@ export const marketNews: NewsEvents = {
          ],
       },
       {
-         type: newsKinds.NEGATIVE,
+         type: NewsKinds.NEGATIVE,
          titles: [
             { title: "Компания терпит убыдки! Скоро акции полетят вниз!" },
             {

@@ -4,6 +4,7 @@ import {
    Difficulty,
    Conditions,
    MarketAssetsType,
+   MarketLevels,
 } from "../../../../../../../models";
 import {
    numberToRisk,
@@ -20,7 +21,7 @@ import {
 } from "../models";
 import { Stock } from "../typings";
 
-export const generateStocks = (difficulty: Difficulty) => {
+export const generateStocks = (difficulty: Difficulty, level: MarketLevels) => {
    // коеффициент изменения цены
    const normalPriceChange = stocksDiffToNormalPriceChangeMap[difficulty];
    // различие в X минимальной цены и начальной
@@ -28,7 +29,7 @@ export const generateStocks = (difficulty: Difficulty) => {
    // шанс на то, что у акции будут дивиденды
    const dividendsChance = stocksDiffToDividendsChance[difficulty];
 
-   return companiesForStocks.map((company) => {
+   return companiesForStocks[level].map((company) => {
       const risk = numberToRisk(generateRoundRandomValue(4));
       // минимальная цена за акцию
       const minPrice =

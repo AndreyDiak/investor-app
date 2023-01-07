@@ -9,19 +9,22 @@ import {
    selectStockById,
    Conditions,
 } from "../../../../redux/slices";
-import { MoneyIconWithPrice } from "../../../common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
+import { MoneyIconWithPrice } from "../../../common";
 import { ConditionBlock } from "../ConditionBlock/ConditionBlock";
 
 import classes from "../cards.module.css";
+import { round } from "../../../../utils";
 
 interface Props {
    asset: Portfolio;
 }
 
+// TODO : добавить в карточку отображение дивидендов
+
 export const PortfolioCard = ({ asset }: Props) => {
    const dispatch = useAppDispatch();
 
-   const stockFromMarket = useAppSelector(selectStockById(asset.id));
+   const stockFromMarket = useAppSelector(selectStockById(asset.id))!;
 
    const myPrice = useCallback(() => asset.price[0], [])();
 
@@ -68,6 +71,14 @@ export const PortfolioCard = ({ asset }: Props) => {
             </div>
             {asset.count} шт
          </div>
+         {asset.isDividends && (
+            <div>
+               Дивиденды:{" "}
+               <MoneyIconWithPrice
+                  price={round((marketPrice * stockFromMarket.dividendsPercentage) / 100)}
+               />
+            </div>
+         )}
       </div>
    );
 };

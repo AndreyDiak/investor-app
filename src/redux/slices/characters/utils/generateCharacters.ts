@@ -1,9 +1,5 @@
 import { enum2array } from "enum2array";
-import {
-   generateRandomValue,
-   generateRoundRandomValue,
-   roundMultiply,
-} from "../../../../utils";
+import { generateRandomValue, generateRoundRandomValue, round } from "../../../../utils";
 import {
    defaultSalary,
    defaultSpendingsMaxPaymentPercantage,
@@ -18,7 +14,8 @@ import {
    expensesTitleMap,
    initialCharacters,
 } from "../../../../models";
-import { Expense, ExpenseType, Person } from "../typings";
+import { Person } from "../typings";
+import { Expense } from "../../game";
 
 // Generate characters
 export const generateCharacters = () => {
@@ -27,38 +24,38 @@ export const generateCharacters = () => {
       const characterDifficultyValue = difficultyMap[characterDifficulty];
 
       // generate spendings
-      const expenses: Expense[] = enum2array(Expenses).map(({ title, value }) => {
-         const difficultySpendingsCoefficientMin =
-            difficultySpendingsCoefficient[characterDifficultyValue][0];
+      const expenses: Expense[] = [Expenses.HOME, Expenses.CAR, Expenses.CREDIT_CARD].map(
+         (value) => {
+            const difficultySpendingsCoefficientMin =
+               difficultySpendingsCoefficient[characterDifficultyValue][0];
 
-         const difficultySpendingsCoefficientMax =
-            difficultySpendingsCoefficient[characterDifficultyValue][1];
+            const difficultySpendingsCoefficientMax =
+               difficultySpendingsCoefficient[characterDifficultyValue][1];
 
-         const totalCoefficient =
-            difficultySpendingsCoefficientMin +
-            generateRandomValue(
-               difficultySpendingsCoefficientMax - difficultySpendingsCoefficientMin
-            );
+            const totalCoefficient =
+               difficultySpendingsCoefficientMin +
+               generateRandomValue(
+                  difficultySpendingsCoefficientMax - difficultySpendingsCoefficientMin
+               );
 
-         const price = roundMultiply(
-            defaultSpendingsPrices[value as ExpenseType] * totalCoefficient,
-            0
-         );
+            const price = round(defaultSpendingsPrices[value] * totalCoefficient, 0);
 
-         const paymentPercantage =
-            defaultSpendingsMinPaymentPercantage +
-            generateRoundRandomValue(
-               defaultSpendingsMaxPaymentPercantage - defaultSpendingsMinPaymentPercantage
-            );
-         // return spendings
-         return {
-            type: value as ExpenseType,
-            title: expensesTitleMap[value as ExpenseType],
-            startPrice: price,
-            remainPrice: price,
-            paymentPercantage,
-         };
-      });
+            const paymentPercantage =
+               defaultSpendingsMinPaymentPercantage +
+               generateRoundRandomValue(
+                  defaultSpendingsMaxPaymentPercantage -
+                     defaultSpendingsMinPaymentPercantage
+               );
+            // return spendings
+            return {
+               type: value,
+               title: expensesTitleMap[value],
+               startPrice: price,
+               remainPrice: price,
+               paymentPercantage,
+            };
+         }
+      );
 
       // суммарный платеж по всем кредитам
       const expensesSummaryMonthPayment = expenses.reduce(

@@ -5,10 +5,9 @@ import {
    PayloadAction,
    ThunkAction,
 } from "@reduxjs/toolkit";
-import { spendLevelToPrice, SpendsLevel } from "../../../../models";
-import { generateRoundRandomValue } from "../../../../utils/generateRandom";
+import { Difficulty, spendLevelToPrice, SpendsLevel } from "../../../../models";
+import { generateRoundRandomValue } from "../../../../utils";
 import { RootState } from "../../../store";
-import { DifficultyType } from "../../settings/typings";
 import { decreaseWallet } from "../character/characterSlice";
 import type { HappenedSpend, Spend, SpendsLevelType } from "./typings";
 import { generateInitialEvents } from "./utils/generateInitialEvents";
@@ -35,7 +34,7 @@ export const spendsSlice = createSlice({
          state.currentEvents = [];
       },
       setAvailableEvents: {
-         prepare: (difficulty: DifficultyType) => {
+         prepare: (difficulty: Difficulty) => {
             return {
                payload: generateInitialEvents(difficulty),
             };

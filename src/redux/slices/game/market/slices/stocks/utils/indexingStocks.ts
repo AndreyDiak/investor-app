@@ -1,7 +1,7 @@
 import {
    generateRandomValue,
    generateRoundRandomValue,
-   roundMultiply,
+   round,
    createChance,
 } from "../../../../../../../utils";
 import {
@@ -36,7 +36,7 @@ export const indexingStocks = (stocks: Stock[], difficulty: Difficulty) => {
          // вероятность повышения / понижения
          const priceDiffFromRisk = assetsRiskToConditionMap[stock.risk];
          // новая цена на акцию ( коэф )
-         const priceDiffCoefficient = roundMultiply(
+         const priceDiffCoefficient = round(
             priceDiffFromRisk.down / 10 + generateRandomValue(normalPriceChange / 100)
          );
 
@@ -95,7 +95,7 @@ export const indexingStocks = (stocks: Stock[], difficulty: Difficulty) => {
                   ? stock.count + countDifference
                   : stock.count - countDifference
                : stock.count + countDifference,
-         price: [...stock.price, roundMultiply(newPrice, 1)],
+         price: [...stock.price, round(newPrice, 1)],
          condition,
          priceChangeIntervalDueToNews,
          priceGrowOfFallDueToNews,

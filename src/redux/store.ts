@@ -10,8 +10,9 @@ import {
    bondsSlice,
    timeSlice,
    portfolioSlice,
+   marketSlice,
+   creditSlice,
 } from "./slices";
-// ...
 
 export const store = configureStore({
    reducer: {
@@ -19,11 +20,13 @@ export const store = configureStore({
       spends: spendsSlice.reducer,
       news: newsSlice.reducer,
       character: characterSlice.reducer,
+      credit: creditSlice.reducer,
 
       // market
       bonds: bondsSlice.reducer,
       stocks: stocksSlice.reducer,
       portfolio: portfolioSlice.reducer,
+      market: marketSlice.reducer,
 
       // game helpers
       modal: modalSlice.reducer,

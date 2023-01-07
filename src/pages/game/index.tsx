@@ -1,13 +1,12 @@
-import { GameRoutes } from "./_routes";
-
 import React from "react";
-import { Header } from "../../components/Header/Header";
+import { GameRoutes } from "./_routes";
 import { useTime } from "../../hooks/useTime";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { selectDay, selectTimeSpeed, setDay } from "../../redux/slices";
-import classes from "./index.module.css";
-import { Footer } from "../../components/Footer/Footer";
+import { Footer, Header } from "../../components";
 import { ModalTemplate } from "./modal/Modal";
+
+import classes from "./index.module.css";
 
 const GamePage = React.memo(() => {
    const day = useAppSelector(selectDay);

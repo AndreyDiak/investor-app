@@ -6,13 +6,13 @@ import {
    ThunkAction,
 } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
-import { generateRoundRandomValue } from "../../../../utils/generateRandom";
+import { generateRoundRandomValue } from "../../../../utils";
 import { RootState } from "../../../store";
 import { increaseWallet } from "../character/characterSlice";
 import { Conditions, setStockInterval } from "../market";
 import { months } from "../time/models";
-import { marketNews, newsKinds, newsTopics, personNews } from "./models";
-import { News, NewsTopics } from "./typings";
+import { marketNews, NewsKinds, NewsTopics, personNews } from "./models";
+import { News } from "./typings";
 
 const initialState = {
    newsTemplate: [personNews, marketNews],
@@ -39,10 +39,10 @@ export const newsSlice = createSlice({
       },
       openTopic: (state, action: PayloadAction<NewsTopics>) => {
          switch (action.payload) {
-            case newsTopics.PERSONAL:
+            case NewsTopics.PERSONAL:
                state.newsTemplate[0].ableToShow = true;
                break;
-            case newsTopics.MARKET:
+            case NewsTopics.MARKET:
                state.newsTemplate[1].ableToShow = true;
          }
       },
@@ -113,13 +113,13 @@ export const generateNews = (): ThunkType => (dispatch, getState) => {
    };
 
    switch (templateTopic.type) {
-      case newsTopics.PERSONAL:
-         if (templateKind.type != newsKinds.NEUTRAL) {
+      case NewsTopics.PERSONAL:
+         if (templateKind.type != NewsKinds.NEUTRAL) {
             dispatch(increaseWallet(event.amount as number));
             news.money = event.amount as number;
          }
          break;
-      case newsTopics.MARKET:
+      case NewsTopics.MARKET:
          {
             // рандомим акцию
             // TODO: добавить облигации, когда они будут готовы
@@ -133,10 +133,10 @@ export const generateNews = (): ThunkType => (dispatch, getState) => {
 
             // если новость хорошая или плохая
             // то мы должны засетать воздействие новости на акцию
-            if (templateKind.type != newsKinds.NEUTRAL) {
+            if (templateKind.type != NewsKinds.NEUTRAL) {
                // рост или спад
                const priceChangeType =
-                  templateKind.type === newsKinds.POSITIVE
+                  templateKind.type === NewsKinds.POSITIVE
                      ? Conditions.UP
                      : Conditions.DOWN;
                // интервал воздействия новости

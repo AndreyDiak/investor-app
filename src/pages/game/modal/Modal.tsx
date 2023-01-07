@@ -1,5 +1,4 @@
-import React from "react";
-import { CloseButton } from "../../../components/common/CloseButton/CloseButton";
+import { CloseButton } from "../../../components";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import {
    closeModal,

@@ -2,10 +2,8 @@ import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../redux/hooks";
 import { checkNewsById, openModal } from "../../../redux/slices";
-import { Mode, popups } from "../../../redux/slices/game/modal/models";
+import { Mode, popups, NewsKinds, News } from "../../../redux/slices";
 
-import { newsKinds } from "../../../redux/slices/game/news/models";
-import { News } from "../../../redux/slices/game/news/typings";
 import { MoneyIconWithPrice } from "../../common/MoneyIcon/MoneyIconWithPrice/MoneyIconWithPrice";
 
 import classes from "./NewsCard.module.css";
@@ -40,10 +38,10 @@ export const NewsCard = ({ news }: Props) => {
                   className={classes.money}
                   style={{
                      backgroundColor:
-                        news.kind === newsKinds.NEGATIVE ? "#ac3030" : "#147804",
+                        news.kind === NewsKinds.NEGATIVE ? "#ac3030" : "#147804",
                   }}
                >
-                  {news.kind === newsKinds.POSITIVE ? (
+                  {news.kind === NewsKinds.POSITIVE ? (
                      <div>Вы получили</div>
                   ) : (
                      <div>Вы потратили</div>
@@ -56,7 +54,7 @@ export const NewsCard = ({ news }: Props) => {
                   className={classes.stock}
                   style={{
                      backgroundColor:
-                        news.kind === newsKinds.NEGATIVE ? "#ac3030" : "#147804",
+                        news.kind === NewsKinds.NEGATIVE ? "#ac3030" : "#147804",
                   }}
                >
                   {news.stock.title}

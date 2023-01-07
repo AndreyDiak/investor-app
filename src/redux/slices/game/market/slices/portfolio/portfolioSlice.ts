@@ -1,4 +1,5 @@
-import { roundMultiply } from "./../../../../../../utils";
+import { selectStocks, selectStocksWithDividends } from "./../stocks/stocksSlice";
+import { round } from "./../../../../../../utils";
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { MarketAssetsType } from "../../../../../../models";
 import { RootState, ThunkType } from "../../../../../store";
@@ -6,6 +7,7 @@ import { decreaseWallet, increaseWallet } from "../../../character/characterSlic
 import { toggleMarketAssetsCount } from "../../marketSlice";
 import { AllAssetsType, Assets } from "../../typings";
 import type { Portfolio } from "./typings";
+import { Stock } from "../stocks";
 
 const initialState = {
    portfolio: [] as Portfolio[],
@@ -51,12 +53,35 @@ export const {} = portfolioSlice.actions;
 // Selectors
 export const selectPortfolio = (state: RootState) => state.portfolio.portfolio;
 
+const selectPortfolioWithDividends = createSelector(selectPortfolio, (portfolio) =>
+   portfolio.filter((item) => !!item.isDividends)
+);
+
+export const selectPortfolioStocksWithDividends = createSelector(
+   [selectPortfolioWithDividends, selectStocksWithDividends],
+   (portfolio, stocks) => {
+      return {
+         title: "Акции",
+         payment: portfolio.reduce((acc, item) => {
+            const stock = stocks.find((s) => s.id === item.id)!;
+            return (
+               acc +
+               round(
+                  (stock.dividendsPercentage * // процент на дивы
+                     stock.price[stock.price.length - 1] * // последняя цена
+                     item.count) / // количество акций в портфеле
+                     100
+               )
+            );
+         }, 0),
+      };
+   }
+);
+
 export const selectPortfolioById = (id: string) =>
    createSelector(selectPortfolio, (portfolio) =>
       portfolio.find((item) => item.id === id)
    );
-
-// TODO: сделать только id и type нельзя пробрасывать весь asset
 
 export const buyAsset =
    (asset: Assets, count: number, price: number): ThunkType =>
@@ -67,14 +92,7 @@ export const buyAsset =
          title: asset.title,
          count: count,
          price: [asset.price[asset.price.length - 1]],
-         dividends:
-            asset.dividendsPercentage !== 0
-               ? roundMultiply(
-                    asset.price[asset.price.length - 1] *
-                       count *
-                       (asset.dividendsPercentage / 100)
-                 )
-               : 0,
+         isDividends: asset.dividendsPercentage !== 0,
       };
       // добавление в портфель
       dispatch(portfolioSlice.actions.addToPortfolio(item));

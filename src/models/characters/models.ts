@@ -1,10 +1,5 @@
 import { charactersPhotos } from "../../assets/characters/characters";
-import {
-   DefaultExpensesPrices,
-   DifficultyCoefficientMapType,
-   ExpenseTitleMapType,
-   InitialPerson,
-} from "../../redux/slices";
+import { InitialPerson } from "../../redux/slices";
 import { Difficulty } from "../settings/models";
 
 export enum Expenses {
@@ -13,7 +8,7 @@ export enum Expenses {
    CREDIT_CARD = "credit-card",
 }
 
-export const expensesTitleMap: ExpenseTitleMapType = {
+export const expensesTitleMap: Record<Expenses, string> = {
    home: "Дом",
    car: "Машина",
    "credit-card": "Кредитные карты",
@@ -27,26 +22,26 @@ export const difficultyMap = {
 
 export const defaultSalary = 600;
 export const defaultStartMoney = 1000;
-export const defaultSpendingsPrices: DefaultExpensesPrices = {
+export const defaultSpendingsMinPaymentPercantage = 2;
+export const defaultSpendingsMaxPaymentPercantage = 10;
+
+export const defaultSpendingsPrices: Record<Expenses, number> = {
    home: 3000,
    car: 2000,
    "credit-card": 1000,
 };
 
-export const defaultSpendingsMinPaymentPercantage = 2;
-export const defaultSpendingsMaxPaymentPercantage = 10;
-
-export const difficultySalaryCoefficient: DifficultyCoefficientMapType = {
+export const difficultySalaryCoefficient: Record<Difficulty, number> = {
    easy: 1,
    normal: 0.8,
    hard: 0.6,
 };
-export const difficultyStaryMoneyCoefficient: DifficultyCoefficientMapType = {
+export const difficultyStaryMoneyCoefficient: Record<Difficulty, number> = {
    easy: 0.9,
    normal: 0.7,
    hard: 0.5,
 };
-export const difficultySpendingsCoefficient = {
+export const difficultySpendingsCoefficient: Record<Difficulty, number[]> = {
    easy: [0.5, 2],
    normal: [2, 3.5],
    hard: [3.5, 5],

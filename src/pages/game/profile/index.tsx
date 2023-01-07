@@ -2,10 +2,13 @@ import { Card, NewsCard, PersonImage } from "../../../components";
 import { useAppSelector } from "../../../redux/hooks";
 import {
    selectCharacter,
+   selectCredits,
+   selectCreditsTotal,
    selectInitialIncome,
    selectLastNews,
+   selectPortfolioStocksWithDividends,
 } from "../../../redux/slices";
-import { roundMultiply } from "../../../utils";
+import { round } from "../../../utils";
 
 import classes from "./index.module.css";
 
@@ -14,18 +17,25 @@ const ProfilePage = () => {
 
    const income = useAppSelector(selectInitialIncome);
 
+   const stocksDividends = useAppSelector(selectPortfolioStocksWithDividends);
+
    const lastNews = useAppSelector(selectLastNews);
 
-   const CardExpenses = character.spendings.map((spend) => ({
+   const credits = useAppSelector(selectCredits);
+
+   const creditsTotal = useAppSelector(selectCreditsTotal);
+
+   const CardCredits = credits.map((spend) => ({
       title: spend.title,
-      payment: roundMultiply((spend.startPrice * spend.paymentPercantage) / 100, 1),
+      payment: round((spend.startPrice * spend.paymentPercantage) / 100, 1),
    }));
 
    const CardIncome = [
       {
          title: "Зарплата",
-         payment: income,
+         payment: round(income - creditsTotal),
       },
+      stocksDividends,
    ];
 
    const CardBio = [
@@ -60,7 +70,7 @@ const ProfilePage = () => {
                </div>
                {/* character expenses*/}
                <div>
-                  <Card title="Расходы" list={CardExpenses} footerText={"Расход / мес"} />
+                  <Card title="Расходы" list={CardCredits} footerText={"Расход / мес"} />
                </div>
                {/* character bio */}
                <div>

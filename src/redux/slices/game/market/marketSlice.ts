@@ -1,9 +1,27 @@
-import { createSelector } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 
-import { MarketAssetsType } from "../../../../models";
+import { defaultMarketLevel, MarketAssetsType, MarketLevels } from "../../../../models";
 import { ThunkType } from "../../../store";
 import { selectBonds, selectStocks, toggleStockCount } from "./slices";
 import { AllAssetsType, ToggleAssetCountType } from "./typings";
+
+const initialState = {
+   level: defaultMarketLevel,
+};
+
+export const marketSlice = createSlice({
+   name: "market",
+   initialState,
+   reducers: {
+      upgradeMarketLevel: (state) => {
+         if (state.level === MarketLevels.GARBAGE) {
+            state.level = MarketLevels.MEDIUM;
+         } else if (state.level === MarketLevels.MEDIUM) {
+            state.level = MarketLevels.PREMIUM;
+         }
+      },
+   },
+});
 
 // Selectors
 export const selectMarketAssets = createSelector(
@@ -36,3 +54,10 @@ export const toggleMarketAssetsCount =
             return null;
       }
    };
+
+// TODO : написать функцию которая будет улучшать уровень маркета
+// а также придумать какие либо условия для повышения этого уровня
+// например : купить X акций, заплатить Х денег и тогда новый уровень
+
+// при покупке доступа к новому рынку мы генерим новые акции в зависимости от уровня
+// надо сделать какую-нибудь модалку

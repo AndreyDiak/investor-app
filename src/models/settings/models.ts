@@ -57,6 +57,7 @@ export const defaultPersonImageWidth = {
 };
 
 export const difficultyToTitleMap = {
+   all: "Все",
    easy: "Легко",
    normal: "Нормально",
    hard: "Сложно",

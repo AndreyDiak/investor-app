@@ -6,7 +6,7 @@ import {
    MarketAssetsType,
 } from "../../../../../../models";
 import { RootState, ThunkType } from "../../../../../store";
-import { newsTopics, openTopic } from "../../../news";
+import { NewsTopics, openTopic } from "../../../news";
 import { ToggleAssetCountType } from "../../typings";
 import { filterAsset } from "../../utils/filterAsset";
 import { Stock } from "./typings";
@@ -91,6 +91,15 @@ export const selectStocks = (state: RootState) => state.stocks.stocks;
 export const selectStockById = (id: string) =>
    createSelector(selectStocks, (stocks) => stocks.find((stock) => stock.id === id));
 
+export const selectStocksWithDividends = createSelector(selectStocks, (stocks) =>
+   stocks.filter((stock) => !!stock.dividendsPercentage)
+);
+
+export const selectStocksWithDividendsById = (id: string) =>
+   createSelector(selectStocksWithDividends, (stocks) =>
+      stocks.find((stock) => stock.id === id)
+   );
+
 export const selectFilteredStocks = (filter: AssetsFilter, search = "") =>
    createSelector(selectStocks, (stocks) => filterAsset(stocks, filter, search));
 
@@ -99,21 +108,22 @@ export const selectFilteredStocks = (filter: AssetsFilter, search = "") =>
 export const checkStocks = (): ThunkType => (dispatch, getState) => {
    const stocks = getState().stocks.stocks;
    const difficulty = getState().settings.difficulty;
+   const marketLevel = getState().market.level;
 
    if (stocks.length !== 0) {
       const newStocks = index(stocks, difficulty);
       dispatch(indexingStocks(newStocks));
    } else {
-      const income = getState().character.totalIncome;
+      const income = getState().character.initialIncome;
 
       if (incomeToOpenMarket["stocks"] < income) {
          // открываем возможность показывать новости про акции
-         console.log("he");
-         dispatch(openTopic(newsTopics.MARKET));
+
+         dispatch(openTopic(NewsTopics.MARKET));
 
          // создаем акции
          // если наш доход больше чем необходимый минимум
-         const newStocks = generateStocks(difficulty);
+         const newStocks = generateStocks(difficulty, marketLevel);
 
          dispatch(setInitialStocks(newStocks));
       }

@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { Difficulty, difficultyToTitleMap } from "../../../models";
+import { CharactersListFilter } from "../../../pages/characters/CharactersList/CharactersList";
 
 interface Props {
-   difficulty: Difficulty;
+   difficulty: CharactersListFilter;
 }
 
 const difficultyColors = {
+   all: "#17abf0",
    easy: "#2e7d32",
    normal: "#f9a825",
    hard: "#bf360c",

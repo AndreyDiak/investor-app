@@ -1,3 +1,5 @@
+import { AssetsType } from "../../../redux/slices";
+
 export enum AssetsFilter {
    PRICE = "price",
    CONDITION = "condition",
@@ -28,20 +30,35 @@ export enum MarketAssetsType {
    BONDS = "bonds",
 }
 
-export const marketFiltersToLabelMap = {
+export enum MarketLevels {
+   GARBAGE = "garbage",
+   MEDIUM = "medium",
+   PREMIUM = "premium",
+}
+
+export const defaultMarketLevel = MarketLevels.GARBAGE;
+
+export const MarketLevelsToLabelMap: Record<MarketLevels, string> = {
+   garbage: "Мусорные",
+   medium: "Средние класс",
+   premium: "Премиум",
+};
+
+export const marketFiltersToLabelMap: Record<AssetsType, string> = {
    stocks: "Акции",
    bonds: "Облигации",
 };
 
-export const assetsRiskToConditionMap = {
-   "super-low": { up: 0.7, down: 0.3 },
-   low: { up: 0.6, down: 0.4 },
-   medium: { up: 0.5, down: 0.5 },
-   "upper-medium": { up: 0.4, down: 0.6 },
-   high: { up: 0.3, down: 0.7 },
-};
+export const assetsRiskToConditionMap: Record<AssetsRisk, { up: number; down: number }> =
+   {
+      "super-low": { up: 0.7, down: 0.3 },
+      low: { up: 0.6, down: 0.4 },
+      medium: { up: 0.5, down: 0.5 },
+      "upper-medium": { up: 0.4, down: 0.6 },
+      high: { up: 0.3, down: 0.7 },
+   };
 
-export const incomeToOpenMarket = {
+export const incomeToOpenMarket: Record<AssetsType, number> = {
    stocks: 500,
    bonds: 1300,
 };

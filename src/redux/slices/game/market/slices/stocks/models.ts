@@ -1,6 +1,9 @@
 // минимальная цена акции
 export const defaultStockMinPrice = 35;
 
+// TODO : сделать настройки по уровням
+// garbage medium premium (цена, доходность, разность, риск и тд...)
+
 // минимальное количество акций
 export const defaultStockCountChange = 10;
 

@@ -1,3 +1,4 @@
+import { round } from "./../../../../utils";
 import { AnyAction, createSlice, PayloadAction, ThunkAction } from "@reduxjs/toolkit";
 import { RootState } from "../../../store";
 import { Person } from "../../characters/typings";
@@ -13,37 +14,12 @@ const mock = {
    salary: 976,
    startMoney: 1628,
    difficulty: "easy",
-   spendings: [
-      {
-         type: "home",
-         title: "Дом",
-         startPrice: 2130,
-         remainPrice: 2130,
-         paymentPercantage: 8,
-      },
-      {
-         type: "car",
-         title: "Машина",
-         startPrice: 1640,
-         remainPrice: 1640,
-         paymentPercantage: 2,
-      },
-      {
-         type: "credit-card",
-         title: "Кредитные карты",
-         startPrice: 580,
-         remainPrice: 580,
-         paymentPercantage: 8,
-      },
-   ],
-   spendingsMonthPayment: 248,
 };
 
 const initialState = {
    character: mock as null | Person,
    initialIncome: 0, // зарплата игрока
-   totalCredit: 0, // суммарный кредит игрока
-   passiveIncome: 0, // пассивный доход
+   passiveIncome: {}, // пассивный доход
    walletBalance: 0, // текущие накопления
 };
 
@@ -54,7 +30,6 @@ export const characterSlice = createSlice({
       setCharacter: (state, action: PayloadAction<Person>) => {
          state.character = action.payload;
          state.initialIncome = action.payload.salary;
-         state.totalCredit = action.payload.spendingsMonthPayment;
          state.passiveIncome = 0;
          state.walletBalance = action.payload.startMoney;
       },
@@ -62,10 +37,10 @@ export const characterSlice = createSlice({
          state.walletBalance = action.payload;
       },
       increaseWallet: (state, action: PayloadAction<number>) => {
-         state.walletBalance = Number((state.walletBalance + action.payload).toFixed(1));
+         state.walletBalance = round(state.walletBalance + action.payload);
       },
       decreaseWallet: (state, action: PayloadAction<number>) => {
-         state.walletBalance = Number((state.walletBalance - action.payload).toFixed(1));
+         state.walletBalance = round(state.walletBalance - action.payload);
       },
    },
 });
@@ -83,8 +58,24 @@ export const selectInitialIncome = (state: RootState) => state.character.initial
 type ThunkType = ThunkAction<void, RootState, unknown, AnyAction>;
 
 export const monthPayment = (): ThunkType => (dispatch, getState) => {
-   const income = getState().character.initialIncome;
-   dispatch(increaseWallet(income));
+   const income = getState().character.initialIncome; // доход с работы
+   const creditTotal = getState().credit.total; // кредиты
+
+   const stocksDividends = getState()
+      .portfolio.portfolio.filter((p) => !!p.isDividends)
+      .reduce((acc, item) => {
+         const s = getState().stocks.stocks.find((stock) => stock.id === item.id)!;
+         return (
+            acc +
+            round(
+               (item.count * s.price[s.price.length - 1] * s.dividendsPercentage) / 100
+            )
+         );
+      }, 0);
+
+   const payment = income - creditTotal + stocksDividends;
+
+   dispatch(increaseWallet(payment));
 };
 
 export default characterSlice.reducer;
