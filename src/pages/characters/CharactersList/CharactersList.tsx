@@ -14,7 +14,7 @@ import { motion } from "framer-motion";
 
 import classes from "./CharactersList.module.css";
 import { Person } from "../../../redux/slices/characters/typings";
-import { useEffect, useState } from "react";
+import { memo, useState } from "react";
 import { DifficultyCard } from "../../../components";
 
 interface Props {
@@ -23,7 +23,7 @@ interface Props {
 
 export type CharactersListFilter = "all" | Difficulty;
 
-export const CharactersList = ({ selectCharacter }: Props) => {
+export const CharactersList = memo(({ selectCharacter }: Props) => {
    const dispatch = useAppDispatch();
    const [filter, setFilter] = useState<CharactersListFilter>("all");
    const characters = useAppSelector(selectCharactersWithMaxInARow(filter));
@@ -89,4 +89,4 @@ export const CharactersList = ({ selectCharacter }: Props) => {
          </motion.div>
       </div>
    );
-};
+});

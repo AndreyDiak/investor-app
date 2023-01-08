@@ -56,29 +56,29 @@ export const PortfolioCard = ({ asset }: Props) => {
                <ConditionBlock condition={condition} />
             </div>
          </div>
-         <div className={classes.info}>
-            <div>
-               <div className={classes.price}>
-                  Цена покупки: <MoneyIconWithPrice price={myPrice} />
-               </div>
-               <div className={classes.price}>
-                  Цена продажи:{" "}
-                  <MoneyIconWithPrice
-                     price={marketPrice}
-                     color={isProfit ? "#128900" : "#820000"}
-                  />
-               </div>
-            </div>
-            {asset.count} шт
-         </div>
-         {asset.isDividends && (
-            <div>
-               Дивиденды:{" "}
+         <div className={classes.infoPrice}>
+            <p>Покупка / Продажа</p>
+            <div className={classes.priceLine}>
+               <MoneyIconWithPrice price={myPrice} /> /{" "}
                <MoneyIconWithPrice
-                  price={round((marketPrice * stockFromMarket.dividendsPercentage) / 100)}
+                  price={marketPrice}
+                  color={isProfit ? "#128900" : "#820000"}
+               />
+            </div>
+         </div>
+
+         {asset.isDividends && (
+            <div className={classes.portfolioDividends}>
+               <p>Дивиденды - </p>
+               <MoneyIconWithPrice
+                  price={round(
+                     (marketPrice * asset.count * stockFromMarket.dividendsPercentage) /
+                        100
+                  )}
                />
             </div>
          )}
+         <div className={classes.portfolioCount}>{asset.count} шт</div>
       </div>
    );
 };

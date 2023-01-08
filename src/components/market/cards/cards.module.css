@@ -10,6 +10,7 @@
    font-family: var(--font-family-default);
    color: #fff;
    cursor: pointer;
+   position: relative;
 }
 
 .card:hover {
@@ -52,7 +53,6 @@
 
 .price {
    display: flex;
-   width: 250px;
    align-items: center;
    justify-content: space-between;
    column-gap: 20px;
@@ -62,5 +62,33 @@
    padding: 5px 10px;
    background: transparent;
    color: #d5d5d5;
-   /* font-size: var(--font-size-default); */
+}
+
+.infoPrice {
+   padding-bottom: 10px;
+   display: flex;
+   align-items: center;
+   font-weight: 700;
+   justify-content: space-between;
+   border-bottom: 1px solid #fff;
+}
+
+.priceLine {
+   display: flex;
+   align-items: center;
+   column-gap: 5px;
+}
+
+.portfolioDividends {
+   display: flex;
+   align-items: center;
+   column-gap: 5px;
+}
+
+.portfolioCount {
+   position: absolute;
+   right: 10px;
+   bottom: 10px;
+   font-weight: 700;
+   font-size: var(--font-size-normal);
 }
